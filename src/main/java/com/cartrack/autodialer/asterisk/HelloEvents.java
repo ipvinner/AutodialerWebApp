@@ -1,28 +1,42 @@
 package com.cartrack.autodialer.asterisk;
 
-import com.cartrack.autodialer.LoggerWrapper;
 import org.asteriskjava.manager.*;
 import org.asteriskjava.manager.action.OriginateAction;
+import org.asteriskjava.manager.action.StatusAction;
+import org.asteriskjava.manager.event.HangupEvent;
+import org.asteriskjava.manager.event.ManagerEvent;
+import org.asteriskjava.manager.event.UserEvent;
 import org.asteriskjava.manager.response.ManagerResponse;
 
 import java.io.IOException;
 
-
-public class HelloManager  {
+/**
+ * Created by vinner on 26.08.2015.
+ */
+public class HelloEvents implements ManagerEventListener {
 
     private ManagerConnection managerConnection;
-    
-    private static final LoggerWrapper LOG = LoggerWrapper.get(HelloManager.class);
 
-
-    public HelloManager() throws IOException {
+    public HelloEvents() throws IOException {
         ManagerConnectionFactory factory = new ManagerConnectionFactory("31.131.16.59", "autodialer", "gieB7Due6eit");
+
         this.managerConnection = factory.createManagerConnection();
+        managerConnection.registerUserEventClass(VIPCallEvent.class);
     }
 
-    public void call(final String user, final String phoneNumber) throws IOException, AuthenticationFailedException, TimeoutException {
+    public void call() throws IOException, AuthenticationFailedException, TimeoutException, InterruptedException  {
+
         OriginateAction originateAction;
         ManagerResponse originateResponse;
+
+
+        // register for events
+        managerConnection.addEventListener(this);
+
+        // connect to Asterisk and log in
+        managerConnection.login();
+
+
 
         originateAction = new OriginateAction();
         originateAction.setChannel("SIP/zadarma/14168");
@@ -30,24 +44,9 @@ public class HelloManager  {
         originateAction.setExten("s");
         originateAction.setPriority(1);
         originateAction.setAsync(false);
-        originateAction.setVariable("dial_string","SIP/zadarma/14168");
-        originateAction.setTimeout(new Integer(30000));
-//        originateAction.setContext("directdial");
-//        originateAction.setExten("1");
-//        originateAction.setPriority(new Integer(1));
-//        originateAction.setTimeout(new Integer(30000));
-//        originateAction.setVariable("customernum", phoneNumber);
-
-        // connect to Asterisk and log in
-        managerConnection.login();
-
-
-        // send the originate action and wait for a maximum of 30 seconds for Asterisk
-        // to send a reply
+        originateAction.setVariable("TestVar", "testVarValue");
 
         originateResponse = managerConnection.sendAction(originateAction, 30000);
-//        ResponseEvents responseEvents1 = managerConnection.sendEventGeneratingAction(originateAction);
-
 
         // print out whether the originate succeeded or not
         System.out.println("SOUT Response getResponse:  " + originateResponse.getResponse());
@@ -60,22 +59,28 @@ public class HelloManager  {
         System.out.println("SOUT Response getArrribute actionid: " + originateResponse.getAttribute("actionid"));
         System.out.println("SOUT Response getUniqueID " + originateResponse.getUniqueId());
 
-        //System.out.println("SOUT RespontEVEnt" + responseEvents.getEvents());
+        // request channel state
+        // managerConnection.sendAction(new StatusAction());
+
+        // wait 10 seconds for events to come in
+        //Thread.sleep(10000);
+
         // and finally log off and disconnect
         managerConnection.logoff();
     }
 
-
-    public static void main(String[] args) throws Exception {
-
-        String[] phoneNumbers = {"14168", "14168", "14168"};
-        String trunk = "SIP/zadarma/";
-
-
-        HelloManager helloManager;
-
-        helloManager = new HelloManager();
-        helloManager.call("88001", "14168");
+    @Override
+    public void onManagerEvent(ManagerEvent event) {
+        if(event instanceof HangupEvent){
+            System.out.println("Hangup");
+        }
+        System.out.println("EVENT: " + event);
     }
 
+    public static void main(String[] args) throws Exception {
+        HelloEvents helloEvents;
+
+        helloEvents = new HelloEvents();
+        helloEvents.call();
+    }
 }
