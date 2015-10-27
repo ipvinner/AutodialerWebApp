@@ -5,4 +5,12 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
        <context:annotation-config/>
+
+
+
+       <context:component-scan base-package="com.cartrack.autodialer.**.repository.jdbc"/>
+
+       <context:component-scan base-package="com.cartrack.autodialer.**.service"/>
+
+       <context:component-scan base-package="com.cartrack.autodialer.**.web"/>
 </beans>
