@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,6 +18,7 @@ import java.util.List;
  * Created by vinner on 29.09.2015.
  */
 @Repository
+@Transactional(readOnly = true)
 public class JdbcClientRepository implements ClientRepository {
 
     private static final BeanPropertyRowMapper<Client> ROW_MAPPER = BeanPropertyRowMapper.newInstance(Client.class);
@@ -30,6 +32,7 @@ public class JdbcClientRepository implements ClientRepository {
     }
 
     @Override
+    @Transactional
     public Client save(Client client) {
         if(client.isNew()){
             jdbcTemplate.update("INSERT INTO client (firstname, lastname, phone_number, email, clients_list_id) VALUES (?, ?, ?, ?, ?)",
@@ -42,6 +45,7 @@ public class JdbcClientRepository implements ClientRepository {
     }
 
     @Override
+    @Transactional
     public boolean delete(int id) {
         return jdbcTemplate.update("DELETE FROM client WHERE id=?", id) !=0;
     }
