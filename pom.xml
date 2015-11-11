@@ -27,6 +27,14 @@
         <!--    Tests  -->
         <junit.version>4.12</junit.version>
 
+        <!--web-->
+        <webjars-bootstrap.version>3.3.5</webjars-bootstrap.version>
+        <webjars-jquery.version>2.1.4</webjars-jquery.version>
+        <webjars-datetimepicker.version>2.3.4</webjars-datetimepicker.version>
+        <webjars-noty.version>2.2.4</webjars-noty.version>
+        <spring-security.version>4.0.2.RELEASE</spring-security.version>
+        <webjars-datatables.version>1.10.9</webjars-datatables.version>
+
     </properties>
 
 
@@ -54,6 +62,51 @@
             <artifactId>servlet-api</artifactId>
             <version>2.5</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+
+        <!-- Webjars (static dependencies distributed as JAR files) -->
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>bootstrap</artifactId>
+            <version>${webjars-bootstrap.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>jquery</artifactId>
+            <version>${webjars-jquery.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>datetimepicker</artifactId>
+            <version>${webjars-datetimepicker.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>noty</artifactId>
+            <version>${webjars-noty.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.webjars</groupId>
+            <artifactId>datatables</artifactId>
+            <version>${webjars-datatables.version}</version>
         </dependency>
 
         <!-- Spring -->
