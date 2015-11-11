@@ -1,0 +1,10 @@
+img {
+  width: auto; }
+
+.top-slider__arrows {
+  background-color: white; }
+
+.search-navigation__form-item {
+  margin: 10px 0 0 24px; }
+  .search-navigation__form-item:first-child {
+    margin-left: 0; }

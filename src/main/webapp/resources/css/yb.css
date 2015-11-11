@@ -1,0 +1,25 @@
+table .icons__play {
+  background-position: -47px -240px;
+  width: 16px;
+  height: 20px; }
+
+.form__line-items .datepicker-overlay {
+  position: relative;
+  display: inline-block; }
+.form__line-items input {
+  font-size: 11px; }
+
+.custom-input-file input[type="file"] {
+  display: block; }
+
+.custom-input-file {
+  position: relative;
+  overflow: hidden; }
+  .custom-input-file input[type="file"] {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 150px;
+    height: 27px;
+    opacity: 0; }

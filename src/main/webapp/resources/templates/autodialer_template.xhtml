@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+    <h:head>
+        <title>#{msg.index_title}</title>
+        <h:outputStylesheet library="css" name="style.css"  />
+        <h:outputStylesheet library="css" name="yb.css"  />
+        <h:outputScript library="javascript" name="html5shiv.js" />
+    </h:head>
+    <h:body>
+        
+        <div class="site-layout">
+            <aside class="aside">
+                <ui:insert name="left_menu">
+                    <ui:include src="/resources/templates/left_menu.xhtml"/>
+                </ui:insert>    
+            </aside>
+            <div class="main">
+                <header class="main__header">
+                    <ui:insert name="header">
+                        <ui:include src="/resources/templates/header.xhtml"/>
+                    </ui:insert> 
+                </header>
+                
+                <div class="main__content">
+                    <ui:insert name="content">
+                        <ui:include src="/resources/templates/content.xhtml"/>
+                    </ui:insert> 
+                </div>
+            </div>
+        </div>
+        
+        <h:outputScript library="javascript" name="jquery.min.js" />
+        <h:outputScript library="javascript" name="jquery-ui-1.10.3.custom.min.js" />    
+        <h:outputScript library="javascript" name="common.js" />
+    </h:body>
+</html>
