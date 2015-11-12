@@ -32,6 +32,11 @@ public class JdbcClientRepository implements ClientRepository {
     }
 
     @Override
+    public List<Client> getAll() {
+        return jdbcTemplate.query("SELECT * FROM client", ROW_MAPPER);
+    }
+
+    @Override
     @Transactional
     public Client save(Client client) {
         if(client.isNew()){

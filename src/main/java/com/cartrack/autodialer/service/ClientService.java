@@ -11,6 +11,8 @@ public interface ClientService {
 
     List<Client> getByList(int listId);
 
+    List<Client> getAll();
+
     Client save(Client client);
 
     Client update(Client client);

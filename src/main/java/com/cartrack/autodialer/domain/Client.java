@@ -1,5 +1,7 @@
 package com.cartrack.autodialer.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * Created by vinner on 27.08.2015.
  */
@@ -8,6 +10,8 @@ public class Client extends BaseEntity{
     protected String lastName;
     protected String phoneNumber;
     protected String email;
+
+    @JsonIgnore
     protected ClientList clientList;
 
     public Client(Integer id, String firstName, String lastName, String phoneNumber, String email, ClientList clientList) {
@@ -22,7 +26,6 @@ public class Client extends BaseEntity{
 
 
     public Client(){
-
 
     }
 

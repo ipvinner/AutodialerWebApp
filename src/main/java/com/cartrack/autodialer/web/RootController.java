@@ -27,7 +27,7 @@ public class RootController {
 
     @RequestMapping(value = "/clients", method = RequestMethod.GET)
     public String userList(Model model) {
-        model.addAttribute("clients", service.getByList(1));
+        model.addAttribute("clients", service.getAll());
         model.addAttribute("clientsLists", serviceLists.getAll());
         return "clients";
     }

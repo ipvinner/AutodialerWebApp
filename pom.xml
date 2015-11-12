@@ -35,6 +35,10 @@
         <spring-security.version>4.0.2.RELEASE</spring-security.version>
         <webjars-datatables.version>1.10.9</webjars-datatables.version>
 
+        <!-- Tools-->
+        <jackson-json.version>2.6.3</jackson-json.version>
+        <asterisk-java.version>1.0.0.M3</asterisk-java.version>
+
     </properties>
 
 
@@ -109,6 +113,18 @@
             <version>${webjars-datatables.version}</version>
         </dependency>
 
+        <!--JSON-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson-json.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-hibernate4</artifactId>
+            <version>${jackson-json.version}</version>
+        </dependency>
+
         <!-- Spring -->
         <dependency>
             <groupId>org.springframework</groupId>
@@ -181,7 +197,7 @@
         <dependency>
             <groupId>org.asteriskjava</groupId>
             <artifactId>asterisk-java</artifactId>
-            <version>1.0.0.M3</version>
+            <version>${asterisk-java.version}</version>
 
             <exclusions>
                 <exclusion>
