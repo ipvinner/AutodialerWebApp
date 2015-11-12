@@ -4,9 +4,6 @@
 
 <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container">
-
-
-
         <div class="collapse navbar-collapse">
             <a href="/autodialer">
                 <img src="resources/images/cartrack.png"/>
