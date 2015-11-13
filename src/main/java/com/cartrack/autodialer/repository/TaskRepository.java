@@ -11,7 +11,7 @@ public interface TaskRepository {
 
     List<Task> getAll();
 
-    Task save(Task client);
+    Task save(Task task);
 
     boolean delete(int id);
 
