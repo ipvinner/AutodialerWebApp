@@ -18,10 +18,6 @@ import java.util.List;
 @RestController
 @RequestMapping("ajax/admin/clients")
 public class AjaxClientController extends AbstractClientController {
-    private static final LoggerWrapper LOG = LoggerWrapper.get(ClientRestController.class);
-
-    @Autowired
-    private ClientService clientService;
 
     @Autowired
     private ClientListService clientListService;

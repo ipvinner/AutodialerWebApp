@@ -31,10 +31,10 @@ public class JdbcTaskRepository implements TaskRepository{
     @Override
     public Task save(Task task) {
         if(task.isNew()){
-            jdbcTemplate.update("INSERT INTO task (name, clients_list_id, active, originate_param_id) VALUES (?, ?, ?, ?)",
+            jdbcTemplate.update("INSERT INTO task (name, client_list_id, active, originate_param_id) VALUES (?, ?, ?, ?)",
                     task.getName(), task.getClientList().getId(), task.isActive(), task.getOriginateParam().getId());
         }else{
-            jdbcTemplate.update("UPDATE client SET name = ?, clients_list_id = ?, active = ?, originate_param_id = ? WHERE id = ?",
+            jdbcTemplate.update("UPDATE task SET name = ?, client_list_id = ?, active = ?, originate_param_id = ? WHERE id = ?",
                     task.getName(), task.getClientList().getId(), task.isActive(), task.getOriginateParam().getId(), task.getId());
         }
         return task;

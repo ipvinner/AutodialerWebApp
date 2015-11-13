@@ -31,4 +31,9 @@ public class RootController {
         model.addAttribute("clientsLists", serviceLists.getAll());
         return "clients";
     }
+
+    @RequestMapping(value = "/tasks", method = RequestMethod.GET)
+    public String taskList() {
+        return "tasks";
+    }
 }

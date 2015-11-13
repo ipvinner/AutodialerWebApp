@@ -8,6 +8,17 @@ public class Task extends NamedEntity {
     private boolean active;
     private OriginateParam originateParam;
 
+    public Task() {
+
+    }
+
+    public Task(Integer id, String name, ClientList clientList, boolean active, OriginateParam originateParam) {
+        this.id = id;
+        this.name = name;
+        this.clientList = clientList;
+        this.active = active;
+        this.originateParam = originateParam;
+    }
 
 
     public ClientList getClientList() {

@@ -14,7 +14,7 @@ import java.util.List;
  */
 
 public class AbstractClientController {
-    private static final LoggerWrapper LOG = LoggerWrapper.get(ClientRestController.class);
+    protected final LoggerWrapper LOG = LoggerWrapper.get(getClass());
 
     @Autowired
     private ClientService clientService;
