@@ -10,4 +10,6 @@ import java.util.List;
 public interface ClientListService {
 
     List<ClientList> getAll();
+
+    ClientList getById(int id);
 }

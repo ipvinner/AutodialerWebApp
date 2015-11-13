@@ -10,4 +10,7 @@ import java.util.List;
 public interface ClientListRepository {
 
     List<ClientList> getAll();
+
+    ClientList getByid(int id);
+
 }

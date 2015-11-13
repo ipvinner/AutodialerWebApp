@@ -28,7 +28,7 @@
 
             <c:forEach items="${clientsLists}" var="list">
               <jsp:useBean id="list" scope="page" type="com.cartrack.autodialer.domain.ClientList"/>
-              <li><a href="#">${list.name}</a></li>
+              <li><a class="btn btn-sm btn-info chooseList" id="${list.id}">${list.name}</a></li>
             </c:forEach>
 
           </ul>
@@ -37,6 +37,7 @@
         <table class="table table-striped display" id="datatable">
           <thead>
           <tr>
+
             <th>firstName</th>
             <th>lastName</th>
             <th>phoneNumber</th>
@@ -47,8 +48,9 @@
           </thead>
           <c:forEach items="${clients}" var="client">
             <jsp:useBean id="client" scope="page" type="com.cartrack.autodialer.domain.Client"/>
-            <tr>
-              <td><c:out value="${client.firstName}"/></td>
+            <tr id="${client.id}">
+
+              <td>${client.firstName}</td>
               <td>${client.lastName}</td>
               <td>${client.phoneNumber}</td>
               <td>${client.email}</td>
@@ -76,26 +78,35 @@
           <input type="text" hidden="hidden" id="id" name="id">
 
           <div class="form-group">
-            <label for="name" class="control-label col-xs-3">firstname</label>
+            <label for="firstName" class="control-label col-xs-3">firstName</label>
 
             <div class="col-xs-9">
-              <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+              <input type="text" class="form-control" id="firstName" name="firstName" placeholder="firstName">
             </div>
           </div>
 
           <div class="form-group">
-            <label for="email" class="control-label col-xs-3">lastname</label>
+            <label for="lastName" class="control-label col-xs-3">lastName</label>
+
+            <div class="col-xs-9">
+              <input type="text" class="form-control" id="lastName" name="lastName" placeholder="lastName">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="phoneNumber" class="control-label col-xs-3">phoneNumber</label>
+
+            <div class="col-xs-9">
+              <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="phoneNumber">
+            </div>
+          </div>
+
+
+          <div class="form-group">
+            <label for="email" class="control-label col-xs-3">email</label>
 
             <div class="col-xs-9">
               <input type="email" class="form-control" id="email" name="email" placeholder="email">
-            </div>
-          </div>
-
-          <div class="form-group">
-            <label for="password" class="control-label col-xs-3">email</label>
-
-            <div class="col-xs-9">
-              <input type="password" class="form-control" id="password" name="password" placeholder="">
             </div>
           </div>
 
@@ -117,6 +128,59 @@
 <script type="text/javascript" src="webjars/datetimepicker/2.3.4/jquery.datetimepicker.js"></script>
 <script type="text/javascript" src="webjars/datatables/1.10.9/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="webjars/noty/2.2.4/jquery.noty.packaged.min.js"></script>
-<script type="text/javascript" src="resources/js/datatablesUtil.js"></script>
+<script type="text/javascript" src="resources/javascript/datatablesUtil.js"></script>
+
 <script type="text/javascript">
+
+
+  var ajaxUrl = 'ajax/admin/clients/';
+  var datatableApi;
+
+  function updateTable() {
+    $.get(ajaxUrl, function (data) {
+      updateTableByData(data);
+    });
+  }
+
+  $(function () {
+    datatableApi = $('#datatable').DataTable({
+      "bPaginate": false,
+      "bInfo": false,
+      "aoColumns": [
+        {
+          "mData": "firstName"
+        },
+        {
+          "mData": "lastName"
+        },
+        {
+          "mData": "phoneNumber"
+        },
+        {
+          "mData": "email"
+        },
+        {
+          "sDefaultContent": "Edit",
+          "bSortable": false
+        },
+        {
+          "sDefaultContent": "Delete",
+          "bSortable": false
+        }
+      ],
+      "aaSorting": [
+        [
+          0,
+          "asc"
+        ]
+      ]
+    });
+    makeEditable();
+    init();
+  });
+
+  function init() {
+  }
+
+  </script>
 </html>

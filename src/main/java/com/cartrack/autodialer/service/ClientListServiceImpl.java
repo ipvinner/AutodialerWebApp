@@ -21,4 +21,9 @@ public class ClientListServiceImpl implements ClientListService {
     public List<ClientList> getAll() {
         return repository.getAll();
     }
+
+    @Override
+    public ClientList getById(int id) {
+        return repository.getByid(id);
+    }
 }

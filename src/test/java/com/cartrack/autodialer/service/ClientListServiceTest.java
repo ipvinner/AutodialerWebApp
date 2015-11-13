@@ -1,5 +1,6 @@
 package com.cartrack.autodialer.service;
 
+import com.cartrack.autodialer.ClientTestData;
 import com.cartrack.autodialer.TestData;
 import com.cartrack.autodialer.domain.ClientList;
 import com.cartrack.autodialer.matcher.ModelMatcher;
@@ -36,5 +37,12 @@ public class ClientListServiceTest {
     public void testGetAll() throws Exception {
         Collection<ClientList> clientsLists = service.getAll();
         MATCHER.assertCollectionEquals(Arrays.asList(TestData.CLIENT_LIST1, TestData.CLIENT_LIST2, TestData.CLIENT_LIST3, TestData.CLIENT_LIST4), clientsLists);
+    }
+
+
+    @Test
+    public void testGetById() throws Exception {
+        ClientList clientList = service.getById(1);
+        MATCHER.assertEquals(ClientTestData.CLIENT_LIST1, clientList);
     }
 }
