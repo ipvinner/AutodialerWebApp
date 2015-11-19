@@ -38,7 +38,6 @@ public class AjaxClientController extends AbstractClientController {
     }
 
 
-
     @RequestMapping(method = RequestMethod.POST)
     public void updateOrCreate(@RequestParam("id") int id,
                                @RequestParam("firstName") String firstName,

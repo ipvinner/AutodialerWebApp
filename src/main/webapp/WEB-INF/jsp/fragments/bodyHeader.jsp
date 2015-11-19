@@ -11,7 +11,7 @@
             </a>
             <form class="navbar-form navbar-right">
                 <a class="btn btn-info" role="button" href="clients">clients</a>
-                <a class="btn btn-primary" role="button" href="">tasks</a>
+                <a class="btn btn-primary" role="button" href="tasks">tasks</a>
                 <a class="btn btn-default" role="button" href="">users</a>
                 <a class="btn btn-default" role="button" href="">monitoring</a>
                 <a class="btn btn-default" role="button" href="">Asterisk settings</a>

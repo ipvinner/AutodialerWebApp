@@ -58,10 +58,26 @@
           </div>
 
           <div class="form-group">
-            <label for="active" class="control-label col-xs-3">lastName</label>
+            <label for="client_list_id" class="control-label col-xs-3">client_list_id</label>
+
+            <div class="col-xs-9">
+              <input type="text" class="client_list_id" id="client_list_id" name="client_list_id" placeholder="client_list_id">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="active" class="control-label col-xs-3">active</label>
 
             <div class="col-xs-9">
               <input type="text" class="active" id="active" name="active" placeholder="active">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="originate_param_id" class="control-label col-xs-3">originate_param_id</label>
+
+            <div class="col-xs-9">
+              <input type="text" class="originate_param_id" id="originate_param_id" name="originate_param_id" placeholder="originate_param_id">
             </div>
           </div>
 

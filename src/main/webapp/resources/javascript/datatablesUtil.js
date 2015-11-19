@@ -27,15 +27,6 @@ function deleteRow(id) {
     });
 }
 
-function getClientsById(id){
-    $.ajax({
-        url: ajaxUrl + id,
-        type: 'GET',
-        success: function () {
-            updateTable();
-        }
-    });
-}
 
 function enable(chkbox) {
     var enabled = chkbox.is(":checked");

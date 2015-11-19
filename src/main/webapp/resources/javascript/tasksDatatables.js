@@ -38,9 +38,7 @@ $(function () {
             ]
         ],
         "createdRow": function (row, data, dataIndex) {
-            if (!data.enabled) {
-                $(row).css("text-decoration", "line-through");
-            }
+
         },
         "initComplete": makeEditable
     });
