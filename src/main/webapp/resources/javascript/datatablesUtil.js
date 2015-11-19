@@ -93,6 +93,13 @@ function failNoty(event, jqXHR, options, jsExc) {
     });
 }
 
+function renderPlayBtn(data, type, row) {
+    if (type == 'display') {
+        return '<a class="btn btn-xs btn-success" >Play</a>';
+    }
+    return data;
+}
+
 function renderEditBtn(data, type, row) {
     if (type == 'display') {
         return '<a class="btn btn-xs btn-primary" onclick="updateRow(' + row.id + ');">Edit</a>';

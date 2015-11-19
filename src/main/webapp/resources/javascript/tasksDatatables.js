@@ -23,6 +23,11 @@ $(function () {
             {
                 "bSortable": false,
                 "sDefaultContent": "",
+                "mRender": renderPlayBtn
+            },
+            {
+                "bSortable": false,
+                "sDefaultContent": "",
                 "mRender": renderEditBtn
             },
             {
