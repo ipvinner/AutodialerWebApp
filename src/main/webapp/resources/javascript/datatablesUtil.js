@@ -1,3 +1,5 @@
+var form;
+
 function makeEditable() {
     form = $('#detailsForm');
 
@@ -6,6 +8,9 @@ function makeEditable() {
         $('#editRow').modal();
     });
 
+    $('.edit').click(function () {
+        updateRow($(this).closest('tr').attr("id"));
+    });
     form.submit(function () {
         save();
         return false;
@@ -15,7 +20,6 @@ function makeEditable() {
         failNoty(event, jqXHR, options, jsExc);
     });
 }
-
 
 function updateRow(id) {
     $.get(ajaxUrl + id, function (data) {

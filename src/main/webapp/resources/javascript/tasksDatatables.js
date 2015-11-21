@@ -12,6 +12,7 @@ $(function () {
         "sAjaxSource": ajaxUrl,
         "sAjaxDataProp": "",
         "bPaginate": false,
+        "bFilter": false,
         "bInfo": false,
         "aoColumns": [
             {

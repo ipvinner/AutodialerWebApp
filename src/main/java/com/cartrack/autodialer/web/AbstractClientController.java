@@ -20,6 +20,11 @@ public class AbstractClientController {
     private ClientService clientService;
 
 
+    public Client get(int id){
+        LOG.info("get client by id: " + id);
+        return clientService.get(id);
+    }
+
     public Collection<Client> getAll(){
         LOG.info("getAll");
         return clientService.getAll();

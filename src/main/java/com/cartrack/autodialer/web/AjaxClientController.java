@@ -27,9 +27,9 @@ public class AjaxClientController extends AbstractClientController {
         return super.getAll();
     }
 
-    @RequestMapping(value = "/{listId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Client> getByList(@PathVariable("listId") int listId){
-        return super.getByList(listId);
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Client get(@PathVariable("id") int id){
+        return super.get(id);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
