@@ -27,6 +27,9 @@ $(function () {
                 "mData": "email"
             },
             {
+                "mData": "clientList.name"
+            },
+            {
                 "bSortable": false,
                 "sDefaultContent": "",
                 "mRender": renderEditBtn

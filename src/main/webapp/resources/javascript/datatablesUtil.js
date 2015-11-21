@@ -16,6 +16,16 @@ function makeEditable() {
     });
 }
 
+
+function updateRow(id) {
+    $.get(ajaxUrl + id, function (data) {
+        $.each(data, function (key, value) {
+            form.find("input[name='" + key + "']").val(value);
+        });
+        $('#editRow').modal();
+    });
+}
+
 function deleteRow(id) {
     $.ajax({
         url: ajaxUrl + id,
@@ -100,6 +110,7 @@ function renderPlayBtn(data, type, row) {
     return data;
 }
 
+
 function renderEditBtn(data, type, row) {
     if (type == 'display') {
         return '<a class="btn btn-xs btn-primary" onclick="updateRow(' + row.id + ');">Edit</a>';
@@ -109,7 +120,6 @@ function renderEditBtn(data, type, row) {
 
 function renderDeleteBtn(data, type, row) {
     if (type == 'display') {
-        debugger;
         return '<a class="btn btn-xs btn-danger" onclick="deleteRow(' + row.id + ');">Delete</a>';
     }
     return data;

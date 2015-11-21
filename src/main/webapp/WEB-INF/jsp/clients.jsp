@@ -41,6 +41,7 @@
             <th>lastName</th>
             <th>phoneNumber</th>
             <th>email</th>
+            <th>clientsList</th>
             <th></th>
             <th></th>
           </tr>
