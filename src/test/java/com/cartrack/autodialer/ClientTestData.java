@@ -21,8 +21,9 @@ public class ClientTestData {
     public static final Client CLIENT1 = new Client(1, "Ivan", "Ivan", "+380638925578", "1@urk.net", CLIENT_LIST1);
     public static final Client CLIENT2 = new Client(2, "Petrov", "Ivan", "+380638925678", "2@urk.net", CLIENT_LIST1);
     public static final Client CLIENT3 = new Client(7, "Сергеев", "Дмитрий", "+38055325678", "2@mail.ru", CLIENT_LIST1);
+    public static final Client CLIENT4 = new Client(8, "Наумова", "Дмитрий", "+380738625020", "naumov@mail.ru", CLIENT_LIST1);
 
-    public static final Client CLIENTNEW = new Client(8, "New Client", "lastname", "phoneNew", "emailnew", CLIENT_LIST1);
+    public static final Client CLIENTNEW = new Client(9, "New Client", "lastname", "phoneNew", "emailnew", CLIENT_LIST1);
 
     public static final OriginateParam ORIGINATE_PARAM1 = new OriginateParam(1, "from-ami", "from-ami", "s", 1, false, 30000, "var1Value", "var2Value");
     public static final OriginateParam ORIGINATE_PARAM2 = new OriginateParam(1, "outbount without handlers", "from-admin", "s", 1, false, 20000, "test", "test");

@@ -1,11 +1,13 @@
 package com.cartrack.autodialer.repository.jdbc;
 
 import com.cartrack.autodialer.domain.Client;
+import com.cartrack.autodialer.repository.ClientListRepository;
 import com.cartrack.autodialer.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
@@ -21,7 +23,12 @@ import java.util.List;
 @Transactional(readOnly = true)
 public class JdbcClientRepository implements ClientRepository {
 
-    private static final BeanPropertyRowMapper<Client> ROW_MAPPER = BeanPropertyRowMapper.newInstance(Client.class);
+    @Autowired
+    private ClientListRepository clientListRepository;
+//    private static final BeanPropertyRowMapper<Client> ROW_MAPPER = BeanPropertyRowMapper.newInstance(Client.class);
+    private  final RowMapper<Client> ROW_MAPPER = (rs, rowNum) ->
+        new Client(rs.getInt("id"), rs.getString("firstname"), rs.getString("lastname"), rs.getString("phone_number"),
+                rs.getString("email"), clientListRepository.getByid(rs.getInt("clients_list_id")));
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -57,7 +64,7 @@ public class JdbcClientRepository implements ClientRepository {
 
     @Override
     public Client get(int id) {
-        List<Client> clients = jdbcTemplate.query("SELECT id, firstname, lastname, phone_number, email FROM client WHERE id = ?", ROW_MAPPER, id);
+        List<Client> clients = jdbcTemplate.query("SELECT id, firstname, lastname, phone_number, email, clients_list_id FROM client WHERE id = ?", ROW_MAPPER, id);
         return DataAccessUtils.singleResult(clients);
     }
 

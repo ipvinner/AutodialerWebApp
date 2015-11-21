@@ -11,7 +11,7 @@ public class Client extends BaseEntity{
     protected String phoneNumber;
     protected String email;
 
-    @JsonIgnore
+//    @JsonIgnore
     protected ClientList clientList;
 
     public Client(Integer id, String firstName, String lastName, String phoneNumber, String email, ClientList clientList) {

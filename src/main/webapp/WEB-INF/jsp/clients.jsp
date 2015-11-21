@@ -37,7 +37,6 @@
         <table class="table table-striped display" id="datatable">
           <thead>
           <tr>
-
             <th>firstName</th>
             <th>lastName</th>
             <th>phoneNumber</th>
@@ -46,18 +45,6 @@
             <th></th>
           </tr>
           </thead>
-          <c:forEach items="${clients}" var="client">
-            <jsp:useBean id="client" scope="page" type="com.cartrack.autodialer.domain.Client"/>
-            <tr id="${client.id}">
-
-              <td>${client.firstName}</td>
-              <td>${client.lastName}</td>
-              <td>${client.phoneNumber}</td>
-              <td>${client.email}</td>
-              <td><a class="btn btn-xs btn-primary edit" id="${client.id}">Edit</a></td>
-              <td><a class="btn btn-xs btn-danger delete" id="${client.id}">Delete</a></td>
-            </tr>
-          </c:forEach>
         </table>
 
       </div>
@@ -129,58 +116,7 @@
 <script type="text/javascript" src="webjars/datatables/1.10.9/js/jquery.dataTables.min.js"></script>
 <script type="text/javascript" src="webjars/noty/2.2.4/jquery.noty.packaged.min.js"></script>
 <script type="text/javascript" src="resources/javascript/datatablesUtil.js"></script>
+<script type="text/javascript" src="resources/javascript/clientsDatatables.js"></script>
 
-<script type="text/javascript">
 
-
-  var ajaxUrl = 'ajax/admin/clients/';
-  var datatableApi;
-
-  function updateTable() {
-    $.get(ajaxUrl, function (data) {
-      updateTableByData(data);
-    });
-  }
-
-  $(function () {
-    datatableApi = $('#datatable').DataTable({
-      "bPaginate": false,
-      "bInfo": false,
-      "aoColumns": [
-        {
-          "mData": "firstName"
-        },
-        {
-          "mData": "lastName"
-        },
-        {
-          "mData": "phoneNumber"
-        },
-        {
-          "mData": "email"
-        },
-        {
-          "sDefaultContent": "Edit",
-          "bSortable": false
-        },
-        {
-          "sDefaultContent": "Delete",
-          "bSortable": false
-        }
-      ],
-      "aaSorting": [
-        [
-          0,
-          "asc"
-        ]
-      ]
-    });
-    makeEditable();
-    init();
-  });
-
-  function init() {
-  }
-
-  </script>
 </html>

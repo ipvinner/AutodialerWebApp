@@ -42,7 +42,7 @@ public class ClientServiceTest {
     @Test
     public void testGetByList() throws Exception {
         Collection<Client> clients = service.getByList(1);
-        MATCHER.assertCollectionEquals(Arrays.asList(ClientTestData.CLIENT1, ClientTestData.CLIENT2, ClientTestData.CLIENT3), clients);
+        MATCHER.assertCollectionEquals(Arrays.asList(ClientTestData.CLIENT1, ClientTestData.CLIENT2, ClientTestData.CLIENT3, ClientTestData.CLIENT4), clients);
     }
 
     @Test
@@ -51,7 +51,7 @@ public class ClientServiceTest {
         Client client = new Client(null, "New Client", "lastname", "phoneNew", "emailnew", ClientTestData.CLIENT_LIST1);
         Client created = service.save(client);
 
-        MATCHER.assertCollectionEquals(Arrays.asList(ClientTestData.CLIENT1, ClientTestData.CLIENT2, ClientTestData.CLIENT3, ClientTestData.CLIENTNEW), service.getByList(1));
+        MATCHER.assertCollectionEquals(Arrays.asList(ClientTestData.CLIENT1, ClientTestData.CLIENT2, ClientTestData.CLIENT3, ClientTestData.CLIENT4, ClientTestData.CLIENTNEW), service.getByList(1));
     }
 
     @Test
@@ -62,7 +62,7 @@ public class ClientServiceTest {
     @Test
     public void testDelete() throws Exception {
         service.delete(1);
-        MATCHER.assertCollectionEquals(Arrays.asList(ClientTestData.CLIENT2, ClientTestData.CLIENT3), service.getByList(1));
+        MATCHER.assertCollectionEquals(Arrays.asList(ClientTestData.CLIENT2, ClientTestData.CLIENT3, ClientTestData.CLIENT4), service.getByList(1));
     }
 
 
