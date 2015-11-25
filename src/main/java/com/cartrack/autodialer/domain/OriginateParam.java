@@ -5,22 +5,25 @@ package com.cartrack.autodialer.domain;
  */
 public class OriginateParam extends NamedEntity {
 
-    private String context;
-    private String extension;
-    private int priority;
-    private boolean async;
-    private long timeout;
-    private String var1;
-    private String var2;
+    protected String context;
+    protected String extension;
+    protected int priority;
+    protected boolean async;
+    protected long timeout;
+    protected String var1;
+    protected String var2;
 
     public OriginateParam(){
 
     }
 
-    public OriginateParam(int id, String name, String context, String extension, int priority, boolean async, long timeout, String var1, String var2) {
+
+
+    public OriginateParam(Integer id, String name, String context, String extension, int priority, boolean async, long timeout, String var1, String var2) {
         this.id = id;
         this.name = name;
         this.context = context;
+        this.extension = extension;
         this.priority = priority;
         this.async = async;
         this.timeout = timeout;
@@ -83,5 +86,18 @@ public class OriginateParam extends NamedEntity {
 
     public void setVar2(String var2) {
         this.var2 = var2;
+    }
+
+    @Override
+    public String toString() {
+        return "OriginateParam{" +
+                "context='" + context + '\'' +
+                ", extension='" + extension + '\'' +
+                ", priority=" + priority +
+                ", async=" + async +
+                ", timeout=" + timeout +
+                ", var1='" + var1 + '\'' +
+                ", var2='" + var2 + '\'' +
+                '}';
     }
 }
