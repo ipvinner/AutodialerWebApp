@@ -14,7 +14,7 @@
                 <a class="btn btn-primary" role="button" href="tasks">tasks</a>
                 <a class="btn btn-default" role="button" href="">users</a>
                 <a class="btn btn-default" role="button" href="">monitoring</a>
-                <a class="btn btn-default" role="button" href="">Asterisk settings</a>
+                <a class="btn btn-default" role="button" href="asterisk">Asterisk settings</a>
 
             </form>
         </div>

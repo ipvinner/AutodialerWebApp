@@ -36,4 +36,9 @@ public class RootController {
     public String taskList() {
         return "tasks";
     }
+
+    @RequestMapping(value = "/asterisk", method = RequestMethod.GET)
+    public String originateParamsList() {
+        return "asterisk";
+    }
 }
