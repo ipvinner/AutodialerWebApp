@@ -11,5 +11,5 @@ public interface ClientListService {
 
     List<ClientList> getAll();
 
-    ClientList getById(int id);
+    ClientList get(int id);
 }

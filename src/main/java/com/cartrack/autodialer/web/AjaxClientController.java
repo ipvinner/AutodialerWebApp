@@ -1,16 +1,13 @@
 package com.cartrack.autodialer.web;
 
-import com.cartrack.autodialer.LoggerWrapper;
 import com.cartrack.autodialer.domain.Client;
 import com.cartrack.autodialer.domain.ClientList;
 import com.cartrack.autodialer.service.ClientListService;
-import com.cartrack.autodialer.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
-import java.util.List;
 
 /**
  * Created by vinner on 12.11.2015.
@@ -45,7 +42,7 @@ public class AjaxClientController extends AbstractClientController {
                                @RequestParam("phoneNumber") String phoneNumber,
                                @RequestParam("email") String email){
 
-        ClientList clientList = clientListService.getById(1);
+        ClientList clientList = clientListService.get(1);
         Client client = new Client(id, firstName, lastName, phoneNumber, email, clientList);
         if (id == 0) {
             super.create(client);

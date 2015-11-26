@@ -1,10 +1,6 @@
-package com.cartrack.autodialer.web;
+package com.cartrack.autodialer.web.asterisk;
 
-import com.cartrack.autodialer.domain.ClientList;
 import com.cartrack.autodialer.domain.OriginateParam;
-import com.cartrack.autodialer.domain.Task;
-import com.cartrack.autodialer.service.ClientListService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 

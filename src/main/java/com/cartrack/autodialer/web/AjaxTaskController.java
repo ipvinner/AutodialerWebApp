@@ -42,7 +42,7 @@ public class AjaxTaskController extends AbstractTaskController {
                                @RequestParam("active") boolean active,
                                @RequestParam("originate_param_id") int originate_param_id){
 
-        ClientList clientList = clientListService.getById(client_list_id);
+        ClientList clientList = clientListService.get(client_list_id);
         Task task = new Task(id, name, clientList, active, new OriginateParam());
         if (id == 0) {
             super.create(task);

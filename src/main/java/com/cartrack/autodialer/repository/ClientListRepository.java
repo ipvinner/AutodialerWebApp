@@ -11,6 +11,6 @@ public interface ClientListRepository {
 
     List<ClientList> getAll();
 
-    ClientList getByid(int id);
+    ClientList get(int id);
 
 }

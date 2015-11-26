@@ -27,7 +27,7 @@ public class JdbcClientListRepository implements ClientListRepository {
     }
 
     @Override
-    public ClientList getByid(int id) {
+    public ClientList get(int id) {
         List<ClientList> lists = jdbcTemplate.query("SELECT * FROM list WHERE id = ?", ROW_MAPPER, id);
         return DataAccessUtils.singleResult(lists);
     }

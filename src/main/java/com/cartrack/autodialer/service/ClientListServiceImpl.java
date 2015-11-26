@@ -23,7 +23,7 @@ public class ClientListServiceImpl implements ClientListService {
     }
 
     @Override
-    public ClientList getById(int id) {
-        return repository.getByid(id);
+    public ClientList get(int id) {
+        return repository.get(id);
     }
 }

@@ -15,8 +15,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.util.Arrays;
 import java.util.Collection;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by vinner on 05.11.2015.
  */
@@ -42,7 +40,7 @@ public class ClientListServiceTest {
 
     @Test
     public void testGetById() throws Exception {
-        ClientList clientList = service.getById(1);
+        ClientList clientList = service.get(1);
         MATCHER.assertEquals(ClientTestData.CLIENT_LIST1, clientList);
     }
 }
