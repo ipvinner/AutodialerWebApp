@@ -1,9 +1,8 @@
-package com.cartrack.autodialer.web;
+package com.cartrack.autodialer.web.client;
 
 import com.cartrack.autodialer.LoggerWrapper;
 import com.cartrack.autodialer.domain.Client;
 import com.cartrack.autodialer.service.ClientService;
-import org.asteriskjava.Cli;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

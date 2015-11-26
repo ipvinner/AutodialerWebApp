@@ -1,4 +1,4 @@
-package com.cartrack.autodialer.web;
+package com.cartrack.autodialer.web.client;
 
 import com.cartrack.autodialer.domain.Client;
 import com.cartrack.autodialer.domain.ClientList;

@@ -1,4 +1,4 @@
-package com.cartrack.autodialer.web;
+package com.cartrack.autodialer.web.task;
 
 import com.cartrack.autodialer.LoggerWrapper;
 import com.cartrack.autodialer.domain.Task;

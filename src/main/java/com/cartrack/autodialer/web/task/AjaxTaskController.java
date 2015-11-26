@@ -1,4 +1,4 @@
-package com.cartrack.autodialer.web;
+package com.cartrack.autodialer.web.task;
 
 import com.cartrack.autodialer.domain.ClientList;
 import com.cartrack.autodialer.domain.OriginateParam;
