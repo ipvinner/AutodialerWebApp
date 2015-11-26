@@ -30,6 +30,11 @@ public class AjaxTaskController extends AbstractTaskController {
         super.delete(id);
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Task get(@PathVariable("id") int id){
+        return super.get(id);
+    }
+
     @RequestMapping(method = RequestMethod.POST)
     public void updateOrCreate(@RequestParam("id") int id,
                                @RequestParam("name") String name,

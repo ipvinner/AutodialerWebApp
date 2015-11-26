@@ -62,6 +62,15 @@
             <li><a href="#">log out</a></li>
         </ul>
     </li>
+
+        <%--<li class="dropdown">--%>
+            <%--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${pageContext.response.locale} <span class="caret"></span></a>--%>
+            <%--<ul class="dropdown-menu">--%>
+                <%--<li><a href="?lang=en">English</a></li>--%>
+                <%--<li><a href="?lang=ru">Russian</a></li>--%>
+            <%--</ul>--%>
+        <%--</li>--%>
+        <jsp:include page="lang.jsp"/>
     </ul>
 </div><!--/.nav-collapse -->
 </div>

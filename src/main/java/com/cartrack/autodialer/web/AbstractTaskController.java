@@ -22,6 +22,11 @@ public class AbstractTaskController {
         return service.getAll();
     }
 
+    public Task get(int id){
+        LOG.info("get Task by id: " + id);
+        return service.get(id);
+    }
+
     public void delete( int id){
         LOG.info("delete + " + id);
         service.delete(id);

@@ -7,5 +7,7 @@
 <body>
 <jsp:include page="fragments/bodyHeader.jsp"/>
 
+<jsp:include page="fragments/footer.jsp"/>
+
 </body>
 </html>
