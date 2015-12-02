@@ -27,7 +27,7 @@ public class AbstractTaskController {
         return service.get(id);
     }
 
-    public void delete( int id){
+    public void delete(int id){
         LOG.info("delete + " + id);
         service.delete(id);
     }
@@ -42,5 +42,11 @@ public class AbstractTaskController {
         task.setId(id);
         LOG.info("update Client + " + task);
         return service.update(task);
+    }
+
+    public void start(int id){
+        Task task = service.get(id);
+        LOG.info("start task " + task.getName());
+        service.start(task);
     }
 }

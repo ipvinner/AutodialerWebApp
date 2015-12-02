@@ -41,4 +41,9 @@ public class TaskServiceImpl implements TaskService{
     public Task update(Task task) {
         return ExceptionUtil.check(taskRepository.save(task), task.getId());
     }
+
+    @Override
+    public void start(Task task) {
+
+    }
 }

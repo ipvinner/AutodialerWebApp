@@ -19,7 +19,6 @@ public class HelloEvents implements ManagerEventListener {
 
     public HelloEvents() throws IOException {
         ManagerConnectionFactory factory = new ManagerConnectionFactory("31.131.16.59", "autodialer", "gieB7Due6eit");
-
         this.managerConnection = factory.createManagerConnection();
         managerConnection.registerUserEventClass(VIPCallEvent.class);
     }

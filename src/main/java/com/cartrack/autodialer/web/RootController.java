@@ -37,6 +37,11 @@ public class RootController {
         return "clientsList";
     }
 
+    @RequestMapping(value = "/addList", method = RequestMethod.GET)
+    public String addList(Model model) {
+        return "addList";
+    }
+
     @RequestMapping(value = "/tasks", method = RequestMethod.GET)
     public String taskList() {
         return "tasks";

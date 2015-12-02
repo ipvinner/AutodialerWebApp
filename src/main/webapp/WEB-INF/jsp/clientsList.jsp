@@ -17,7 +17,7 @@
       <h3><fmt:message key="clients.title"/></h3>
 
       <div class="view-box">
-        <a class="btn btn-sm btn-info" id="add">Add client</a>
+        <a class="btn btn-sm btn-info" id="add"><fmt:message key="clients.add_clients_list"/></a>
 
         <div class="dropdown">
           <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">

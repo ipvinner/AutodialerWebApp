@@ -42,6 +42,16 @@ function deleteRow(id) {
     });
 }
 
+function play(id) {
+    $.ajax({
+        url: ajaxUrl + 'play/' + id,
+        type: 'GET',
+        success: function () {
+            successNoty('Task started');
+        }
+    });
+}
+
 
 function enable(chkbox) {
     var enabled = chkbox.is(":checked");
@@ -110,7 +120,7 @@ function failNoty(event, jqXHR, options, jsExc) {
 
 function renderPlayBtn(data, type, row) {
     if (type == 'display') {
-        return '<a class="btn btn-xs btn-success" >Play</a>';
+        return '<a class="btn btn-xs btn-success" onclick="play(' + row.id + ');">Play</a>';
     }
     return data;
 }
