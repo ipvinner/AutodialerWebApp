@@ -22,7 +22,8 @@ import static org.junit.Assert.*;
  */
 @ContextConfiguration({
         "classpath:spring/spring-app.xml",
-        "classpath:spring/spring-db.xml"
+        "classpath:spring/spring-db.xml",
+        "classpath:spring/spring-asterisk.xml"
 })
 @RunWith(SpringJUnit4ClassRunner.class)
 @Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
@@ -47,7 +48,7 @@ public class OriginateParamServiceTest {
 
     @Test
     public void testSave() throws Exception {
-        OriginateParam originateParamNew = new OriginateParam(null, "from-ami-new", "from-ami-new", "s", 1, false, 30000, "var1ValueNew", "var2ValueNew");
+        OriginateParam originateParamNew = new OriginateParam(null, "from-ami-new", "from-ami-new", "s", 1, false, 30000, "var1ValueNew", "var2ValueNew", "SIP/zadarma/");
         OriginateParam created = service.save(originateParamNew);
 
         MATCHER.assertCollectionEquals(Arrays.asList(ClientTestData.ORIGINATE_PARAM1, ClientTestData.ORIGINATE_PARAM2, ClientTestData.ORIGINATE_PARAMNEW), service.getAll());
@@ -55,7 +56,7 @@ public class OriginateParamServiceTest {
 
     @Test
     public void testUpdate() throws Exception {
-        OriginateParam updated = new OriginateParam(ClientTestData.ORIGINATE_PARAM1.getId(), "UPDATED", "UPDATED", "s", 1, false, 30000, "var1ValueNew", "var2ValueNew");
+        OriginateParam updated = new OriginateParam(ClientTestData.ORIGINATE_PARAM1.getId(), "UPDATED", "UPDATED", "s", 1, false, 30000, "var1ValueNew", "var2ValueNew", "SIP/zadarma/");
         service.update(updated);
         MATCHER.assertEquals(updated, service.get(1));
     }

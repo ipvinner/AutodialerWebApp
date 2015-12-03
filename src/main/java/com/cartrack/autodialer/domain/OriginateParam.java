@@ -6,12 +6,13 @@ package com.cartrack.autodialer.domain;
 public class OriginateParam extends NamedEntity {
 
     protected String context;
-    protected String extension;
+    protected String exten;
     protected int priority;
     protected boolean async;
     protected long timeout;
     protected String var1;
     protected String var2;
+    protected String trunk;
 
     public OriginateParam(){
 
@@ -19,11 +20,12 @@ public class OriginateParam extends NamedEntity {
 
 
 
-    public OriginateParam(Integer id, String name, String context, String extension, int priority, boolean async, long timeout, String var1, String var2) {
+    public OriginateParam(Integer id, String name, String context, String exten,
+                          int priority, boolean async, long timeout, String var1, String var2, String trunk) {
         this.id = id;
         this.name = name;
         this.context = context;
-        this.extension = extension;
+        this.exten = exten;
         this.priority = priority;
         this.async = async;
         this.timeout = timeout;
@@ -40,12 +42,12 @@ public class OriginateParam extends NamedEntity {
         this.context = context;
     }
 
-    public String getExtension() {
-        return extension;
+    public String getExten() {
+        return exten;
     }
 
-    public void setExtension(String extension) {
-        this.extension = extension;
+    public void setExten(String exten) {
+        this.exten = exten;
     }
 
     public int getPriority() {
@@ -88,11 +90,19 @@ public class OriginateParam extends NamedEntity {
         this.var2 = var2;
     }
 
+    public String getTrunk() {
+        return trunk;
+    }
+
+    public void setTrunk(String trunk) {
+        this.trunk = trunk;
+    }
+
     @Override
     public String toString() {
         return "OriginateParam{" +
                 "context='" + context + '\'' +
-                ", extension='" + extension + '\'' +
+                ", extension='" + exten + '\'' +
                 ", priority=" + priority +
                 ", async=" + async +
                 ", timeout=" + timeout +

@@ -37,7 +37,7 @@ public class AjaxTaskController extends AbstractTaskController {
 
     @RequestMapping(value = "/play/{id}", method = RequestMethod.GET)
     public void startTask(@PathVariable("id") int id){
-        System.out.println("START" + id);
+        super.start(id);
     }
 
     @RequestMapping(method = RequestMethod.POST)

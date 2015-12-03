@@ -1,5 +1,6 @@
 package com.cartrack.autodialer.asterisk;
 
+
 import org.asteriskjava.manager.event.UserEvent;
 
 /**
@@ -9,11 +10,14 @@ public class VIPCallEvent extends UserEvent
 {
     private String firstName;
 
-    public VIPCallEvent(Object source) {
+
+    public VIPCallEvent(Object source)
+    {
         super(source);
     }
 
-    public String getFirstName() {
+    public String getFirstName()
+    {
         return firstName;
     }
 

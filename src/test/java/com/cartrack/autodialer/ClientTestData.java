@@ -25,10 +25,10 @@ public class ClientTestData {
 
     public static final Client CLIENTNEW = new Client(9, "New Client", "lastname", "phoneNew", "emailnew", CLIENT_LIST1);
 
-    public static final OriginateParam ORIGINATE_PARAM1 = new OriginateParam(1, "from-ami", "from-ami", "s", 1, false, 30000, "var1Value", "var2Value");
-    public static final OriginateParam ORIGINATE_PARAM2 = new OriginateParam(2, "outbount without handlers", "from-admin", "s", 1, false, 20000, "test", "test");
+    public static final OriginateParam ORIGINATE_PARAM1 = new OriginateParam(1, "from-ami", "from-ami", "s", 1, false, 30000, "var1Value", "var2Value", "SIP/zadarma/");
+    public static final OriginateParam ORIGINATE_PARAM2 = new OriginateParam(2, "outbount without handlers", "from-admin", "s", 1, false, 20000, "test", "test", "SIP/zadarma/");
 
-    public static final OriginateParam ORIGINATE_PARAMNEW = new OriginateParam(3, "from-ami-new", "from-ami-new", "s", 1, false, 30000, "var1ValueNew", "var2ValueNew");
+    public static final OriginateParam ORIGINATE_PARAMNEW = new OriginateParam(3, "from-ami-new", "from-ami-new", "s", 1, false, 30000, "var1ValueNew", "var2ValueNew", "SIP/zadarma/");
 
     public static final Task TASK1 = new Task(1, "vip", CLIENT_LIST1, true, ORIGINATE_PARAM1);
     public static final Task TASK2 = new Task(2, "debtors dialer", CLIENT_LIST2, true, ORIGINATE_PARAM1);

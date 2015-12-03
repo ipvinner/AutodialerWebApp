@@ -39,12 +39,12 @@ public class JdbcOriginateParamRepository implements OriginateParamRepository {
     @Transactional
     public OriginateParam save(OriginateParam originateParam) {
         if(originateParam.isNew()){
-            jdbcTemplate.update("INSERT INTO originate_param (name, context, extension, priority, async, timeout, var1, var2) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
-                    originateParam.getName(), originateParam.getContext(), originateParam.getExtension(), originateParam.getPriority(),
+            jdbcTemplate.update("INSERT INTO originate_param (name, context, exten, priority, async, timeout, var1, var2) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                    originateParam.getName(), originateParam.getContext(), originateParam.getExten(), originateParam.getPriority(),
                     originateParam.isAsync(), originateParam.getTimeout(), originateParam.getVar1(), originateParam.getVar2());
         }else{
-            jdbcTemplate.update("UPDATE originate_param SET name = ?, context = ?, extension = ?, priority = ?, async = ?, timeout = ?, var1 = ?, var2 = ? WHERE id = ?",
-                    originateParam.getName(), originateParam.getContext(), originateParam.getExtension(), originateParam.getPriority(),
+            jdbcTemplate.update("UPDATE originate_param SET name = ?, context = ?, exten = ?, priority = ?, async = ?, timeout = ?, var1 = ?, var2 = ? WHERE id = ?",
+                    originateParam.getName(), originateParam.getContext(), originateParam.getExten(), originateParam.getPriority(),
                     originateParam.isAsync(), originateParam.getTimeout(), originateParam.getVar1(), originateParam.getVar2(), originateParam.getId());
         }
         return originateParam;

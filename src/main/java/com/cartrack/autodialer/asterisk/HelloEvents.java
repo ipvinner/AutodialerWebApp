@@ -20,7 +20,7 @@ public class HelloEvents implements ManagerEventListener {
     public HelloEvents() throws IOException {
         ManagerConnectionFactory factory = new ManagerConnectionFactory("31.131.16.59", "autodialer", "gieB7Due6eit");
         this.managerConnection = factory.createManagerConnection();
-        managerConnection.registerUserEventClass(VIPCallEvent.class);
+
     }
 
     public void call() throws IOException, AuthenticationFailedException, TimeoutException, InterruptedException  {
@@ -29,9 +29,11 @@ public class HelloEvents implements ManagerEventListener {
         ManagerResponse originateResponse;
 
 
+
+
         // register for events
         managerConnection.addEventListener(this);
-
+        managerConnection.registerUserEventClass(VIPCallEvent.class);
         // connect to Asterisk and log in
         managerConnection.login();
 
@@ -70,10 +72,13 @@ public class HelloEvents implements ManagerEventListener {
 
     @Override
     public void onManagerEvent(ManagerEvent event) {
+
+
         if(event instanceof HangupEvent){
             System.out.println("Hangup");
         }
-        System.out.println("EVENT: " + event);
+
+
     }
 
     public static void main(String[] args) throws Exception {

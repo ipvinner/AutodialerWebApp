@@ -21,7 +21,7 @@ $(function () {
                 "mData": "context"
             },
             {
-                "mData": "extension"
+                "mData": "exten"
             },
             {
                 "mData": "priority"
@@ -31,6 +31,9 @@ $(function () {
             },
             {
                 "mData": "timeout"
+            },
+            {
+                "mData": "trunk"
             },
             {
                 "mData": "var1"

@@ -37,11 +37,12 @@ public class AjaxOriginateParamController extends AbstractOriginateParamControll
                                @RequestParam("priority") int priority,
                                @RequestParam("async") boolean async,
                                @RequestParam("timeout") long timeout,
+                               @RequestParam("trunk") String trunk,
                                @RequestParam("var1") String var1,
                                @RequestParam("var2") String var2){
 
 
-        OriginateParam originateParam = new OriginateParam(id, name, context, extension, priority, async, timeout, var1, var2);
+        OriginateParam originateParam = new OriginateParam(id, name, context, extension, priority, async, timeout, var1, var2, trunk);
         if (id == 0) {
             super.create(originateParam);
         } else {

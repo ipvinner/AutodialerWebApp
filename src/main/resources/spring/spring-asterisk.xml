@@ -5,10 +5,19 @@
          http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 
-    <bean id="amiConnection" class="com.cartrack.autodialer.asterisk.AmiConnection" >
-        <property name="host" value="${asterisk.host}" />
-        <property name="username" value="${asterisk.amiuser}" />
-        <property name="password" value="${asterisk.password}" />
+    <bean id="amiConnection" class="com.cartrack.autodialer.asterisk.AsteriskHelper" >
+
+        <constructor-arg>
+            <value>${asterisk.host}</value>
+        </constructor-arg>
+
+        <constructor-arg>
+            <value>${asterisk.amiuser}</value>
+        </constructor-arg>
+
+        <constructor-arg>
+            <value>${asterisk.password}</value>
+        </constructor-arg>
 
     </bean>
 </beans>

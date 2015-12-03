@@ -22,6 +22,7 @@ public class OriginateParamServiceImpl implements OriginateParamService {
 
     @Override
     public List<OriginateParam> getAll() {
+        List<OriginateParam> list = repository.getAll();
         return repository.getAll();
     }
 

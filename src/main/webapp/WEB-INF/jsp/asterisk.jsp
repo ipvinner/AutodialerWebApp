@@ -29,6 +29,7 @@
             <th>priority</th>
             <th>async</th>
             <th>timeout</th>
+            <th>trunk</th>
             <th>var1</th>
             <th>var2</th>
             <th></th>
@@ -99,7 +100,15 @@
             <label for="timeout" class="control-label col-xs-3">timeout</label>
 
             <div class="col-xs-9">
-              <input type="timeout" class="form-control" id="timeout" name="timeout" placeholder="timeout">
+              <input type="text" class="form-control" id="timeout" name="timeout" placeholder="timeout">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="trunk" class="control-label col-xs-3">trunk</label>
+
+            <div class="col-xs-9">
+              <input type="text" class="form-control" id="trunk" name="trunk" placeholder="trunk">
             </div>
           </div>
 
