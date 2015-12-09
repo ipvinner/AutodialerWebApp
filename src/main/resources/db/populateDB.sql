@@ -1,9 +1,11 @@
+DELETE FROM call_result;
 DELETE FROM client;
 DELETE FROM task;
 DELETE FROM originate_param;
 ALTER SEQUENCE client_id_seq RESTART WITH 1;
 ALTER SEQUENCE task_id_seq RESTART WITH 1;
 ALTER SEQUENCE originate_param_id_seq RESTART WITH 1;
+ALTER SEQUENCE call_result_id_seq RESTART WITH 1;
 
 INSERT INTO client (firstname, lastname, phone_number, email, clients_list_id) VALUES ('Ivan', 'Ivan', '+380638925578', '1@urk.net', 1);
 INSERT INTO client (firstname, lastname, phone_number, email, clients_list_id) VALUES ('Petrov', 'Ivan', '+380638925678', '2@urk.net', 1);
@@ -24,6 +26,12 @@ INSERT INTO task (name, client_list_id, active, originate_param_id) VALUES ('new
 INSERT INTO task (name, client_list_id, active, originate_param_id) VALUES ('hold calls', 2, TRUE , 1);
 INSERT INTO task (name, client_list_id, active, originate_param_id) VALUES ('безнадежные звонки', 2, TRUE , 2);
 
+INSERT INTO call_result(datetime, result, reason, task_id, client_id) VALUES ('2015-11-30 10:00:00', 'success', 'success', 1, 1);
+INSERT INTO call_result(datetime, result, reason, task_id, client_id) VALUES ('2015-12-01 11:00:00', 'failed', 'no-answer', 1, 2);
+INSERT INTO call_result(datetime, result, reason, task_id, client_id) VALUES ('2015-12-01 12:00:00', 'failed', 'no-answer', 1, 3);
+INSERT INTO call_result(datetime, result, reason, task_id, client_id) VALUES ('2015-12-02 13:00:00', 'success', 'success', 1, 3);
+INSERT INTO call_result(datetime, result, reason, task_id, client_id) VALUES ('2015-12-02 14:00:00', 'success', 'success', 2, 3);
+INSERT INTO call_result(datetime, result, reason, task_id, client_id) VALUES ('2015-12-02 18:00:00', 'failed', 'busy', 2, 3);
 
 
 

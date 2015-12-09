@@ -24,6 +24,8 @@ public class HelloManager  {
         OriginateAction originateAction;
         ManagerResponse originateResponse;
 
+        managerConnection.registerUserEventClass(VIPCallEvent.class);
+
         originateAction = new OriginateAction();
         originateAction.setChannel("SIP/zadarma/14168");
         originateAction.setContext("from-ami");

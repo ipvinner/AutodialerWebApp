@@ -1,5 +1,6 @@
 package com.cartrack.autodialer;
 
+import com.cartrack.autodialer.domain.CallResult;
 import com.cartrack.autodialer.domain.Client;
 import com.cartrack.autodialer.domain.ClientList;
 import com.cartrack.autodialer.matcher.ModelMatcher;

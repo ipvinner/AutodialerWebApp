@@ -22,7 +22,8 @@ import com.cartrack.autodialer.ClientTestData;
  */
 @ContextConfiguration({
         "classpath:spring/spring-app.xml",
-        "classpath:spring/spring-db.xml"
+        "classpath:spring/spring-db.xml",
+        "classpath:spring/spring-asterisk.xml"
 })
 @RunWith(SpringJUnit4ClassRunner.class)
 @Sql(scripts = "classpath:db/populateDB.sql", config = @SqlConfig(encoding = "UTF-8"))
@@ -42,7 +43,7 @@ public class ClientServiceTest {
     @Test
     public void testGetByList() throws Exception {
         Collection<Client> clients = service.getByList(1);
-        MATCHER.assertCollectionEquals(Arrays.asList(ClientTestData.CLIENT1, ClientTestData.CLIENT2, ClientTestData.CLIENT3, ClientTestData.CLIENT4), clients);
+        MATCHER.assertCollectionEquals(Arrays.asList(ClientTestData.CLIENT1, ClientTestData.CLIENT2, ClientTestData.CLIENT7, ClientTestData.CLIENT8), clients);
     }
 
     @Test
@@ -51,7 +52,7 @@ public class ClientServiceTest {
         Client client = new Client(null, "New Client", "lastname", "phoneNew", "emailnew", ClientTestData.CLIENT_LIST1);
         Client created = service.save(client);
 
-        MATCHER.assertCollectionEquals(Arrays.asList(ClientTestData.CLIENT1, ClientTestData.CLIENT2, ClientTestData.CLIENT3, ClientTestData.CLIENT4, ClientTestData.CLIENTNEW), service.getByList(1));
+        MATCHER.assertCollectionEquals(Arrays.asList(ClientTestData.CLIENT1, ClientTestData.CLIENT2, ClientTestData.CLIENT7, ClientTestData.CLIENT8, ClientTestData.CLIENTNEW), service.getByList(1));
     }
 
     @Test

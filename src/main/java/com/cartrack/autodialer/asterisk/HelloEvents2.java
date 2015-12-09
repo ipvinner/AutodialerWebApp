@@ -2,10 +2,8 @@ package com.cartrack.autodialer.asterisk;
 
 import org.asteriskjava.manager.*;
 import org.asteriskjava.manager.action.OriginateAction;
-import org.asteriskjava.manager.action.StatusAction;
 import org.asteriskjava.manager.event.HangupEvent;
 import org.asteriskjava.manager.event.ManagerEvent;
-import org.asteriskjava.manager.event.UserEvent;
 import org.asteriskjava.manager.response.ManagerResponse;
 
 import java.io.IOException;
@@ -13,11 +11,11 @@ import java.io.IOException;
 /**
  * Created by vinner on 26.08.2015.
  */
-public class HelloEvents implements ManagerEventListener {
+public class HelloEvents2 implements ManagerEventListener {
 
     private ManagerConnection managerConnection;
 
-    public HelloEvents() throws IOException {
+    public HelloEvents2() throws IOException {
         ManagerConnectionFactory factory = new ManagerConnectionFactory("192.168.241.135", "autodialer", "gieB7Due6eit");
         this.managerConnection = factory.createManagerConnection();
 
@@ -28,6 +26,9 @@ public class HelloEvents implements ManagerEventListener {
         OriginateAction originateAction;
         ManagerResponse originateResponse;
 
+
+
+
         // register for events
         managerConnection.addEventListener(this);
         managerConnection.registerUserEventClass(VIPCallEvent.class);
@@ -37,12 +38,13 @@ public class HelloEvents implements ManagerEventListener {
 
 
         originateAction = new OriginateAction();
-        originateAction.setChannel("SIP/zadarma/14168");
-        originateAction.setContext("from-ami");
-        originateAction.setExten("s");
+        originateAction.setChannel("Local/DIAL@my_context");
+        originateAction.setContext("my_context");
+        originateAction.setExten("ANSWERED");
         originateAction.setPriority(1);
         originateAction.setAsync(false);
-        originateAction.setVariable("Result", "Call Result");
+//        originateAction.setCallerId("5555551212");
+        originateAction.setVariable("dial_string","SIP/zadarma/14168");
 
         originateResponse = managerConnection.sendAction(originateAction, 30000);
 
@@ -79,9 +81,9 @@ public class HelloEvents implements ManagerEventListener {
     }
 
     public static void main(String[] args) throws Exception {
-        HelloEvents helloEvents;
+        HelloEvents2 helloEvents;
 
-        helloEvents = new HelloEvents();
+        helloEvents = new HelloEvents2();
         helloEvents.call();
     }
 }

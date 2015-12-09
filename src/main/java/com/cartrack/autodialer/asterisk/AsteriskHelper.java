@@ -21,6 +21,9 @@ public class AsteriskHelper {
     private String username;
     private String password;
 
+    OriginateAction originateAction;
+    ManagerResponse originateResponse;
+
 
 
     private ManagerConnection managerConnection;
@@ -62,9 +65,6 @@ public class AsteriskHelper {
 
 
     public void call(String trunk, String number, String context, String exten, int priority, long timeout, boolean isAsync, String var1, String var2) throws IOException, AuthenticationFailedException, TimeoutException, InterruptedException  {
-
-        OriginateAction originateAction;
-        ManagerResponse originateResponse;
 
         // connect to Asterisk and log in
         managerConnection.login();
