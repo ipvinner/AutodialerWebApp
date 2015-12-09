@@ -18,7 +18,7 @@ public class HelloEvents implements ManagerEventListener {
     private ManagerConnection managerConnection;
 
     public HelloEvents() throws IOException {
-        ManagerConnectionFactory factory = new ManagerConnectionFactory("192.168.241.135", "autodialer", "gieB7Due6eit");
+        ManagerConnectionFactory factory = new ManagerConnectionFactory("31.131.16.59", "autodialer", "gieB7Due6eit");
         this.managerConnection = factory.createManagerConnection();
 
     }

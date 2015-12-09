@@ -11,11 +11,11 @@ import java.io.IOException;
 /**
  * Created by vinner on 26.08.2015.
  */
-public class HelloEvents2 implements ManagerEventListener {
+public class HelloEvents3 implements ManagerEventListener {
 
     private ManagerConnection managerConnection;
 
-    public HelloEvents2() throws IOException {
+    public HelloEvents3() throws IOException {
         ManagerConnectionFactory factory = new ManagerConnectionFactory("31.131.16.59", "autodialer", "gieB7Due6eit");
         this.managerConnection = factory.createManagerConnection();
 
@@ -25,21 +25,25 @@ public class HelloEvents2 implements ManagerEventListener {
 
         OriginateAction originateAction;
         ManagerResponse originateResponse;
+
         // register for events
         managerConnection.addEventListener(this);
-        managerConnection.registerUserEventClass(CallDialStatusEvent.class);
+        managerConnection.registerUserEventClass(VIPCallEvent.class);
         // connect to Asterisk and log in
         managerConnection.login();
 
+
+
         originateAction = new OriginateAction();
-        originateAction.setChannel("Local/DIAL@my_context");
-        originateAction.setContext("my_context");
-        originateAction.setExten("s-ANSWERED");
+        originateAction.setChannel("SIP/zadarma");
+        originateAction.setContext("from-ami");
+        originateAction.setExten("s");
         originateAction.setPriority(1);
         originateAction.setAsync(false);
-        originateAction.setVariable("dial_string","SIP/zadarma/14168");
+        originateAction.setCallerId("14168");
+        originateAction.setVariable("Result", "Call Result");
 
-        originateResponse = managerConnection.sendAction(originateAction, 300000);
+        originateResponse = managerConnection.sendAction(originateAction, 30000);
 
         // print out whether the originate succeeded or not
         System.out.println("SOUT Response getResponse:  " + originateResponse.getResponse());
@@ -52,25 +56,31 @@ public class HelloEvents2 implements ManagerEventListener {
         System.out.println("SOUT Response getArrribute actionid: " + originateResponse.getAttribute("actionid"));
         System.out.println("SOUT Response getUniqueID " + originateResponse.getUniqueId());
 
+        // request channel state
+        // managerConnection.sendAction(new StatusAction());
+
+        // wait 10 seconds for events to come in
+        //Thread.sleep(10000);
+
         // and finally log off and disconnect
         managerConnection.logoff();
     }
 
     @Override
     public void onManagerEvent(ManagerEvent event) {
-        if(event instanceof CallDialStatusEvent){
-            System.out.println("Ураааааааааааааааааааа!!!!!!!!!!!!!");
+        if(event instanceof HangupEvent){
+            System.out.println("Hangup");
         }
 
-
+        System.out.println(event);
 
 
     }
 
     public static void main(String[] args) throws Exception {
-        HelloEvents2 helloEvents;
+        HelloEvents3 helloEvents;
 
-        helloEvents = new HelloEvents2();
+        helloEvents = new HelloEvents3();
         helloEvents.call();
     }
 }

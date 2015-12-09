@@ -10,7 +10,6 @@ public class VIPCallEvent extends UserEvent
 {
     private String firstName;
 
-
     public VIPCallEvent(Object source)
     {
         super(source);
@@ -25,4 +24,6 @@ public class VIPCallEvent extends UserEvent
     {
         this.firstName = firstName;
     }
+
+
 }
