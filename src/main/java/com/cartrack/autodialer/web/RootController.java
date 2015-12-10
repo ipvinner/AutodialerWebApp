@@ -51,4 +51,9 @@ public class RootController {
     public String originateParamsList() {
         return "asterisk";
     }
+
+    @RequestMapping(value = "/results", method = RequestMethod.GET)
+    public String callResultList() {
+        return "results";
+    }
 }

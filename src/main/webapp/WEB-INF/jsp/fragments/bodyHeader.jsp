@@ -40,7 +40,7 @@
     <ul class="nav navbar-nav">
     <li class="active"><a href="/autodialer">Home</a></li>
 
-    <li><a href="clients">Statistics</a></li>
+    <li><a href="results">Statistics</a></li>
     <li><a href="clients">Clients</a></li>
     <li><a href="tasks">Tasks</a></li>
     <li><a href="asterisk">Asterisk settings</a></li>

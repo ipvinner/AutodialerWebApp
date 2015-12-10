@@ -37,6 +37,7 @@ public class JdbcCallResultRepository implements CallResultRepository {
 
     @Override
     public List<CallResult> getAll() {
+        List<CallResult> callResults = jdbcTemplate.query("SELECT * FROM call_result", ROW_MAPPER);
         return jdbcTemplate.query("SELECT * FROM call_result", ROW_MAPPER);
     }
 

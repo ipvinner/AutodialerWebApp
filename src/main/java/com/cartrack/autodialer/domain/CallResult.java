@@ -11,8 +11,8 @@ public class CallResult extends BaseEntity {
     protected LocalDateTime dateTime;
     protected String result;
     protected String reason;
-    protected Client client;
     protected Task task;
+    protected Client client;
 
     public CallResult(Integer id, LocalDateTime datetime, String result, String reason, Task task, Client client) {
         this.id = id;
