@@ -11,6 +11,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlConfig;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.Arrays;
@@ -50,7 +51,8 @@ public class CallResultServiceTest {
 
     @Test
     public void testGetBetween() throws Exception {
-
+        MATCHER.assertCollectionEquals(Arrays.asList(ClientTestData.CALL_RESULT6, ClientTestData.CALL_RESULT5, ClientTestData.CALL_RESULT4,
+                ClientTestData.CALL_RESULT3, ClientTestData.CALL_RESULT2), service.getBetweenDates(LocalDate.of(2015, Month.DECEMBER, 1), LocalDate.of(2015, Month.DECEMBER, 4)));
 
     }
 

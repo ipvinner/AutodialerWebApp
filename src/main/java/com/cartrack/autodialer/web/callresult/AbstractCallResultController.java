@@ -5,7 +5,9 @@ import com.cartrack.autodialer.domain.CallResult;
 import com.cartrack.autodialer.service.CallResultService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 /**
@@ -28,8 +30,8 @@ public class AbstractCallResultController {
         return service.getByTaskId(id);
     }
 
-    public List<CallResult> getBetween(LocalDateTime startDate, LocalDateTime endDate){
-        LOG.info("getBetWeen CallResults" + startDate + " " + endDate);
-        return service.getBetween(startDate, endDate);
+    public List<CallResult> getBetween(LocalDate startDate, LocalTime startTime, LocalDate endDate, LocalTime endTime){
+        LOG.info("getBetween dates {} - {} for time {}", startDate, endDate, startTime, endTime);
+        return service.getBetweenDates(startDate, endDate);
     }
 }

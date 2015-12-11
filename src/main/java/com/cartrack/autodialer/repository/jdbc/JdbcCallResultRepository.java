@@ -48,7 +48,7 @@ public class JdbcCallResultRepository implements CallResultRepository {
 
     @Override
     public List<CallResult> getBetween(LocalDateTime startDate, LocalDateTime endDate) {
-        return jdbcTemplate.query("SELECT * FROM call_result WHERE date_time BETWEEN ? AND ? ORDER BY date_time DESC",
+        return jdbcTemplate.query("SELECT * FROM call_result WHERE datetime BETWEEN ? AND ? ORDER BY datetime DESC",
                 ROW_MAPPER, Timestamp.valueOf(startDate), Timestamp.valueOf(endDate));
     }
 

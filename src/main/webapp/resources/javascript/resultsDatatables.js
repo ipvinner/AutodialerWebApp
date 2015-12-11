@@ -2,9 +2,15 @@ var ajaxUrl = 'ajax/admin/results/';
 var datatableApi;
 
 function updateTable() {
-    $.get(ajaxUrl, function (data) {
-        updateTableByData(data);
+    $.ajax({
+        type: "POST",
+        url: ajaxUrl + 'filter',
+        data: $('#filter').serialize(),
+        success: function (data) {
+            updateTableByData(data);
+        }
     });
+    return false;
 }
 
 $(function () {
@@ -28,7 +34,10 @@ $(function () {
                 "mData": "task.name"
             },
             {
-                "mData": "client.firstName"
+                "mData": "client.firstName",
+                "render":function(data, type, full){
+                    return full.client.firstName + " " +  full.client.lastName;
+                }
             },
             {
                 "mData": "client.phoneNumber"
@@ -48,9 +57,12 @@ $(function () {
                 "asc"
             ]
         ],
+
         "createdRow": function (row, data, dataIndex) {
 
         },
+
+
         "initComplete": function () {
             $('#filter').submit(function () {
                 updateTable();

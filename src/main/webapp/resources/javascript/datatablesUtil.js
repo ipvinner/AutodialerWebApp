@@ -67,13 +67,17 @@ function enable(chkbox) {
     });
 }
 
+//function updateTableByData(data) {
+//    datatableApi.clear();
+//    $.each(data, function (key, item) {
+//        datatableApi.row.add(item);
+//    });
+//    datatableApi.draw();
+//    init();
+//}
+
 function updateTableByData(data) {
-    datatableApi.clear();
-    $.each(data, function (key, item) {
-        datatableApi.row.add(item);
-    });
-    datatableApi.draw();
-    init();
+    datatableApi.clear().rows.add(data).draw();
 }
 
 function save() {
