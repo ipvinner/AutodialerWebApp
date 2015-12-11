@@ -16,7 +16,13 @@ $(function () {
         "bInfo": false,
         "aoColumns": [
             {
-                "mData": "dateTime"
+                "mData": "dateTime",
+                "render": function (date, type, row) {
+                    if (type == 'display') {
+                        return date.replace('T', ' ');
+                    }
+                    return date;
+                }
             },
             {
                 "mData": "task.name"

@@ -2,6 +2,8 @@ package com.cartrack.autodialer.domain;
 
 
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDateTime;
 
 /**
@@ -13,6 +15,10 @@ public class CallResult extends BaseEntity {
     protected String reason;
     protected Task task;
     protected Client client;
+
+    public CallResult(){
+
+    }
 
     public CallResult(Integer id, LocalDateTime datetime, String result, String reason, Task task, Client client) {
         this.id = id;

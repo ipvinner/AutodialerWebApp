@@ -25,6 +25,7 @@ public class CallResultServiceImpl implements CallResultService {
 
     @Override
     public List<CallResult> getAll() {
+        List<CallResult> callResults = callResultRepository.getAll();
         return callResultRepository.getAll();
     }
 
