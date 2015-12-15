@@ -3,7 +3,7 @@
 
 <div class="footer">
   <div class="container">
-    <fmt:message key="app.title"/>
+    <fmt:message key="app.title"/> <fmt:message key="app.author"/>
   </div>
 </div>
 <script type="text/javascript" src="webjars/jquery/2.1.4/jquery.min.js"></script>
