@@ -19,16 +19,16 @@
     <ul class="nav navbar-nav">
     <li class="active"><a href="/autodialer">Home</a></li>
 
-    <li><a href="results">Statistics</a></li>
-    <li><a href="clients">Clients</a></li>
-    <li><a href="tasks">Tasks</a></li>
-    <li><a href="asterisk">Asterisk settings</a></li>
+    <li><a href="results"><fmt:message key="app.statistics"/></a></li>
+    <li><a href="clients"><fmt:message key="app.clients"/></a></li>
+    <li><a href="tasks"><fmt:message key="app.tasks"/></a></li>
+    <li><a href="asterisk"><fmt:message key="app.asterisk_settings"/></a></li>
 
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Numbers list <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><fmt:message key="app.numbers_list"/> <span class="caret"></span></a>
             <ul class="dropdown-menu">
-                <li><a href="addList">Add new clients list</a></li>
-                <li><a href="clientsList">Show clients lists</a></li>
+                <li><a href="addList"><fmt:message key="app.add_new_list"/></a></li>
+                <li><a href="clientsList"><fmt:message key="app.lists"/></a></li>
             </ul>
         </li>
 

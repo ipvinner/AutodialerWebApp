@@ -2,8 +2,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <div class="footer">
-  <div class="container">
-    <fmt:message key="app.title"/> <fmt:message key="app.author"/>
+  <p class="container">
+    <p class="text-center"><fmt:message key="app.title"/></p>
   </div>
 </div>
 <script type="text/javascript" src="webjars/jquery/2.1.4/jquery.min.js"></script>
