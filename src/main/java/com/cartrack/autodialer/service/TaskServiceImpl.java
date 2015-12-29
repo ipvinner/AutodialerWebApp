@@ -1,9 +1,11 @@
 package com.cartrack.autodialer.service;
 
 import com.cartrack.autodialer.asterisk.AsteriskHelper;
+import com.cartrack.autodialer.domain.CallResult;
 import com.cartrack.autodialer.domain.Client;
 import com.cartrack.autodialer.domain.OriginateParam;
 import com.cartrack.autodialer.domain.Task;
+import com.cartrack.autodialer.repository.CallResultRepository;
 import com.cartrack.autodialer.repository.ClientRepository;
 import com.cartrack.autodialer.repository.OriginateParamRepository;
 import com.cartrack.autodialer.repository.TaskRepository;
@@ -20,7 +22,7 @@ import java.util.List;
  * Created by vinner on 13.11.2015.
  */
 @Service
-public class TaskServiceImpl implements TaskService{
+public class TaskServiceImpl implements TaskService {
 
     @Autowired
     private AsteriskHelper asteriskHelper;
@@ -33,6 +35,9 @@ public class TaskServiceImpl implements TaskService{
 
     @Autowired
     OriginateParamRepository originateParamRepository;
+
+    @Autowired
+    CallResultRepository callResultRepository;
 
     @Override
     public List<Task> getAll() {
@@ -61,26 +66,15 @@ public class TaskServiceImpl implements TaskService{
 
     @Override
     public void start(Task task) {
-
         List<Client> clients = clientRepository.getByList(task.getClientList().getId());
 
-
         for (Client client : clients) {
-            try {
-                asteriskHelper.call(task.getOriginateParam().getTrunk(), client.getPhoneNumber(), task.getOriginateParam().getContext(), task.getOriginateParam().getExten(),
-                        task.getOriginateParam().getPriority(), task.getOriginateParam().getTimeout(), task.getOriginateParam().isAsync(),
-                        task.getOriginateParam().getVar1(), task.getOriginateParam().getVar2());
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (AuthenticationFailedException e) {
-                e.printStackTrace();
-            } catch (TimeoutException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            CallResult callResult = asteriskHelper.call(task.getOriginateParam().getTrunk(), client.getPhoneNumber(), task.getOriginateParam().getContext(), task.getOriginateParam().getExten(),
+                    task.getOriginateParam().getPriority(), task.getOriginateParam().getTimeout(), task.getOriginateParam().isAsync(),
+                    task.getOriginateParam().getVar1(), task.getOriginateParam().getVar2());
+            callResult.setTask(task);
+            callResult.setClient(client);
+            callResultRepository.save(callResult);
         }
-
-
     }
 }

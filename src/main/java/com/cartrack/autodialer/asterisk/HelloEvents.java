@@ -30,7 +30,7 @@ public class HelloEvents implements ManagerEventListener {
 
         // register for events
         managerConnection.addEventListener(this);
-        managerConnection.registerUserEventClass(VIPCallEvent.class);
+
         // connect to Asterisk and log in
         managerConnection.login();
 

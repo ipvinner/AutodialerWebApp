@@ -1,21 +1,23 @@
 package com.cartrack.autodialer.asterisk;
 
 import com.cartrack.autodialer.LoggerWrapper;
-import org.asteriskjava.manager.AuthenticationFailedException;
-import org.asteriskjava.manager.ManagerConnection;
-import org.asteriskjava.manager.ManagerConnectionFactory;
-import org.asteriskjava.manager.TimeoutException;
+import com.cartrack.autodialer.domain.CallResult;
+import com.cartrack.autodialer.util.TimeUtil;
+import org.asteriskjava.manager.*;
 import org.asteriskjava.manager.action.OriginateAction;
+import org.asteriskjava.manager.event.ManagerEvent;
 import org.asteriskjava.manager.response.ManagerResponse;
 
 import java.io.IOException;
+import java.time.ZoneId;
 
 /**
  * Created by ipvinner on 02.12.2015.
  */
-public class AsteriskHelper {
+public class AsteriskHelper implements ManagerEventListener {
 
     private static final LoggerWrapper LOG = LoggerWrapper.get(AsteriskHelper.class);
+    CallResult callResult = new CallResult();
 
     private String host;
     private String username;
@@ -64,39 +66,88 @@ public class AsteriskHelper {
     }
 
 
-    public void call(String trunk, String number, String context, String exten, int priority, long timeout, boolean isAsync, String var1, String var2) throws IOException, AuthenticationFailedException, TimeoutException, InterruptedException  {
+    public CallResult call(String trunk, String number, String context, String exten, int priority, long timeout, boolean isAsync, String var1, String var2)  {
 
+        OriginateAction originateAction;
+        ManagerResponse originateResponse;
+
+        // register for events
+        managerConnection.addEventListener(this);
+        managerConnection.registerUserEventClass(CallDialStatusEvent.class);
         // connect to Asterisk and log in
-        managerConnection.login();
+        try {
+            managerConnection.login();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (AuthenticationFailedException e) {
+            e.printStackTrace();
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+        }
 
         originateAction = new OriginateAction();
-        originateAction.setChannel(trunk + number);
+        originateAction.setChannel("Local/DIAL@my_context");
         originateAction.setContext(context);
         originateAction.setExten(exten);
         originateAction.setPriority(priority);
         originateAction.setAsync(isAsync);
-        originateAction.setVariable("TestVar", var1);
+        originateAction.setVariable("dial_string",trunk + number);
 
-        originateResponse = managerConnection.sendAction(originateAction, timeout );
+        try {
+            originateResponse = managerConnection.sendAction(originateAction, 300000);
+            callResult.setDateTime(originateResponse.getDateReceived().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime().withNano(0));
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+        }
 
-        // print out whether the originate succeeded or not
-        System.out.println("SOUT Response getResponse:  " + originateResponse.getResponse());
-        System.out.println("SOUT Response Message:   " + originateResponse.getMessage());
-        System.out.println("SOUT Response getServer: " + originateResponse.getServer());
-        System.out.println("SOUT Response getActionId: " + originateResponse.getActionId());
-        System.out.println("SOUT Response getEventList: " + originateResponse.getEventList());
-        System.out.println("SOUT Response getDateReceived: " + originateResponse.getDateReceived());
-        System.out.println("SOUT Response getAttributes: " + originateResponse.getAttributes());
-        System.out.println("SOUT Response getArrribute actionid: " + originateResponse.getAttribute("actionid"));
-        System.out.println("SOUT Response getUniqueID " + originateResponse.getUniqueId());
 
-        // request channel state
-        // managerConnection.sendAction(new StatusAction());
-
-        // wait 10 seconds for events to come in
-        //Thread.sleep(10000);
 
         // and finally log off and disconnect
         managerConnection.logoff();
+        System.out.println(callResult);
+        return callResult;
+    }
+
+    @Override
+    public void onManagerEvent(ManagerEvent event) {
+        if(event instanceof CallDialStatusEvent){
+            // get dialStatus
+            String dialStatus = ((CallDialStatusEvent) event).getDialStatus();
+            if(dialStatus.equals("ANSWERED")){
+                callResult.setResult("Success");
+                callResult.setReason("Answered");
+            }else {
+                switch (dialStatus) {
+                    case "NOANSWER":
+                        callResult.setResult("Failed");
+                        callResult.setReason("No answered");
+                        break;
+                    case "BUSY":
+                        callResult.setResult("Failed");
+                        callResult.setReason("Busy");
+                        break;
+                    case "CHANUNAVAIL":
+                        callResult.setResult("Failed");
+                        callResult.setReason("Channel is anavailable");
+                        break;
+                    case "CONGESTION":
+                        callResult.setResult("Failed");
+                        callResult.setReason("Congestion");
+                        break;
+                    case "CANCEL":
+                        callResult.setResult("Failed");
+                        callResult.setReason("Congestion");
+                        break;
+                    default:
+                        callResult.setResult("Failed");
+                        callResult.setReason("Unknown reason");
+                        break;
+                }
+            }
+
+        }
+
     }
 }

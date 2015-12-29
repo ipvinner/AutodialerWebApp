@@ -1,5 +1,6 @@
 package com.cartrack.autodialer.asterisk;
 
+import com.cartrack.autodialer.domain.CallResult;
 import org.asteriskjava.manager.*;
 import org.asteriskjava.manager.action.OriginateAction;
 import org.asteriskjava.manager.event.HangupEvent;
@@ -7,6 +8,7 @@ import org.asteriskjava.manager.event.ManagerEvent;
 import org.asteriskjava.manager.response.ManagerResponse;
 
 import java.io.IOException;
+import java.time.ZoneId;
 
 /**
  * Created by vinner on 26.08.2015.
@@ -14,6 +16,7 @@ import java.io.IOException;
 public class HelloEvents2 implements ManagerEventListener {
 
     private ManagerConnection managerConnection;
+    CallResult callResult = new CallResult();
 
     public HelloEvents2() throws IOException {
         ManagerConnectionFactory factory = new ManagerConnectionFactory("31.131.16.59", "autodialer", "gieB7Due6eit");
@@ -22,9 +25,9 @@ public class HelloEvents2 implements ManagerEventListener {
     }
 
     public void call() throws IOException, AuthenticationFailedException, TimeoutException, InterruptedException  {
-
         OriginateAction originateAction;
         ManagerResponse originateResponse;
+
         // register for events
         managerConnection.addEventListener(this);
         managerConnection.registerUserEventClass(CallDialStatusEvent.class);
@@ -41,6 +44,8 @@ public class HelloEvents2 implements ManagerEventListener {
 
         originateResponse = managerConnection.sendAction(originateAction, 300000);
 
+
+
         // print out whether the originate succeeded or not
         System.out.println("SOUT Response getResponse:  " + originateResponse.getResponse());
         System.out.println("SOUT Response Message:   " + originateResponse.getMessage());
@@ -52,18 +57,50 @@ public class HelloEvents2 implements ManagerEventListener {
         System.out.println("SOUT Response getArrribute actionid: " + originateResponse.getAttribute("actionid"));
         System.out.println("SOUT Response getUniqueID " + originateResponse.getUniqueId());
 
+        callResult.setDateTime(originateResponse.getDateReceived().toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
+
         // and finally log off and disconnect
         managerConnection.logoff();
+        System.out.println(callResult);
     }
 
     @Override
     public void onManagerEvent(ManagerEvent event) {
         if(event instanceof CallDialStatusEvent){
-            System.out.println("Ураааааааааааааааааааа!!!!!!!!!!!!!");
+            String dialStatus = ((CallDialStatusEvent) event).getDialStatus();
+            if(dialStatus.equals("ANSWERED")){
+                callResult.setResult("Success");
+                callResult.setReason("Answered");
+            }else {
+                switch (dialStatus) {
+                    case "NOANSWER":
+                        callResult.setResult("Failed");
+                        callResult.setReason("No answered");
+                        break;
+                    case "BUSY":
+                        callResult.setResult("Failed");
+                        callResult.setReason("Busy");
+                        break;
+                    case "CHANUNAVAIL":
+                        callResult.setResult("Failed");
+                        callResult.setReason("Channel is anavailable");
+                        break;
+                    case "CONGESTION":
+                        callResult.setResult("Failed");
+                        callResult.setReason("Congestion");
+                        break;
+                    case "CANCEL":
+                        callResult.setResult("Failed");
+                        callResult.setReason("Congestion");
+                        break;
+                    default:
+                        callResult.setResult("Failed");
+                        callResult.setReason("Unknown");
+                        break;
+                }
+            }
+
         }
-
-
-
 
     }
 
