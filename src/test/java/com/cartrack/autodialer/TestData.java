@@ -3,6 +3,7 @@ package com.cartrack.autodialer;
 import com.cartrack.autodialer.domain.CallResult;
 import com.cartrack.autodialer.domain.Client;
 import com.cartrack.autodialer.domain.ClientList;
+import com.cartrack.autodialer.domain.User;
 import com.cartrack.autodialer.matcher.ModelMatcher;
 
 /**
@@ -21,6 +22,12 @@ public class TestData {
 //    public static final Client CLIENT3 = new Client(7, "Сергеев", "Дмитрий", "+38055325678", "2@mail.ru", CLIENT_LIST1);
 //
 //    public static final Client CLIENTNEW = new Client(8, "New Client", "lastname", "phoneNew", "emailnew", CLIENT_LIST1);
+    public static final User ADMIN = new User(1, "admin", "g8keeper", "ROLE_ADMIN" );
+    public static final User MANAGER = new User(2, "manager", "g8keeper", "ROLE_MANAGER" );
+    public static final User USER = new User(3, "user", "g8keeper", "ROLE_USER" );
+    public static final User NEWUSER = new User(4, "newUser", "g8keeper", "ROLE_ADMIN");
+
+
 
 
 }

@@ -1,3 +1,4 @@
+DELETE FROM users;
 DELETE FROM call_result;
 DELETE FROM client;
 DELETE FROM task;
@@ -6,6 +7,12 @@ ALTER SEQUENCE client_id_seq RESTART WITH 1;
 ALTER SEQUENCE task_id_seq RESTART WITH 1;
 ALTER SEQUENCE originate_param_id_seq RESTART WITH 1;
 ALTER SEQUENCE call_result_id_seq RESTART WITH 1;
+ALTER SEQUENCE user_id_seq RESTART WITH 1;
+
+INSERT INTO users (login, password_hash, role) VALUES ('admin', 'g8keeper', 'ROLE_ADMIN');
+INSERT INTO users (login, password_hash, role) VALUES ('manager', 'g8keeper', 'ROLE_MANAGER');
+INSERT INTO users (login, password_hash, role) VALUES ('user', 'g8keeper', 'ROLE_USER');
+
 
 INSERT INTO client (firstname, lastname, phone_number, email, clients_list_id) VALUES ('Ivan', 'Ivan', '+380638925578', '1@urk.net', 1);
 INSERT INTO client (firstname, lastname, phone_number, email, clients_list_id) VALUES ('Petrov', 'Ivan', '+380638925678', '2@urk.net', 1);

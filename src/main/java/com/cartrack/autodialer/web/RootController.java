@@ -56,4 +56,9 @@ public class RootController {
     public String callResultList() {
         return "results";
     }
+
+    @RequestMapping(value = "/users", method = RequestMethod.GET)
+    public String userList() {
+        return "users";
+    }
 }

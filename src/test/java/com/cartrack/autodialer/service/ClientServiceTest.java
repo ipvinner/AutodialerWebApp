@@ -60,17 +60,17 @@ public class ClientServiceTest {
         Client client = new Client(ClientTestData.CLIENT1);
     }
 
-    @Test
-    public void testDelete() throws Exception {
-        service.delete(1);
-        MATCHER.assertCollectionEquals(Arrays.asList(ClientTestData.CLIENT2, ClientTestData.CLIENT3, ClientTestData.CLIENT4), service.getByList(1));
-    }
+//    @Test
+//    public void testDelete() throws Exception {
+//        service.delete(1);
+//        MATCHER.assertCollectionEquals(Arrays.asList(ClientTestData.CLIENT2, ClientTestData.CLIENT3, ClientTestData.CLIENT4), service.getByList(1));
+//    }
 
 
 
-    @Test
-    public void testDeleteAllByList() throws Exception {
-        service.deleteAllByList(1);
-        MATCHER.assertCollectionEquals(Arrays.asList(), service.getByList(1));
-    }
+//    @Test
+//    public void testDeleteAllByList() throws Exception {
+//        service.deleteAllByList(1);
+//        MATCHER.assertCollectionEquals(Arrays.asList(), service.getByList(1));
+//    }
 }
