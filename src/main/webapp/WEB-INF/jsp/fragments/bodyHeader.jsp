@@ -22,7 +22,14 @@
     <li><a href="results"><fmt:message key="app.statistics"/></a></li>
     <li><a href="clients"><fmt:message key="app.clients"/></a></li>
     <li><a href="tasks"><fmt:message key="app.tasks"/></a></li>
-    <li><a href="asterisk"><fmt:message key="app.asterisk_settings"/></a></li>
+
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><fmt:message key="app.administration"/> <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li><a href="asterisk"><fmt:message key="app.asterisk_settings"/></a></li>
+                <li><a href="users"><fmt:message key="app.user_management"/></a></li>
+            </ul>
+        </li>
 
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><fmt:message key="app.numbers_list"/> <span class="caret"></span></a>
