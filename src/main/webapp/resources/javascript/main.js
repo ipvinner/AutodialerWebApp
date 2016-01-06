@@ -14,12 +14,12 @@ let inst = new addCSVList({
             "title": "Фамилия"
         },
         {
-            "id": "phoneNumber",
-            "title": "Номер Телефона"
-        },
-        {
             "id": "email",
             "title": "Почтовый адресс"
+        },
+        {
+            "id": "phoneNumber",
+            "title": "Номер Телефона"
         }
     ]
 });

@@ -1,0 +1,24 @@
+@import "dialog.css";
+
+body {
+    background-color: #ccc;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.editable {
+    border: 1px solid #000;
+}
+
+
+dt, dd {
+    display: inline-block;
+}
+
+dd.empty {
+    min-width: 100px;
+    border: 1px solid red;
+    text-align: left;
+}

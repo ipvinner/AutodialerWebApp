@@ -5,7 +5,7 @@ class addCSVList {
          * Dom elements
          */
         this._componentRoot = options.componentRoot,
-        this._btnFile = options.btnFile;
+            this._btnFile = options.btnFile;
         this._btnSubmit = options.btnSubmit;
         this._btnRenderTable = options.btnRenderTable;
 
@@ -70,14 +70,18 @@ class addCSVList {
         }.bind(this);
     }
 
+    /**
+     * Render List with standart fields
+     */
+
     _renderListFields(){
-        var self = this;
-        //var tpl = document.getElementById("title-list").innerHTML.trim();
-        var tpl = '<div class="chooseFields"><% for(var i = 0; i < items.length; i++) { %> <div class="list-titles-item"><div class="inline-block"><%-items[i].title%></div><div class="inline-block"><select class="field-select" data-field="<%-items[i].id%>" data-title="<%-items[i].title%>"><option>Select your option</option><%for(var j = 0; j < options.length; j++) { %><option data-index="<%-j%>"><%-options[j]%></option><% } %></select></div></div><% } %><button id="renderTable" class="btn btn-primary" type="button" >Render Table</button></div>';
-        var titleList = _.template(tpl);
+        let self = this;
+        let theTemplateScript = document.getElementById("title-list-template").innerHTML.trim();
+        let theTemplate = Handlebars.compile(theTemplateScript);
+        let theCompiledHtml = theTemplate( {data: self._typeFields, options: self._inputData[0]} );
 
         this._componentRoot
-            .insertAdjacentHTML('beforeEnd', titleList({items: self._typeFields, options: self._inputData[0]}));
+            .insertAdjacentHTML('beforeEnd', theCompiledHtml);
     }
     _eventHandler(event) {
         if(event.target.id === "renderTable") {
@@ -89,23 +93,32 @@ class addCSVList {
      */
     _renderTable(event){
         var self = this;
-        //var tpl = document.getElementById("table-list").innerHTML.trim();
-        var tpl = '<div data-component="table-custom"><div class="table-custom__navigation"><button class="btn btn-primary" data-table-custom="add-row" data-component="dialog" type="button">Add</button><button class="btn btn-primary" data-table-custom="submit" type="button">Submit</button></div><table id="customUserTableFromCSV" class="table" data-component="table-custom"><thead><tr><%for(var i = 0; i < title.length; i++) { %><th data-table-custom="<%-title[i].id%>"><%-title[i].title%></th><% } %><th>Edit/Remove</th></tr></thead><tbody><%for(var i = 0; i < data.length; i++) { %><tr data-index="<%-i%>"><%for(var value in data[i]) { %><%if(value === "index") continue;%><td><%-data[i][value]%></td><% } %><td><button class="btn btn-primary" data-table-custom="edit-row" data-component="dialog" type="button">Edit</button><button class="btn btn-primary" data-table-custom="delete-row" type="button">Delete</button></td></tr><% } %></tbody></table></div>';
-        var tableList = _.template(tpl);
+        var tpl = document.getElementById("table-custom-template").innerHTML.trim();
+        var tableList = Handlebars.compile(tpl);
+        var data = [];
 
-
-        self._updateData();
+        this._updateData();
 
         if(self._componentRoot.querySelector("#customUserTableFromCSV")) {
 
             self._componentRoot.querySelector("#customUserTableFromCSV")
                 .parentNode
-                    .removeChild(self._componentRoot.querySelector("#customUserTableFromCSV"))
+                .removeChild(self._componentRoot.querySelector("#customUserTableFromCSV"))
             ;
         }
 
+        // prepare data to view
+        for(var i = 0; i < self._correctData.length - 1; i++) {
+            var item = [];
+            for(var j = 0; j < self._userDataStyle.length; j++) {
+                if(self._correctData[i][self._userDataStyle[j].id] === "index") continue;
+                item.push(self._correctData[ i ][ self._userDataStyle[j].id ]);
+            }
+            data.push(item);
+        }
+
         self._componentRoot
-            .insertAdjacentHTML("beforeEnd", tableList({title: self._userDataStyle, data: self._correctData}));
+            .insertAdjacentHTML("beforeEnd", tableList({title: self._userDataStyle, data: data}));
 
         window.customTbl = new TableCustom({
             url: "/server.js"
@@ -130,11 +143,11 @@ class addCSVList {
             var optionSelected = userSelections[i].children[userSelections[i].selectedIndex];
 
             if(!optionSelected.dataset.index) continue;
-                this._userDataStyle.push({
-                    index: optionSelected.dataset.index,
-                    id: userSelections[i].dataset.field,
-                    title: userSelections[i].dataset.title
-                });
+            this._userDataStyle.push({
+                index: optionSelected.dataset.index,
+                id: userSelections[i].dataset.field,
+                title: userSelections[i].dataset.title
+            });
         }
 
         if(Object.keys(this._userDataStyle).length) {

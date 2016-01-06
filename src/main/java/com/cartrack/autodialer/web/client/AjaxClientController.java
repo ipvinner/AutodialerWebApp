@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by vinner on 12.11.2015.
@@ -49,5 +50,11 @@ public class AjaxClientController extends AbstractClientController {
         } else {
             super.update(client, id);
         }
+    }
+
+    @RequestMapping(value = "/addClientsList", method = RequestMethod.POST)
+    public void update(@RequestBody List<Client> clients) {
+
+
     }
 }

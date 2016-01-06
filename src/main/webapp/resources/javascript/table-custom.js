@@ -100,14 +100,12 @@ class TableCustom {
             var td;
 
             if(event.target.dataset.index === "newString") {
-                var obj = {};
+                var data = [];
                 for(var i = 0; i < dd.length; i++) {
-                    obj[dd[i].innerText] = dd[i].innerText;
+                    data.push(dd[i].innerText);
                 }
 
-                rowData.push(obj);
-
-                this.addRow(rowData);
+                this.addRow(data);
 
             } else {
                 td = this.elements.tbody.querySelectorAll("[data-index='" + rowIndex + "'] td");
@@ -126,14 +124,18 @@ class TableCustom {
      * add row to table
      * @param data array objects
      * data[item] - it's table row
-     * example of data - [{name: 'Yuriy', surName: "Berezovskiy"}]
+     * example of data - ['Yuriy', 'Berezovskiy']
      */
     addRow(data) {
         // validate data
 
-        //var tpl = document.getElementById("table-row").innerHTML.trim();
-        var tpl = '<%for(var i = 0; i < data.length; i++) { %><tr data-index="<%-i%>"><%for(var value in data[i]) { %><%if(value === "index") continue;%><td><%-data[i][value]%></td><% } %><td><button class="btn btn-primary" data-table-custom="edit-row" data-component="dialog" type="button">Edit</button><button class="btn btn-primary" data-table-custom="delete-row" type="button">Delete</button></td></tr><% } %>';
-        var tableRow = _.template(tpl);
+        var tpl = document.getElementById("table-row-template").innerHTML.trim();
+        //var tpl = '<%for(var i = 0; i < data.length; i++) { %><tr data-index="<%-i%>"><%for(var value in data[i]) { %><%if(value === "index") continue;%><td><%-data[i][value]%></td><% } %><td><button class="btn btn-primary" data-table-custom="edit-row" data-component="dialog" type="button">Edit</button><button class="btn btn-primary" data-table-custom="delete-row" type="button">Delete</button></td></tr><% } %>';
+        var tableRow = Handlebars.compile(tpl);
+
+        // prepare data for view template
+        console.log(data);
+
 
         this.elements.tbody
             .insertAdjacentHTML("beforeEnd", tableRow({data: data}));
