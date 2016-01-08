@@ -49,8 +49,17 @@ $(function () {
         "initComplete": makeEditable
     });
 
-    $('addTaskForm').submit(function(){
-        saveTask();
+    $('#addTaskForm').submit(function(){
+
+        $.ajax({
+            type: "POST",
+            url: "ajax/admin/tasks/create",
+            data: $('#addTaskForm').serialize(),
+            //success: function () {
+            //    updateTable();
+            //    successNoty('Task added');
+            //}
+        });
         return false;
     });
 
@@ -63,15 +72,3 @@ $(function () {
 //    });
 //};
 
-function saveTask(){
-    var form = $('#addTaskForm');
-    $.ajax({
-        type: "POST",
-        url: "ajax/admin/tasks/create",
-        data: form.serialize(),
-        success: function () {
-            updateTable();
-            successNoty('Task added');
-        }
-    });
-}

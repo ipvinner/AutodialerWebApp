@@ -54,7 +54,7 @@
           <div class="form-group">
             <label for="clients_list_id" class="control-label col-xs-3">Client List</label>
             <div class="col-xs-9">
-              <select class="form-control" id="clients_list_id">
+              <select class="form-control" id="clients_list_id" name="client_list_id">
                 <option value="1">vip-clients</option>
                 <option value="2">debts</option>
                 <option value="3">credit cards</option>
@@ -79,7 +79,7 @@
           <div class="form-group">
             <label for="task_originate_param_id" class="control-label col-xs-3">Originate params</label>
             <div class="col-xs-9">
-              <select class="form-control" id="task_originate_param_id">
+              <select class="form-control" id="task_originate_param_id" name="task_originate_param_id">
                 <option value="1">from-ami</option>
                 <option value="2">test</option>
                 <option value="3">test2</option>
