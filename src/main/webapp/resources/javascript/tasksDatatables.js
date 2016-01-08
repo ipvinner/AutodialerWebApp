@@ -48,4 +48,30 @@ $(function () {
         },
         "initComplete": makeEditable
     });
+
+    $('addTaskForm').submit(function(){
+        saveTask();
+        return false;
+    });
+
 });
+//
+//function addTask(){
+//    $('addTaskForm').submit(function(){
+//        saveTask();
+//        return false;
+//    });
+//};
+
+function saveTask(){
+    var form = $('#addTaskForm');
+    $.ajax({
+        type: "POST",
+        url: "ajax/admin/tasks/create",
+        data: form.serialize(),
+        success: function () {
+            updateTable();
+            successNoty('Task added');
+        }
+    });
+}

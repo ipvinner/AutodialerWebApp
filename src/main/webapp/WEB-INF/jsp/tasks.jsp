@@ -39,8 +39,10 @@
       <br/>
       <br/>
       <br/>
+
+      <h3 class="text-center">Add new task</h3>
       <div class="view-box">
-        <form:form>
+        <form id="addTaskForm" method="post">
           <div class="form-group">
             <label for="task_name" class="control-label col-xs-3">Task Name</label>
 
@@ -61,25 +63,27 @@
             </div>
           </div>
 
+
+
           <div class="form-group">
             <label class="control-label col-xs-3">Is active?</label>
             <label class = "checkbox-inline">
-              <input type = "radio" name = "optionsRadiosinline" id = "optionsRadios3" value = "option1" checked> Active
+              <input type = "radio" name = "optionsRadiosinline" id = "task_active" value = "true" checked> Active
             </label>
 
             <label class = "checkbox-inline">
-              <input type = "radio" name = "optionsRadiosinline" id = "optionsRadios4" value = "option2"> No Active
+              <input type = "radio" name = "optionsRadiosinline" value = "false"> No Active
             </label>
           </div>
 
           <div class="form-group">
-            <label for="taskname" class="control-label col-xs-3">Originate params</label>
+            <label for="task_originate_param_id" class="control-label col-xs-3">Originate params</label>
             <div class="col-xs-9">
-              <select class="form-control" id="sel2">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
+              <select class="form-control" id="task_originate_param_id">
+                <option value="1">from-ami</option>
+                <option value="2">test</option>
+                <option value="3">test2</option>
+                <option value="4">outbound-calls</option>
               </select>
             </div>
           </div>
@@ -89,7 +93,7 @@
               <button type="submit" class="btn btn-primary">Add new task</button>
             </div>
           </div>
-        </form:form>
+        </form>
       </div>
 
     </div>
@@ -159,6 +163,5 @@
 <script type="text/javascript" src="webjars/noty/2.2.4/jquery.noty.packaged.min.js"></script>
 <script type="text/javascript" src="resources/javascript/datatablesUtil.js"></script>
 <script type="text/javascript" src="resources/javascript/tasksDatatables.js"></script>
-
 
 </html>
