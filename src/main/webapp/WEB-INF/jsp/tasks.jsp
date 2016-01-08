@@ -54,7 +54,7 @@
           <div class="form-group">
             <label for="clients_list_id" class="control-label col-xs-3">Client List</label>
             <div class="col-xs-9">
-              <select class="form-control" id="clients_list_id" name="client_list_id">
+              <select class="form-control" id="clients_list_id" name="clients_list_id">
                 <option value="1">vip-clients</option>
                 <option value="2">debts</option>
                 <option value="3">credit cards</option>
@@ -68,11 +68,11 @@
           <div class="form-group">
             <label class="control-label col-xs-3">Is active?</label>
             <label class = "checkbox-inline">
-              <input type = "radio" name = "optionsRadiosinline" id = "task_active" value = "true" checked> Active
+              <input type = "radio" name = "task_active" id = "task_active" value = "true" checked> Active
             </label>
 
             <label class = "checkbox-inline">
-              <input type = "radio" name = "optionsRadiosinline" value = "false"> No Active
+              <input type = "radio" name = "task_active" value = "false"> No Active
             </label>
           </div>
 

@@ -50,25 +50,23 @@ $(function () {
     });
 
     $('#addTaskForm').submit(function(){
-
+        debugger;
         $.ajax({
             type: "POST",
             url: "ajax/admin/tasks/create",
             data: $('#addTaskForm').serialize(),
-            //success: function () {
-            //    updateTable();
-            //    successNoty('Task added');
-            //}
+
+            success: function () {
+                updateTable();
+                successNoty('Task added');
+            }
+
+
         });
+        $("#addTaskForm").find('input:text, select').val('');
         return false;
     });
 
 });
-//
-//function addTask(){
-//    $('addTaskForm').submit(function(){
-//        saveTask();
-//        return false;
-//    });
-//};
+
 

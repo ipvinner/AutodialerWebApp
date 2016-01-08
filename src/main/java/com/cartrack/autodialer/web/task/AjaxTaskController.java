@@ -62,11 +62,9 @@ public class AjaxTaskController extends AbstractTaskController {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public void create(@RequestParam("task_name") String name,
-                               @RequestParam("client_list_id") int client_list_id,
+                               @RequestParam("clients_list_id") int client_list_id,
                                @RequestParam("task_active") boolean active,
-                               @RequestParam("originate_param_id") int originate_param_id){
-
-
+                               @RequestParam("task_originate_param_id") int originate_param_id){
         Task task = new Task(null, name, clientListService.get(client_list_id), active, originateParamService.get(originate_param_id));
         super.create(task);
 
