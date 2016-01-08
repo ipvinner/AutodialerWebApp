@@ -1,5 +1,6 @@
 package com.cartrack.autodialer.service;
 
+import com.cartrack.autodialer.domain.Client;
 import com.cartrack.autodialer.domain.ClientList;
 import com.cartrack.autodialer.repository.ClientListRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +26,10 @@ public class ClientListServiceImpl implements ClientListService {
     @Override
     public ClientList get(int id) {
         return repository.get(id);
+    }
+
+    @Override
+    public void createWithListOfClients(ClientList clientList, List<Client> clientsList) {
+        repository.createWithListOfClients(clientList, clientsList);
     }
 }

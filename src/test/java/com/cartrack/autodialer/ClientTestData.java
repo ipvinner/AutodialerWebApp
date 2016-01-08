@@ -54,8 +54,10 @@ public class ClientTestData {
     public static final CallResult CALL_RESULTNew = new CallResult(7, LocalDateTime.of(2015, Month.DECEMBER, 4, 18, 0), "success", "success", TASK2, CLIENT3);
 
 
-
-
+    public static final ClientList CLIENT_LIST_NEW = new ClientList(4, "new", "new");
+    public static final Client CLIENT9 = new Client(9, "Феофанов", "Андрей", "+38050325678", "6@urk.net", CLIENT_LIST_NEW);
+    public static final Client CLIENT10 = new Client(10, "Сергеев", "Дмитрий", "+38055325678", "2@mail.ru", CLIENT_LIST_NEW);
+    public static final Client CLIENT11 = new Client(11, "Наумова", "Дмитрий", "+380738625020", "naumov@mail.ru", CLIENT_LIST_NEW);
 
 
 }

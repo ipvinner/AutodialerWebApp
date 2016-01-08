@@ -49,8 +49,14 @@ $(function () {
         "initComplete": makeEditable
     });
 
+    addTask();
+    renderClientListsOptions();
+    renderOriginateParamsOptions();
+
+});
+
+function addTask(){
     $('#addTaskForm').submit(function(){
-        debugger;
         $.ajax({
             type: "POST",
             url: "ajax/admin/tasks/create",
@@ -66,7 +72,38 @@ $(function () {
         $("#addTaskForm").find('input:text, select').val('');
         return false;
     });
+}
 
-});
+function renderClientListsOptions(){
+    var $listSelect = $('#clients_list_id');
+    $listSelect.find('option').remove();
+
+    $.ajax({
+        url: "ajax/admin/clients/getClientsLists",
+        type: 'GET',
+        dataType : "json",
+        success: function (data) {
+            for(var i = 0, len = data.length; i < len; i++) {
+                $listSelect.append('<option value=' + data[i]["id"] + '>' + data[i]["name"] + '</option>');
+            }
+        }
+    });
+}
+
+function renderOriginateParamsOptions(){
+    var $listSelect = $('#task_originate_param_id');
+    $listSelect.find('option').remove();
+
+    $.ajax({
+        url: "ajax/admin/asterisk",
+        type: 'GET',
+        dataType : "json",
+        success: function (data) {
+            for(var i = 0, len = data.length; i < len; i++) {
+                $listSelect.append('<option value=' + data[i]["id"] + '>' + data[i]["name"] + '</option>');
+            }
+        }
+    });
+}
 
 

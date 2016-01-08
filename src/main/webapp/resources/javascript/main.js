@@ -1,5 +1,6 @@
 "use strict";
-let inst = new addCSVList({
+let inst = new uploadData({
+    "url": "ajax/admin/clients/addClientsList",
     "componentRoot": document.querySelector("[data-component='userUploadCSVFile']"),
     "btnFile": document.getElementById("uploadFile"),
     "btnRenderTable": document.getElementById("renderTable"),

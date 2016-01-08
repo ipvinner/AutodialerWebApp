@@ -52,9 +52,21 @@ public class AjaxClientController extends AbstractClientController {
         }
     }
 
-    @RequestMapping(value = "/addClientsList", method = RequestMethod.POST)
-    public void update(@RequestBody List<Client> clients) {
+    @RequestMapping(value = "/getClientsLists", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public Collection<ClientList> getLists() {
+        return super.getClientsLists();
+    }
 
+    @RequestMapping(value = "/addClientsList", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public void addClientsList(@RequestParam("name") String name,
+                       @RequestParam("description") String description,
+                       @RequestBody List<Client> clients) {
+//        super.createListAndAddClients(new ClientList(null, name, description), clients);
+        System.out.println("listName" + name);
+        System.out.println("listDesc" + description);
+        for (Object o : clients) {
+            System.out.println(o);
+        }
 
     }
 }

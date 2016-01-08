@@ -2,6 +2,8 @@ package com.cartrack.autodialer.web.client;
 
 import com.cartrack.autodialer.LoggerWrapper;
 import com.cartrack.autodialer.domain.Client;
+import com.cartrack.autodialer.domain.ClientList;
+import com.cartrack.autodialer.service.ClientListService;
 import com.cartrack.autodialer.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +17,9 @@ import java.util.List;
 
 public class AbstractClientController {
     protected final LoggerWrapper LOG = LoggerWrapper.get(getClass());
+
+    @Autowired
+    private ClientListService clientListService;
 
     @Autowired
     private ClientService clientService;
@@ -34,6 +39,16 @@ public class AbstractClientController {
     public List<Client> getByList(int listId){
         LOG.info("getByList");
         return clientService.getByList(listId);
+    }
+
+    public List<ClientList> getClientsLists(){
+        LOG.info("get all clients lists");
+        return clientListService.getAll();
+    }
+
+    public void createListAndAddClients(ClientList clientList , List<Client> clients){
+        LOG.info("create List and add clients");
+        clientListService.createWithListOfClients(clientList, clients);
     }
 
 

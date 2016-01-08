@@ -9,16 +9,38 @@ body {
 }
 
 .editable {
-    border: 1px solid #000;
+    outline: 2px solid grey;
+}
+
+#customUserTableFromCSV td:not(:last-child) {
+    cursor: pointer;
+}
+
+.space-m-b-s {
+    margin-bottom: 10px;
+}
+
+.space-p-t-xxl {
+    padding-top: 50px !important;
+}
+
+.space-m-v-md {
+    margin: 20px 0 !important;
 }
 
 
-dt, dd {
+/* edit-group */
+
+.edit-group dd{
+    border: 1px solid grey !important;
+}
+
+.edit-group dt,
+.edit-group dd {
     display: inline-block;
+    line-height: 26px;
 }
 
-dd.empty {
+.edit-group dd.empty {
     min-width: 100px;
-    border: 1px solid red;
-    text-align: left;
 }

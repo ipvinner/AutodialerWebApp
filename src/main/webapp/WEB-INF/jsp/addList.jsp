@@ -16,16 +16,16 @@
 
 <!-- Template for select type item -->
 <script id="title-list-template" type="text/x-handlebars-template">
-    <div class="chooseFields">
+    <div id="chooseFields" class="form-horizontal">
 
         {{#each data}}
-        <div class="list-titles-item">
-            <div class="inline-block">
-                {{title}}
+        <div class="row space-m-b-s list-titles-item">
+            <div class="col-md-2 control-label">
+                <strong>{{title}}:</strong>
             </div>
 
-            <div class="inline-block">
-                <select class="field-select" data-field="{{id}}" data-title="{{title}}">
+            <div class="col-md-4">
+                <select class="field-select form-control" data-field="{{id}}" data-title="{{title}}">
                     <option>Select your option</option>
                     {{#each ../options}}
                     <option data-index="{{@index}}">{{this}}</option>
@@ -36,19 +36,18 @@
         </div>
         {{/each}}
 
-        <button id="renderTable" class="btn btn-primary" type="button" >Render Table</button>
+        <button id="renderTable" class="btn btn-primary space-m-b-s" type="button" >Отобразить данные</button>
     </div>
 </script>
 
 <!-- Template for custom table -->
 <script id="table-custom-template" type="text/x-handlebars-template">
     <div data-component="table-custom">
-        <div class="table-custom__navigation">
-            <button class="btn btn-primary" data-table-custom="add-row" data-component="dialog" type="button">Add</button>
-            <button class="btn btn-primary" data-table-custom="submit" type="button">Submit</button>
+        <div class="table-custom__navigation text-right space-m-b-s">
+            <button class="btn btn-primary" data-table-custom="add-row" data-component="dialog" type="button">Добавить запись</button>
         </div>
 
-        <table id="customUserTableFromCSV" class="table" data-component="table-custom">
+        <table id="customUserTableFromCSV" class="table table-bordered table-hover" data-component="table-custom">
             <thead>
             <tr>
                 {{#each title}}
@@ -92,43 +91,79 @@
 
 <!-- Template for dialog-->
 <script id="dialog-edit-row" type="text/x-handlebars-template">
-    <h3>{{title}}</h3>
+    <div class="dialog__header">
+        <h4>{{title}}</h4>
+    </div>
 
-    <dl id="row-content">
-        {{#each data}}
-        {{#each this}}
-        <dt>{{@key}}</dt>
-        {{#if ../../newString }}
-        <dd class="empty" contenteditable="true"></dd>
-        {{else}}
-        <dd contenteditable="true">{{this}}</dd>
-        {{/if}}
-        {{/each}}
-        <br>
-        {{/each}}
-    </dl>
+    <div class="dialog__body">
+        <div id="row-content">
+            {{#each data}}
+            <dl class="edit-group row">
+                {{#each this}}
+                <dt class="col-md-2 text-right">{{@key}}</dt>
+                {{#if ../../newString }}
+                <dd class="empty col-md-4" contenteditable="true"></dd>
+                {{else}}
+                <dd class="col-md-4" contenteditable="true">{{this}}</dd>
+                {{/if}}
+                {{/each}}
+                <br>
+            </dl>
+            {{/each}}
+        </div>
+    </div>
 
-    <button data-index="{{index}}" class="btn btn-primary" data-table-custom="update-row" type="button">Update</button>
+    <div class="dialog__control">
+        <button class="btn btn-default" type="button" data-dialog="close">Закрыть</button>
+        <button data-index="{{index}}" class="btn btn-primary" data-table-custom="update-row" type="button">Update</button>
+    </div>
 </script>
+
+<!-- Template for warning message-->
+<script id="warning-template" type="text/x-handlebars-template">
+    <div class="alert alert-warning" role="alert">
+        {{message}}
+    </div>
+</script>
+
 
 <div class="jumbotron">
     <div class="container">
-        <div class="container">
+        <div class="shadow">
+            <div data-component="userUploadCSVFile" class="space-m-v-md">
+                <form id="addClientList" method="post">
+                    <div class="row">
+                        <div class="form-group col-xs-4">
+                            <label for="tableCustomTitle">List name</label>
+                            <input placeholder="Название" class="form-control" type="text" name="name" id="tableCustomTitle">
 
-            <div data-component="userUploadCSVFile">
-                <label for="uploadFile">Add new list users</label>
-                <input type="file" name="uploadFile" id="uploadFile"/>
+                        </div>
+
+                        <div class="form-group col-xs-4">
+                            <label for="tableCustomDescribe">Description</label>
+                            <input placeholder="Описание" class="form-control" type="text" name="description" id="tableCustomDescribe">
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="upload-file-group">
+                        <label for="uploadFile">Add file</label>
+                        <input type="file" name="uploadFile" id="uploadFile" title="Добавить файл">
+                    </div>
+
+                <button type="submit" data-table-custom="submit" class="btn btn-primary">Submit</button>
+                </form>
             </div>
+
             <!-- end userUploadCSVFile -->
         </div>
-
-        <script src="resources/javascript/parseCSVFile.js"></script>
-        <script src="resources/javascript/table-custom.js"></script>
-        <script src="resources/javascript/dialog.js"></script>
-        <script src="resources/javascript/main.js"></script>
-
     </div>
 </div>
+
+<script src="resources/javascript/uploadData.js"></script>
+<script src="resources/javascript/table-custom.js"></script>
+<script src="resources/javascript/dialog.js"></script>
+<script src="resources/javascript/main.js"></script>
+
 <jsp:include page="fragments/footer.jsp"/>
 
 </body>

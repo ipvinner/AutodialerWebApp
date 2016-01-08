@@ -8,15 +8,44 @@
 "use strict";
 class TableCustom {
 
-    constructor(options) {
+    constructor(options, title, data) {
         this.options = options || {};
         this.options.data = [];
         this.options.fields = [];
 
+        this._renderTable(title, data);
         this._defineElements();
         this._setEvents();
 
         window.tableCustom = this;
+    }
+
+    /**
+     * Render table with data from csv file
+     */
+    _renderTable(title, data){
+        var tpl = document.getElementById("table-custom-template").innerHTML.trim();
+        var tplCompile = Handlebars.compile(tpl);
+        var viewData = [];
+
+        if(document.body.querySelector("#customUserTableFromCSV")) {
+
+            var table = document.body.querySelector("#customUserTableFromCSV");
+            table.parentNode.removeChild(table);
+        }
+
+        // prepare data to view
+        for(let i = 0; i < data.length - 1; i++) {
+            let item = [];
+            for(let j = 0; j < title.length; j++) {
+                if(data[i][title[j].id] === "index") continue;
+                item.push(data[ i ][ title[j].id ]);
+            }
+            viewData.push(item);
+        }
+
+        document.body.querySelector("#upload-file-group")
+            .insertAdjacentHTML("afterEnd", tplCompile({title: title, data: viewData}));
     }
 
     /**
@@ -35,50 +64,17 @@ class TableCustom {
     }
 
     _setEvents() {
-        this.elements.root.addEventListener("dblclick", this._toggleEditableCell.bind(this));
         this.elements.root.addEventListener("blur", this._disableEditableCell.bind(this), true);
 
         this.elements.root.addEventListener("click", this.clickHandler.bind(this));
     }
 
     /**
-     * Toggle available edit for cell
-     * @private
-     */
-    _toggleEditableCell(event) {
-
-        if(event.target.tagName.toUpperCase() === "TD")  {
-
-            if(event.target.hasAttribute("contenteditable")) {
-                event.target.removeAttribute("contenteditable");
-                event.target.classList.remove("editable");
-            } else {
-                event.target.setAttribute("contenteditable", "true");
-                event.target.classList.add("editable");
-            }
-        }
-    }
-
-    /**
-     * Disable editable for all cell inside table
-     * @param event
-     * @private
-     */
-    _disableEditableCell(event) {
-        var cells = this.elements.root.querySelectorAll(".editable");
-
-        for(var i = 0; i < cells.length; i++) {
-            cells[i].removeAttribute("contenteditable");
-            cells[i].classList.remove("editable");
-        }
-    }
-
-    /**
      * Handler click
      * @param event
      */
-
     clickHandler(event) {
+
         if(event.target.dataset.tableCustom === "delete-row") {
 
             var row = event.target.closest("tr");
@@ -86,11 +82,6 @@ class TableCustom {
 
             // update data-index attribute for row
             this._updateRowIndex();
-        }
-
-        if(event.target.dataset.tableCustom === "submit") {
-            this._prepareData();
-            this._submitData();
         }
 
         if(event.target.dataset.tableCustom === "update-row") {
@@ -118,6 +109,41 @@ class TableCustom {
 
             dialog.destruct();
         }
+
+        if(event.target.tagName.toUpperCase() === "TD")  {
+            this._toggleEditableCell(event);
+        }
+    }
+
+    /**
+     * Toggle available edit for cell
+     * @private
+     */
+    _toggleEditableCell(event) {
+        if(event.target.nextElementSibling.nodeName.toLowerCase() !== "td") return;
+
+        if(event.target.hasAttribute("contenteditable")) {
+            event.target.removeAttribute("contenteditable");
+            event.target.classList.remove("editable");
+        } else {
+            event.target.setAttribute("contenteditable", "true");
+            event.target.classList.add("editable");
+            event.target.focus();
+        }
+    }
+
+    /**
+     * Disable editable for all cell inside table
+     * @param event
+     * @private
+     */
+    _disableEditableCell(event) {
+        var cells = this.elements.root.querySelectorAll(".editable");
+
+        for(var i = 0; i < cells.length; i++) {
+            cells[i].removeAttribute("contenteditable");
+            cells[i].classList.remove("editable");
+        }
     }
 
     /**
@@ -129,16 +155,11 @@ class TableCustom {
     addRow(data) {
         // validate data
 
-        var tpl = document.getElementById("table-row-template").innerHTML.trim();
-        //var tpl = '<%for(var i = 0; i < data.length; i++) { %><tr data-index="<%-i%>"><%for(var value in data[i]) { %><%if(value === "index") continue;%><td><%-data[i][value]%></td><% } %><td><button class="btn btn-primary" data-table-custom="edit-row" data-component="dialog" type="button">Edit</button><button class="btn btn-primary" data-table-custom="delete-row" type="button">Delete</button></td></tr><% } %>';
-        var tableRow = Handlebars.compile(tpl);
-
-        // prepare data for view template
-        console.log(data);
-
+        var template = document.getElementById("table-row-template").innerHTML.trim();
+        var templateCompile = Handlebars.compile(template);
 
         this.elements.tbody
-            .insertAdjacentHTML("beforeEnd", tableRow({data: data}));
+            .insertAdjacentHTML("beforeEnd", templateCompile({data: data}));
 
         this._updateRowIndex();
     }
@@ -173,53 +194,6 @@ class TableCustom {
         for(var i = 0, len = this.elements.tbody.querySelectorAll("tr").length; i < len; i++ ) {
             this.elements.tbody.querySelectorAll("tr")[i].dataset.index = i;
         }
-    }
-
-    /**
-     * Prepare data for submit
-     * [{}, {}, ..., {}]
-     * @private
-     */
-    _prepareData() {
-        this.options.data = [];
-
-        this.options.fields = [];
-
-        for(let i = 0, th = this.elements.thead.querySelectorAll("th"); i < th.length - 1; i++) {
-            this.options.fields.push(th[i].dataset.tableCustom);
-        }
-
-        for(let i = 0, tr = this.elements.tbody.querySelectorAll("tr"); i < tr.length; i++) {
-            let item = {};
-            for(let j = 0, td = this.elements.tbody.querySelectorAll("tr")[i].querySelectorAll("td"); j < td.length - 1; j++) {
-                item[this.options.fields[j]] = td[j].innerText;
-            }
-
-            this.options.data.push(item);
-        }
-    }
-
-    /**
-     * Submit data to server
-     */
-    _submitData() {
-
-        let xhr = new XMLHttpRequest();
-        let data = {data: JSON.stringify(this.options.data)};
-
-        xhr.open("POST", this.options.url, true);
-
-        xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-
-        // ajax handler
-        xhr.onreadystatechange = function() {
-            if (this.readyState != 4) return;
-
-            alert( this.responseText );
-        };
-
-        xhr.send(data.data);
-
     }
 
 }
