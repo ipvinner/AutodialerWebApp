@@ -4,6 +4,7 @@ import com.cartrack.autodialer.domain.ClientList;
 import com.cartrack.autodialer.domain.OriginateParam;
 import com.cartrack.autodialer.domain.Task;
 import com.cartrack.autodialer.service.ClientListService;
+import com.cartrack.autodialer.service.OriginateParamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,9 @@ public class AjaxTaskController extends AbstractTaskController {
 
     @Autowired
     ClientListService clientListService;
+
+    @Autowired
+    OriginateParamService originateParamService;
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Collection<Task> getAll() {
@@ -54,6 +58,16 @@ public class AjaxTaskController extends AbstractTaskController {
         } else {
             super.update(task, id);
         }
+    }
+
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public void create(@RequestParam("task_name") String name,
+                               @RequestParam("clients_list_id") int client_list_id,
+                               @RequestParam("task_active") boolean active,
+                               @RequestParam("task_originate_param_id") int originate_param_id){
+        Task task = new Task(null, name, clientListService.get(client_list_id), active, originateParamService.get(originate_param_id));
+        super.create(task);
+
     }
 
 

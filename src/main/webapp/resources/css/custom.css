@@ -1,0 +1,46 @@
+@import "dialog.css";
+
+body {
+    background-color: #ccc;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.editable {
+    outline: 2px solid grey;
+}
+
+#customUserTableFromCSV td:not(:last-child) {
+    cursor: pointer;
+}
+
+.space-m-b-s {
+    margin-bottom: 10px;
+}
+
+.space-p-t-xxl {
+    padding-top: 50px !important;
+}
+
+.space-m-v-md {
+    margin: 20px 0 !important;
+}
+
+
+/* edit-group */
+
+.edit-group dd{
+    border: 1px solid grey !important;
+}
+
+.edit-group dt,
+.edit-group dd {
+    display: inline-block;
+    line-height: 26px;
+}
+
+.edit-group dd.empty {
+    min-width: 100px;
+}
