@@ -6,3 +6,6 @@ target
 *.iml
 atlassian-ide-plugin.xml
 log
+config/autodialer.properties
+.gitignore
+*~
