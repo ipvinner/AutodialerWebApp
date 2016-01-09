@@ -20,7 +20,7 @@
 
                 <form role="form">
                     <div class="form-group">
-                        <label for="email">Clients list name1</label>
+                        <label for="email">Clients list name</label>
                         <input type="email" class="form-control" id="email">
                     </div>
                     <div class="form-group">
