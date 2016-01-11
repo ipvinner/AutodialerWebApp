@@ -63,29 +63,14 @@ public class AjaxClientController extends AbstractClientController {
         return super.getClientsLists();
     }
 
-//    @RequestMapping(value = "/addClientsList", method = RequestMethod.POST, consumes="application/json")
-//    public void addClientsList(@RequestParam("name") String name,
-//                       @RequestParam("description") String description,
-//                       @RequestBody List<Client> clients ) {
-////        super.createListAndAddClients(new ClientList(null, name, description), clients);
-//        System.out.println("listName" + name);
-//        System.out.println("listDesc" + description);
-//        for (Object o : clients) {
-//            System.out.println(o);
-//        }
-//
-//    }
 
     @RequestMapping(value = "/addClientsList", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<RequestClientListWrapper> addClientsList(@RequestBody RequestClientListWrapper wrapper) {
-//        super.createListAndAddClients(new ClientList(null, name, description), clients);
-//        System.out.println("listName" + name);
-//        System.out.println("listDesc" + description);
+
         HttpHeaders headers = new HttpHeaders();
         List<Client> clients = wrapper.getClients();
-//        for (Object o : clients) {
-//            System.out.println(o);
-//        }
+        ClientList clientList = new ClientList(null, wrapper.getName(), wrapper.getDescription());
+        super.createListAndAddClients(clientList, clients);
         return new ResponseEntity<RequestClientListWrapper>(wrapper, HttpStatus.OK);
 
     }

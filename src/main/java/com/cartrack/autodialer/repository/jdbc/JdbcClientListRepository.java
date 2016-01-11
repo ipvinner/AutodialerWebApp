@@ -82,10 +82,5 @@ public class JdbcClientListRepository implements ClientListRepository {
             }
         });
 
-//        for (Client client : clientsList) {
-//            jdbcTemplate.update("INSERT INTO client (firstname, lastname, phone_number, email, clients_list_id) VALUES (?, ?, ?, ?, ?)",
-//                    client.getFirstName(), client.getLastName(), client.getPhoneNumber(), client.getEmail(), client.getClientList().getId());
-//        }
-
     }
 }

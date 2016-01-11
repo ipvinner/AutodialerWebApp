@@ -109,8 +109,9 @@ function successNoty(text) {
     noty({
         text: text,
         type: 'success',
-        layout: 'bottomRight',
-        timeout: true
+        layout: 'topCenter',
+        timeout: 1500,
+
     });
 }
 
