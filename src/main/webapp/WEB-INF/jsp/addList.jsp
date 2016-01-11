@@ -162,7 +162,6 @@
 <script src="resources/javascript/uploadData.js"></script>
 <script src="resources/javascript/table-custom.js"></script>
 <script src="resources/javascript/dialog.js"></script>
-<script src="resources/javascript/main.js"></script>
 
 <jsp:include page="fragments/footer.jsp"/>
 

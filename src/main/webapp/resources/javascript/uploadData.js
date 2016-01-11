@@ -121,11 +121,14 @@ class uploadData {
      */
     _renderTable(){
         var self = this;
+        var chooseFields = this._componentRoot.querySelector("#chooseFields");
         this._updateData();
 
         window.customTbl = new TableCustom({}, self._userDataStyle, self._correctData);
 
-        this._componentRoot.removeChild(this._componentRoot.querySelector("#chooseFields"));
+        if (chooseFields.parentNode) {
+            chooseFields.parentNode.removeChild(chooseFields);
+        }
     }
 
     _updateData(){
@@ -244,6 +247,9 @@ class uploadData {
      */
     _submitData(event) {
 
+        // prevent submit form
+        event.preventDefault();
+
         if( !this._controlDataBeforeSend() ) {
             document.body.scrollTop = document.documentElement.scrollTop = 0;
             return;
@@ -256,20 +262,32 @@ class uploadData {
             clients: this.options.data
         };
 
-        $.ajax({
+        var xhr = $.ajax({
             type: "POST",
-            url: "ajax/admin/clients/addClientsList" ,
+            url: this.options.url,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            data: JSON.stringify(data),
-            error: function(){
-              alert("Error");
-            },
-            success: function () {
-                alert("Success");
-            }
+            data: JSON.stringify(data)
         });
 
-        debugger;
+        var complete = false;
+
+        xhr
+            .done(function() {
+                complete = true;
+
+            })
+            .fail(function() {
+                complete = false;
+            })
+            .always(function() {
+                if(complete) {
+                    window.location = "/autodialer/tasks?saved";
+                } else {
+                    noty({
+                        text: 'К сожалению произошла ошибка, попробуйте ещё раз!'
+                    });
+                }
+            });
     }
 }
