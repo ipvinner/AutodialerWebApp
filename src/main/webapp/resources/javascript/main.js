@@ -7,11 +7,11 @@ let inst = new uploadData({
     "btnSubmit": document.getElementById("submitData"),
     "typeFields": [
         {
-            "id": "name",
+            "id": "firstName",
             "title": "Имя"
         },
         {
-            "id": "lname",
+            "id": "lastName",
             "title": "Фамилия"
         },
         {

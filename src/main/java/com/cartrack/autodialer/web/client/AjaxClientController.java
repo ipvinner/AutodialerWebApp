@@ -2,10 +2,16 @@ package com.cartrack.autodialer.web.client;
 
 import com.cartrack.autodialer.domain.Client;
 import com.cartrack.autodialer.domain.ClientList;
+import com.cartrack.autodialer.domain.RequestClientListWrapper;
 import com.cartrack.autodialer.service.ClientListService;
+import org.asteriskjava.Cli;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.Collection;
 import java.util.List;
@@ -57,16 +63,31 @@ public class AjaxClientController extends AbstractClientController {
         return super.getClientsLists();
     }
 
-    @RequestMapping(value = "/addClientsList", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void addClientsList(@RequestParam("name") String name,
-                       @RequestParam("description") String description,
-                       @RequestBody List<Client> clients) {
+//    @RequestMapping(value = "/addClientsList", method = RequestMethod.POST, consumes="application/json")
+//    public void addClientsList(@RequestParam("name") String name,
+//                       @RequestParam("description") String description,
+//                       @RequestBody List<Client> clients ) {
+////        super.createListAndAddClients(new ClientList(null, name, description), clients);
+//        System.out.println("listName" + name);
+//        System.out.println("listDesc" + description);
+//        for (Object o : clients) {
+//            System.out.println(o);
+//        }
+//
+//    }
+
+    @RequestMapping(value = "/addClientsList", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<RequestClientListWrapper> addClientsList(@RequestBody RequestClientListWrapper wrapper) {
 //        super.createListAndAddClients(new ClientList(null, name, description), clients);
-        System.out.println("listName" + name);
-        System.out.println("listDesc" + description);
-        for (Object o : clients) {
-            System.out.println(o);
-        }
+//        System.out.println("listName" + name);
+//        System.out.println("listDesc" + description);
+        HttpHeaders headers = new HttpHeaders();
+        List<Client> clients = wrapper.getClients();
+//        for (Object o : clients) {
+//            System.out.println(o);
+//        }
+        return new ResponseEntity<RequestClientListWrapper>(wrapper, HttpStatus.OK);
 
     }
+
 }
