@@ -113,7 +113,7 @@ class uploadData {
 
         if(event.target.dataset.tableCustom === "submit") {
             this._prepareDataBeforeSubmit();
-            this._submitData();
+            this._submitData(event);
         }
     }
     /**
@@ -242,34 +242,35 @@ class uploadData {
     /**
      * Submit data to server
      */
-    _submitData() {
+    _submitData(event) {
 
         if( !this._controlDataBeforeSend() ) {
             document.body.scrollTop = document.documentElement.scrollTop = 0;
             return;
         }
 
-        let xhr = new XMLHttpRequest();
+        //let xhr = new XMLHttpRequest();
         let data = {
             name: this.options.title,
             description: this.options.describe,
-            data: this.options.data
+            clients: this.options.data
         };
 
-        xhr.open("POST", this.options.url, true);
+        $.ajax({
+            type: "POST",
+            url: "ajax/admin/clients/addClientsList" ,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify(data),
+            error: function(){
+              alert("Error");
+            },
+            success: function () {
+                alert("Success");
+                successNoty('Saved');
+            }
+        });
 
-        xhr.setRequestHeader('Content-type', 'application/json; charset=utf-8');
-
-        // ajax handler
-        xhr.onreadystatechange = function() {
-            if (this.readyState != 4) return;
-
-            alert( this.responseText );
-
-
-        };
-
-        xhr.send(JSON.stringify(data));
-
+        debugger;
     }
 }

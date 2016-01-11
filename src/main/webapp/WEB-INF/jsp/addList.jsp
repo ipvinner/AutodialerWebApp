@@ -150,7 +150,7 @@
                         <input type="file" name="uploadFile" id="uploadFile" title="Добавить файл">
                     </div>
 
-                <button type="submit" data-table-custom="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" id="submitData" data-table-custom="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
 
