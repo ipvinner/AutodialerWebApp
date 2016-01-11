@@ -267,7 +267,6 @@ class uploadData {
             },
             success: function () {
                 alert("Success");
-                successNoty('Saved');
             }
         });
 
