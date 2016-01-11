@@ -50,7 +50,7 @@
 
     <!-- Localization-->
     <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource" p:cacheSeconds="60" >
-        <property name="basenames" value="file:///#{systemEnvironment['AUTODIALER_ROOT']}/config/messages/app"/>
+        <property name="basenames" value="file:////home/yb/project/AutodialerWebApp/config/messages/app"/>
         <property name="defaultEncoding" value="UTF-8"/>
     </bean>
 
