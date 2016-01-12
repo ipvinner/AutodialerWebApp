@@ -9,19 +9,31 @@
     <http pattern="/resources/**" security="none"/>
     <http pattern="/webjars/**" security="none"/>
 
-    <http pattern="/rest/**" use-expressions="true" name="restSecurityFilterChain" create-session="stateless">
+    <http pattern="/ajax/**" use-expressions="true" name="restSecurityFilterChain" create-session="stateless">
         <http-basic/>
-        <intercept-url pattern="/rest/admin/**" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/ajax/admin/**" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/**" access="isAuthenticated()"/>
         <csrf disabled="true"/>
     </http>
 
+    <http>
+        <intercept-url pattern="/login" access="permitAll"/>
+        <intercept-url pattern="/**/admin/**" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/**" access="isAuthenticated()" />
+        <form-login login-page="/login" default-target-url="/"
+                    authentication-failure-url="/login?error=true"
+                    login-processing-url="/spring_security_check"/>
+        <logout />
+        <csrf disabled="true"/>
+    </http>
+
     <authentication-manager>
-        <authentication-provider>
-            <user-service>
-                <user name="user@yandex.ru" password="password" authorities="ROLE_USER"/>
-                <user name="admin@gmail.com" password="admin" authorities="ROLE_ADMIN"/>
-            </user-service>
+        <authentication-provider user-service-ref="userService">
+
+            <!--<user-service>-->
+                <!--<user name="user" password="password" authorities="ROLE_USER"/>-->
+                <!--<user name="admin" password="admin" authorities="ROLE_ADMIN"/>-->
+            <!--</user-service>-->
         </authentication-provider>
     </authentication-manager>
 </beans:beans>

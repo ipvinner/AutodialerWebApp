@@ -67,4 +67,10 @@ public class UserServiceTest {
         service.update(updated);
         MATCHER.assertEquals(updated, service.get(1));
     }
+
+    @Test
+    public void testGetUserByLogin(){
+        User admin = service.getByLogin("admin");
+        MATCHER.assertEquals(admin, service.get(1));
+    }
 }

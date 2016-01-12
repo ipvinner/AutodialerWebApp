@@ -15,6 +15,8 @@ public interface UserService {
 
     User get(int id) throws NotFoundException;
 
+    User getByLogin(String login) throws NotFoundException;
+
     List<User> getAll();
 
 //    void update(UserTo user);

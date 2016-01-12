@@ -6,10 +6,6 @@
 </head>
 <body>
 <jsp:include page="fragments/bodyHeader.jsp"/>
-
-<jsp:include page="fragments/footer.jsp"/>
-
-
 <div class="jumbotron">
     <div class="container">
         <!-- Page Heading -->
@@ -130,5 +126,6 @@
         <!-- /.row -->
     </div>
 </div>
+<jsp:include page="fragments/footer.jsp"/>
 </body>
 </html>

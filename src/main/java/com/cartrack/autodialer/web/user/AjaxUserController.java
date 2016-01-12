@@ -1,5 +1,6 @@
 package com.cartrack.autodialer.web.user;
 
+import com.cartrack.autodialer.LoggedUser;
 import com.cartrack.autodialer.domain.*;
 import com.cartrack.autodialer.service.ClientListService;
 import com.cartrack.autodialer.web.task.AbstractTaskController;

@@ -7,11 +7,10 @@ import java.util.Set;
 /**
  * Created by vinner on 27.08.2015.
  */
-public class User extends NamedEntity {
+public class User extends BaseEntity {
     protected String login;
     protected String passwordHash;
     protected String role;
-
     public User(){
 
     }
@@ -41,7 +40,7 @@ public class User extends NamedEntity {
     }
 
     public String getRole() {
-        return role;
+        return "ROLE_ADMIN";
     }
 
     public void setRole(String role) {
