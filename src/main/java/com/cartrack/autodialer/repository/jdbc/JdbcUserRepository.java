@@ -65,7 +65,7 @@ public class JdbcUserRepository implements UserRepository {
     @Override
     public User getByLogin(String login) {
         List<User> users = jdbcTemplate.query("SELECT * FROM users WHERE login=?", GET_ROW_MAPPER, login);
-        User user = DataAccessUtils.singleResult(users);
+//        User user = DataAccessUtils.singleResult(users);
         return DataAccessUtils.singleResult(users);
     }
 

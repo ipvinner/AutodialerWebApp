@@ -40,7 +40,7 @@ public class User extends BaseEntity {
     }
 
     public String getRole() {
-        return "ROLE_ADMIN";
+        return role;
     }
 
     public void setRole(String role) {

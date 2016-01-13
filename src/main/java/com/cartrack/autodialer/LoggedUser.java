@@ -94,10 +94,10 @@ public class LoggedUser implements UserDetails {
     }
 
     public void addRole(String role){
-        boolean check = role.equals(Role.ROLE_ADMIN.toString());
-        System.out.println(check);
         if(role.equals(Role.ROLE_ADMIN.toString())){
             this.roles.add(Role.ROLE_ADMIN);
+        }else if(role.equals(Role.ROLE_MANAGER.toString())){
+            this.roles.add(Role.ROLE_MANAGER);
         }else{
             this.roles.add(Role.ROLE_USER);
         }
