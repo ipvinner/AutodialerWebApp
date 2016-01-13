@@ -11,9 +11,9 @@ ALTER SEQUENCE originate_param_id_seq RESTART WITH 1;
 ALTER SEQUENCE call_result_id_seq RESTART WITH 1;
 ALTER SEQUENCE user_id_seq RESTART WITH 1;
 
-INSERT INTO users (login, password_hash, role) VALUES ('admin', 'g8keeper', 'ROLE_ADMIN');
-INSERT INTO users (login, password_hash, role) VALUES ('manager', 'g8keeper', 'ROLE_MANAGER');
-INSERT INTO users (login, password_hash, role) VALUES ('user', 'g8keeper', 'ROLE_USER');
+INSERT INTO users (login, password_hash, role) VALUES ('admin', '$2a$10$kkBdkvfxaqHIz2zAlyfGAeS5LGazEVoEpQ2iZAlETnjP9G5iSHgN2', 'ROLE_ADMIN');
+INSERT INTO users (login, password_hash, role) VALUES ('manager', '$2a$10$kkBdkvfxaqHIz2zAlyfGAeS5LGazEVoEpQ2iZAlETnjP9G5iSHgN2', 'ROLE_MANAGER');
+INSERT INTO users (login, password_hash, role) VALUES ('user', '$2a$10$kkBdkvfxaqHIz2zAlyfGAeS5LGazEVoEpQ2iZAlETnjP9G5iSHgN2', 'ROLE_USER');
 
 INSERT INTO list (name, description) VALUES ('vip clients', 'vip clients are clients with status of VIP, privileges');
 INSERT INTO list (name, description) VALUES ('debtors', 'the clients which have debts');

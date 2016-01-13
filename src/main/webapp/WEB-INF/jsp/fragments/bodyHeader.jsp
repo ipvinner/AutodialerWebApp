@@ -55,21 +55,13 @@
 
 
     <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">John Smith <span class="caret"></span></a>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${user.login} <span class="caret"></span></a>
         <ul class="dropdown-menu">
-            <li><a href="#"><i class="fa fa-fw fa-user"></i>Profile</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">log out</a></li>
+            <li><a href="profile"><i class="fa fa-fw fa-user"></i>Profile</a></li>
+            <li><a role="button" href="logout">log out</a></li>
         </ul>
     </li>
 
-        <%--<li class="dropdown">--%>
-            <%--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${pageContext.response.locale} <span class="caret"></span></a>--%>
-            <%--<ul class="dropdown-menu">--%>
-                <%--<li><a href="?lang=en">English</a></li>--%>
-                <%--<li><a href="?lang=ru">Russian</a></li>--%>
-            <%--</ul>--%>
-        <%--</li>--%>
         <jsp:include page="lang.jsp"/>
     </ul>
 

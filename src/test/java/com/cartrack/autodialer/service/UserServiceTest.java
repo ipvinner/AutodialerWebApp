@@ -3,6 +3,7 @@ package com.cartrack.autodialer.service;
 import com.cartrack.autodialer.TestData;
 import com.cartrack.autodialer.domain.User;
 import com.cartrack.autodialer.matcher.ModelMatcher;
+import com.cartrack.autodialer.util.PasswordUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +56,7 @@ public class UserServiceTest {
 
     @Test
     public void testSave() throws Exception {
-        User newUser = new User(null, "newUser", "g8keeper", "ROLE_ADMIN");
+        User newUser = new User(null, "newUser", "$2a$10$kkBdkvfxaqHIz2zAlyfGAeS5LGazEVoEpQ2iZAlETnjP9G5iSHgN2", "ROLE_ADMIN");
         User created = service.save(newUser);
         MATCHER.assertCollectionEquals(Arrays.asList(TestData.ADMIN, TestData.MANAGER, TestData.USER, TestData.NEWUSER), service.getAll());
 

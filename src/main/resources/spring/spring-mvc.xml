@@ -10,6 +10,10 @@
 
     <bean class="com.cartrack.autodialer.web.json.JacksonObjectMapper" id="objectMapper" factory-method="getMapper"/>
 
+    <mvc:interceptors>
+        <bean class="com.cartrack.autodialer.web.interceptor.ModelInterceptor"/>
+    </mvc:interceptors>
+
     <mvc:annotation-driven conversion-service="conversionService">
         <mvc:message-converters>
             <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">

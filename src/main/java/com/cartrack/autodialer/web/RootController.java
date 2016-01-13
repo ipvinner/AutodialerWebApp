@@ -74,4 +74,9 @@ public class RootController {
     public String userList() {
         return "users";
     }
+
+    @RequestMapping(value = "/profile", method = RequestMethod.GET)
+    public String profile() {
+        return "profile";
+    }
 }

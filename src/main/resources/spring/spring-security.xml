@@ -9,7 +9,7 @@
     <http pattern="/resources/**" security="none"/>
     <http pattern="/webjars/**" security="none"/>
 
-    <http pattern="/ajax/**" use-expressions="true" name="restSecurityFilterChain" create-session="stateless">
+    <http pattern="/ajax/**" use-expressions="true" name="restSecurityFilterChain" >
         <http-basic/>
         <intercept-url pattern="/ajax/admin/**" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/**" access="isAuthenticated()"/>
@@ -27,8 +27,11 @@
         <csrf disabled="true"/>
     </http>
 
+    <beans:bean class="com.cartrack.autodialer.util.PasswordUtil" id="passwordEncoder" factory-method="getPasswordEncoder"/>
+
     <authentication-manager>
         <authentication-provider user-service-ref="userService">
+            <password-encoder ref="passwordEncoder"/>
 
             <!--<user-service>-->
                 <!--<user name="user" password="password" authorities="ROLE_USER"/>-->

@@ -23,6 +23,8 @@ public class LoggedUser implements UserDetails {
     protected Set<Role> roles = new HashSet<>();
     protected User user;
 
+
+
     public LoggedUser(User user) {
         this.user = user;
     }
@@ -91,6 +93,14 @@ public class LoggedUser implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public void addRole(String role){

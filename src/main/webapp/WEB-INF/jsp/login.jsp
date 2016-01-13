@@ -39,6 +39,11 @@
                 ${sessionScope["SPRING_SECURITY_LAST_EXCEPTION"].message}
         </div>
     </c:if>
+    <c:if test="${not empty message}">
+        <div class="message">
+            <fmt:message key="${message}"/>
+        </div>
+    </c:if>
 
 </div> <!-- /container -->
 

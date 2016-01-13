@@ -19,7 +19,5 @@ public interface UserService {
 
     List<User> getAll();
 
-//    void update(UserTo user);
-
     void update(User user);
 }

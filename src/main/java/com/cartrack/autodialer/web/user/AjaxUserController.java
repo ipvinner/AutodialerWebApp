@@ -3,6 +3,7 @@ package com.cartrack.autodialer.web.user;
 import com.cartrack.autodialer.LoggedUser;
 import com.cartrack.autodialer.domain.*;
 import com.cartrack.autodialer.service.ClientListService;
+import com.cartrack.autodialer.util.PasswordUtil;
 import com.cartrack.autodialer.web.task.AbstractTaskController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -39,7 +40,7 @@ public class AjaxUserController extends AbstractUserController{
                        @RequestParam("password") String password,
                        @RequestParam("role") String role) {
 
-        User user = new User(id, login, password, role);
+        User user = new User(id, login.toLowerCase(), PasswordUtil.encode(password), role);
         if (id == 0) {
             super.create(user);
         } else {
