@@ -14,10 +14,25 @@
 <div class="jumbotron">
   <div class="container">
     <div class="shadow">
+
+      <h3><fmt:message key="clients.title"/></h3>
+
+      <a class="btn btn-sm btn-info" id="addClientsListRef" href="addList" ><fmt:message key="clients.add_clients_list"/></a>
+      <table class="table table-striped display" id="clientsLists">
+        <thead>
+        <tr>
+          <th><fmt:message key="clients.list.name"/></th>
+          <th><fmt:message key="clients.list.description"/></th>
+          <th></th>
+          <th></th>
+        </tr>
+        </thead>
+      </table>
+
       <h3><fmt:message key="clients.title"/></h3>
 
       <div class="view-box">
-        <a class="btn btn-sm btn-info" id="add"><fmt:message key="clients.add_clients_list"/></a>
+        <a class="btn btn-sm btn-info" id="add"><fmt:message key="clients.add_client"/></a>
 
         <div class="dropdown">
           <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -33,6 +48,8 @@
 
           </ul>
         </div>
+
+
 
         <table class="table table-striped display" id="datatable">
           <thead>
@@ -116,6 +133,6 @@
 <script type="text/javascript" src="webjars/noty/2.2.4/jquery.noty.packaged.min.js"></script>
 <script type="text/javascript" src="resources/javascript/datatablesUtil.js"></script>
 <script type="text/javascript" src="resources/javascript/clientsDatatables.js"></script>
-
+<script type="text/javascript" src="resources/javascript/commonMethods.js"></script>
 
 </html>

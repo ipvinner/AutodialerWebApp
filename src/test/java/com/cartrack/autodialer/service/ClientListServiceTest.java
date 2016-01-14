@@ -51,6 +51,11 @@ public class ClientListServiceTest {
         ClientList clientList = service.get(1);
         MATCHER.assertEquals(ClientTestData.CLIENT_LIST1, clientList);
     }
+    @Test
+    public void testDelete() throws Exception{
+        service.delete(1);
+        MATCHER.assertCollectionEquals(Arrays.asList(TestData.CLIENT_LIST2, TestData.CLIENT_LIST3), service.getAll());
+    }
 
     @Test
     public void testCreateWithListOfClients(){

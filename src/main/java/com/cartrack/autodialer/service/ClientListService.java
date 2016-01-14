@@ -15,4 +15,6 @@ public interface ClientListService {
     ClientList get(int id);
 
     void createWithListOfClients(ClientList clientList, List<Client> clientsList);
+
+    void delete(int id);
 }

@@ -29,7 +29,7 @@ INSERT INTO client (firstname, lastname, phone_number, email, clients_list_id) V
 INSERT INTO client (firstname, lastname, phone_number, email, clients_list_id) VALUES ('Наумова', 'Дмитрий', '+380738625020', 'naumov@mail.ru', 1);
 
 
-INSERT INTO originate_param(name, context, exten, priority, async, timeout, var1, var2, trunk) VALUES ('from-ami', 'from-ami', 's', 1, FALSE , 30000, 'var1Value', 'var2Value', 'SIP/zadarma/');
+INSERT INTO originate_param(name, context, exten, priority, async, timeout, var1, var2, trunk) VALUES ('from-ami', 'my_context', 's-ANSWERED', 1, FALSE , 30000, 'var1Value', 'var2Value', 'SIP/zadarma/');
 INSERT INTO originate_param(name, context, exten, priority, async, timeout, var1, var2, trunk) VALUES ('outbount without handlers', 'from-admin', 's', 1, FALSE , 20000, 'test', 'test', 'SIP/zadarma/');
 
 INSERT INTO task (name, client_list_id, active, originate_param_id) VALUES ('vip', 1, TRUE , 1);

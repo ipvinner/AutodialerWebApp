@@ -58,7 +58,7 @@ public class AjaxClientController extends AbstractClientController {
         }
     }
 
-    @RequestMapping(value = "/getClientsLists", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/clientList", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public Collection<ClientList> getLists() {
         return super.getClientsLists();
     }
@@ -73,6 +73,11 @@ public class AjaxClientController extends AbstractClientController {
         super.createListAndAddClients(clientList, clients);
         return new ResponseEntity<RequestClientListWrapper>(wrapper, HttpStatus.OK);
 
+    }
+
+    @RequestMapping(value = "/clientList/{id}", method = RequestMethod.GET)
+    public Collection<Client> deleteList(@PathVariable("id") int id) {
+        return super.getByList(id);
     }
 
 }

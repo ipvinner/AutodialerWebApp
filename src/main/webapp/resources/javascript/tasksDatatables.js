@@ -79,7 +79,7 @@ function renderClientListsOptions(){
     $listSelect.find('option').remove();
 
     $.ajax({
-        url: "ajax/admin/clients/getClientsLists",
+        url: "ajax/admin/clients/clientList",
         type: 'GET',
         dataType : "json",
         success: function (data) {
