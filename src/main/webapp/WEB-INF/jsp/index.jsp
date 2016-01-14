@@ -25,7 +25,7 @@
                     <p><b>Autodialer</b> is a web/java/asterisk application for automatic dialing customers/clients by list.</p>
                     <p>Autodialer application can be used for the following tasks:</p>
                     <ul>
-                        <li>inform clients about current of new products and services or new prices</li>
+                        <li>inform clients about current or new products and services or new prices</li>
                         <li>notify about balances</li>
                         <li>inform on debts</li>
                         <li>warnings about somethings</li>
@@ -73,7 +73,7 @@
                         <li>Results of calls are saving to db. <a href="results">show</a></li>
                         <li>Add list of numbers from csv file: <a href="addList">addList</a></li>
                         <li>After adding list of numbers create task and start process of autodialing <a href="tasks">addTask</a></li>
-                        <li>Application is support miltilanguage: now it's russian and english</li>
+                        <li>Application is support miltilanguage: now russian and english are supported</li>
                     </ul>
                 </div>
             </div>
