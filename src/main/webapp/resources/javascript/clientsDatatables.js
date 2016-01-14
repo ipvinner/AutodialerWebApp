@@ -106,6 +106,7 @@ function renderDeleteBtnClient(data, type, row) {
 
 function renderClientListsOptions(){
     var $listSelect = $('#clients_list_id');
+    var $modalSelect = $('#modal_clients_lis_id');
     $listSelect.find('option').remove();
 
     $.ajax({
@@ -115,6 +116,7 @@ function renderClientListsOptions(){
         success: function (data) {
             for(var i = 0, len = data.length; i < len; i++) {
                 $listSelect.append('<option value=' + data[i]["id"] + '>' + data[i]["name"] + '</option>');
+                $modalSelect.append('<option value=' + data[i]["id"] + '>' + data[i]["name"] + '</option>');
             }
         }
     });

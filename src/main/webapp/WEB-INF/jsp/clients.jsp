@@ -20,15 +20,15 @@
         <a class="btn btn-sm btn-info" id="add">Add client</a>
         </br>
         </br>
-        <form id="addTaskForm" method="post">
+        <form id="chooseClientsByList" method="post">
           <div class="form-group">
             <label for="clients_list_id" class="control-label col-xs-3">Client List</label>
             <div class="col-xs-9">
               <select class="form-control" id="clients_list_id" name="clients_list_id">
-                <option value="1">vip-clients</option>
-                <option value="2">debts</option>
-                <option value="3">credit cards</option>
-                <option value="4">new clients</option>
+                <%--<option value="1">vip-clients</option>--%>
+                <%--<option value="2">debts</option>--%>
+                <%--<option value="3">credit cards</option>--%>
+                <%--<option value="4">new clients</option>--%>
               </select>
             </div>
           </div>
@@ -98,6 +98,19 @@
 
             <div class="col-xs-9">
               <input type="email" class="form-control" id="email" name="email" placeholder="email">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="modal_clients_lis_id" class="control-label col-xs-3">client_list</label>
+
+            <div class="col-xs-9">
+              <select class="form-control" id="modal_clients_lis_id" name="modal_clients_lis_id">
+                <%--<option value="1">from-ami</option>--%>
+                <%--<option value="2">test</option>--%>
+                <%--<option value="3">test2</option>--%>
+                <%--<option value="4">outbound-calls</option>--%>
+              </select>
             </div>
           </div>
 

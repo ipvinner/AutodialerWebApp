@@ -1,5 +1,6 @@
 package com.cartrack.autodialer.domain;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.EnumSet;
 import java.util.Set;
@@ -7,7 +8,7 @@ import java.util.Set;
 /**
  * Created by vinner on 27.08.2015.
  */
-public class User extends BaseEntity {
+public class User extends BaseEntity implements Serializable {
     protected String login;
     protected String passwordHash;
     protected String role;
