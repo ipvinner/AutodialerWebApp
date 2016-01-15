@@ -105,9 +105,9 @@ function renderDeleteBtnClient(data, type, row) {
 }
 
 function renderClientListsOptions(){
-    var $listSelect = $('#clients_list_id');
-    var $modalSelect = $('#modal_clients_lis_id');
-    $listSelect.find('option').remove();
+    var listSelect = $('#clients_list_id');
+    var modalSelect = $('#modal_clients_lis_id');
+    listSelect.find('option').remove();
 
     $.ajax({
         url: "ajax/admin/clients/clientList",
@@ -115,18 +115,15 @@ function renderClientListsOptions(){
         dataType : "json",
         success: function (data) {
             for(var i = 0, len = data.length; i < len; i++) {
-                $listSelect.append('<option value=' + data[i]["id"] + '>' + data[i]["name"] + '</option>');
-                $modalSelect.append('<option value=' + data[i]["id"] + '>' + data[i]["name"] + '</option>');
+                listSelect.append('<option value=' + data[i]["id"] + '>' + data[i]["name"] + '</option>');
+                modalSelect.append('<option value=' + data[i]["id"] + '>' + data[i]["name"] + '</option>');
             }
         }
     });
 
-    $listSelect.onclick = function(event){
-        var target = event.target;
-        if (target.tagName != 'option') return;
-
-        getClientsByList(target.value());
-    };
+    listSelect.on('change', function() {
+        getClientsByList( $(this).find('option:selected').val() );
+    });
 }
 
 function getClientsByList(id){
@@ -135,8 +132,9 @@ function getClientsByList(id){
         type: 'GET',
         dataType : "json",
         success: function (data) {
-            updateTable();
-            successNoty('getClientList filtered');
+            updateTableByData(data);
+            var message = "Список был отфильтрован по " + $('#clients_list_id option:selected').text();
+            successNoty(message);
         }
     });
 }

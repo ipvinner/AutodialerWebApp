@@ -38,6 +38,8 @@ if(document.querySelector("[data-component='dialog']")) {
 
 if(~~!window.location.search.substr(1).indexOf("saved")) {
     noty({
-        text: 'Список был сохранён!'
+        text: 'Список был сохранён!',
+        type: 'success',
+        timeout: 3000
     });
 }
