@@ -11,6 +11,7 @@
     <base href="${fn:substring(url, 0, fn:length(url) - fn:length(pageContext.request.requestURI))}${pageContext.request.contextPath}/" />
 
     <link rel="stylesheet" href="resources/css/style.css">
+    <link rel="stylesheet" href="resources/css/singin.css">
     <link rel="stylesheet" href="webjars/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="shortcut icon" href="resources/images/cartrack-logo.png">
 </head>

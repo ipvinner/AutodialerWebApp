@@ -16,4 +16,6 @@ public interface ClientListRepository {
 
     void createWithListOfClients(ClientList clientList, List<Client> clientsList);
 
+    boolean delete(int id);
+
 }

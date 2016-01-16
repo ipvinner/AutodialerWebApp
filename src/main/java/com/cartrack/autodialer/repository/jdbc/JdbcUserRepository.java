@@ -8,6 +8,7 @@ import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
@@ -28,6 +29,9 @@ import java.util.stream.Collectors;
 public class JdbcUserRepository implements UserRepository {
 
     private static final BeanPropertyRowMapper<User> ROW_MAPPER = BeanPropertyRowMapper.newInstance(User.class);
+
+    private  final RowMapper<User> GET_ROW_MAPPER = (rs, rowNum) ->
+            new User(rs.getInt("id"), rs.getString("login"), rs.getString("password_hash"), rs.getString("role"));
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -55,6 +59,13 @@ public class JdbcUserRepository implements UserRepository {
     @Override
     public User get(int id) {
         List<User> users = jdbcTemplate.query("SELECT * FROM users WHERE id=?", ROW_MAPPER, id);
+        return DataAccessUtils.singleResult(users);
+    }
+
+    @Override
+    public User getByLogin(String login) {
+        List<User> users = jdbcTemplate.query("SELECT * FROM users WHERE login=?", GET_ROW_MAPPER, login);
+//        User user = DataAccessUtils.singleResult(users);
         return DataAccessUtils.singleResult(users);
     }
 

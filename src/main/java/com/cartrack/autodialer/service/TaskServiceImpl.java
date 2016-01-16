@@ -69,6 +69,7 @@ public class TaskServiceImpl implements TaskService {
         List<Client> clients = clientRepository.getByList(task.getClientList().getId());
 
         for (Client client : clients) {
+
             CallResult callResult = asteriskHelper.call(task.getOriginateParam().getTrunk(), client.getPhoneNumber(), task.getOriginateParam().getContext(), task.getOriginateParam().getExten(),
                     task.getOriginateParam().getPriority(), task.getOriginateParam().getTimeout(), task.getOriginateParam().isAsync(),
                     task.getOriginateParam().getVar1(), task.getOriginateParam().getVar2());

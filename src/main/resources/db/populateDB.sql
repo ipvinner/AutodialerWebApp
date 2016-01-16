@@ -11,9 +11,9 @@ ALTER SEQUENCE originate_param_id_seq RESTART WITH 1;
 ALTER SEQUENCE call_result_id_seq RESTART WITH 1;
 ALTER SEQUENCE user_id_seq RESTART WITH 1;
 
-INSERT INTO users (login, password_hash, role) VALUES ('admin', 'g8keeper', 'ROLE_ADMIN');
-INSERT INTO users (login, password_hash, role) VALUES ('manager', 'g8keeper', 'ROLE_MANAGER');
-INSERT INTO users (login, password_hash, role) VALUES ('user', 'g8keeper', 'ROLE_USER');
+INSERT INTO users (login, password_hash, role) VALUES ('admin', '$2a$10$kkBdkvfxaqHIz2zAlyfGAeS5LGazEVoEpQ2iZAlETnjP9G5iSHgN2', 'ROLE_ADMIN');
+INSERT INTO users (login, password_hash, role) VALUES ('manager', '$2a$10$kkBdkvfxaqHIz2zAlyfGAeS5LGazEVoEpQ2iZAlETnjP9G5iSHgN2', 'ROLE_MANAGER');
+INSERT INTO users (login, password_hash, role) VALUES ('user', '$2a$10$kkBdkvfxaqHIz2zAlyfGAeS5LGazEVoEpQ2iZAlETnjP9G5iSHgN2', 'ROLE_USER');
 
 INSERT INTO list (name, description) VALUES ('vip clients', 'vip clients are clients with status of VIP, privileges');
 INSERT INTO list (name, description) VALUES ('debtors', 'the clients which have debts');
@@ -29,7 +29,7 @@ INSERT INTO client (firstname, lastname, phone_number, email, clients_list_id) V
 INSERT INTO client (firstname, lastname, phone_number, email, clients_list_id) VALUES ('Наумова', 'Дмитрий', '+380738625020', 'naumov@mail.ru', 1);
 
 
-INSERT INTO originate_param(name, context, exten, priority, async, timeout, var1, var2, trunk) VALUES ('from-ami', 'from-ami', 's', 1, FALSE , 30000, 'var1Value', 'var2Value', 'SIP/zadarma/');
+INSERT INTO originate_param(name, context, exten, priority, async, timeout, var1, var2, trunk) VALUES ('from-ami', 'my_context', 's-ANSWERED', 1, FALSE , 30000, 'var1Value', 'var2Value', 'SIP/zadarma/');
 INSERT INTO originate_param(name, context, exten, priority, async, timeout, var1, var2, trunk) VALUES ('outbount without handlers', 'from-admin', 's', 1, FALSE , 20000, 'test', 'test', 'SIP/zadarma/');
 
 INSERT INTO task (name, client_list_id, active, originate_param_id) VALUES ('vip', 1, TRUE , 1);

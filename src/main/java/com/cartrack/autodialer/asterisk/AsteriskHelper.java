@@ -25,16 +25,18 @@ public class AsteriskHelper implements ManagerEventListener {
 
     OriginateAction originateAction;
     ManagerResponse originateResponse;
-
-
+    ManagerConnectionFactory factory;
 
     private ManagerConnection managerConnection;
 
 
     public AsteriskHelper(String host, String username, String password){
-        ManagerConnectionFactory factory = new ManagerConnectionFactory(host, username, password);
+        factory = new ManagerConnectionFactory(host, username, password);
         this.managerConnection = factory.createManagerConnection();
-        System.out.println(this.managerConnection);
+    }
+
+    public void createManagerConnection(){
+        this.managerConnection = factory.createManagerConnection();
     }
 
     public String getHost() {

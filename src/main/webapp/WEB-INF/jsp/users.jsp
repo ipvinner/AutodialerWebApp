@@ -33,6 +33,46 @@
         </table>
 
       </div>
+
+      <h3>Add new user</h3>
+      <div class="view-box">
+        <form id="addUser" method="post">
+          <input type="text" hidden="hidden" id="id" name="id">
+
+          <div class="form-group">
+            <label for="login" class="control-label col-xs-3">Login</label>
+
+            <div class="col-xs-9">
+              <input type="text" class="form-control" id="login" name="login" placeholder="login">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="login" class="control-label col-xs-3">Password</label>
+
+            <div class="col-xs-9">
+              <input type="password" class="form-control" id="password" name="password" placeholder="password" >
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="role" class="control-label col-xs-3">Role</label>
+            <div class="col-xs-9">
+              <select class="form-control" id="role" name="role">
+                <option value="ROLE_ADMIN">Admin</option>
+                <option value="ROLE_MANAGER">Manager</option>
+                <option value="ROLE_USER">User</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col-xs-offset-3 col-xs-3">
+              <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
 </div>

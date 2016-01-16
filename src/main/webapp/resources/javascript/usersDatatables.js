@@ -45,4 +45,27 @@ $(function () {
         },
         "initComplete": makeEditable
     });
+
+    addUser();
 });
+
+function addUser(){
+    var form = $('#addUser');
+    $('#id').val(0);
+    form.submit(function(){
+        $.ajax({
+            type: "POST",
+            url: "ajax/admin/users",
+            data: form.serialize(),
+
+            success: function () {
+                updateTable();
+                successNoty('User added');
+            }
+
+
+        });
+        form.find('input:text').val('');
+        return false;
+    });
+}

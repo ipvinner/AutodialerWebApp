@@ -1,5 +1,6 @@
 package com.cartrack.autodialer.domain;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.EnumSet;
 import java.util.Set;
@@ -7,11 +8,10 @@ import java.util.Set;
 /**
  * Created by vinner on 27.08.2015.
  */
-public class User extends NamedEntity {
+public class User extends BaseEntity implements Serializable {
     protected String login;
     protected String passwordHash;
     protected String role;
-
     public User(){
 
     }
@@ -46,5 +46,14 @@ public class User extends NamedEntity {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "login='" + login + '\'' +
+                ", passwordHash='" + passwordHash + '\'' +
+                ", role='" + role + '\'' +
+                '}';
     }
 }
