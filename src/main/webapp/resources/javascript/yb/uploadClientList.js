@@ -4,17 +4,16 @@
  */
 
 "use strict";
-class uploadData {
+class uploadClientList {
     constructor(options) {
         this.options = {};
-        this.options.url = options.url;
+        this.options.tableRender = false;
         /**
          * Dom elements
          */
         this._componentRoot = options.componentRoot,
-            this._btnFile = options.btnFile;
+        this._btnFile = options.btnFile;
         this._btnSubmit = options.btnSubmit;
-        this._btnRenderTable = options.btnRenderTable;
 
         /**
          * Input data typeFields
@@ -29,7 +28,8 @@ class uploadData {
         /**
          * Event Listeners
          */
-        this._btnFile.addEventListener('change', this._parseCSV.bind(this));
+        //this._btnFile.addEventListener('change', this._parseCSV.bind(this));
+        this._btnFile.addEventListener('change', this._controlUploadFile.bind(this));
         this._componentRoot.addEventListener('click', this._eventHandler.bind(this));
 
         /**
@@ -39,48 +39,81 @@ class uploadData {
          * @private
          */
         this._config = {
-            url: "server.jpx",
+            url: options.url,
             delimiterStr: "\n",
             delimiterChar: ","
 
         }
     }
 
-    _parseCSV(event) {
-        /**
-         * This method must validate type file
-         * work with exeption
-         */
-        var csv;
-        var files = event.target.files;
+    /**
+     * check type file, handler upload file
+     * @param event
+     * @private
+     */
+    _controlUploadFile(event) {
+        let file = event.target.files[0];
+        let fileName = file.name;
+        let fileType = fileName.split(".")[fileName.split(".").length - 1];
+
+        if(this.options.tableRender) {
+            let table = this._componentRoot.querySelector('[data-component="table-custom"]');
+
+            if(table) {
+                this._inputData = [];
+                table.parentNode.removeChild(table);
+            }
+
+            this.options.tableRender = false;
+        }
+
+        let chooseFields = this._componentRoot.querySelector("#chooseFields");
+
+        if (chooseFields) {
+            chooseFields.parentNode.removeChild(chooseFields);
+        }
+
+        if(fileType !== 'csv') {
+
+            noty({
+                text: 'Файл ' + fileName + ' некорректный, выберите корректный файл, формата csv.',
+                type: 'error',
+                timeout: 3000
+            });
+
+            return;
+
+        } else {
+
+            noty({
+                text: 'Был выбран файл ' + fileName + '.',
+                type: 'success',
+                timeout: 3000
+            });
+        }
+
+        this._parseCSV(event, file);
+    }
+
+    /**
+     * Parse csv file
+     * @param file Object
+     * @param event Event Object
+     * @private
+     */
+    _parseCSV(event, file) {
         var fileObject = new FileReader();
 
-        // check alert for wrong file format
-        if(this._componentRoot.querySelector(".alert-warning")) {
-            let alert = this._componentRoot.querySelector(".alert-warning");
-            this._componentRoot.removeChild(alert);
-        }
+        fileObject.readAsText(file);
 
-        if(event.target.files[0].name.split(".")[event.target.files[0].name.split(".").length - 1] !== "csv") {
-            let warningTpl = document.getElementById("warning-template").innerHTML.trim();
-            let warningCompile = Handlebars.compile(warningTpl);
-            let warningHtml = warningCompile( {message: "Выберите корректный файл. (csv)"} );
+        fileObject.onload = function(file) {
+            var fileContent = file.target.result;
 
-            this._componentRoot
-                .insertAdjacentHTML('beforeEnd', warningHtml);
-            return;
-        }
-
-        fileObject.readAsText(files[0]);
-
-        fileObject.onload = function(file, filename) {
-            csv = file.target.result;
-
-            for(var i = 0; i < csv.split(this._config.delimiterStr).length; ++i) {
-                let str = csv.split(this._config.delimiterStr)[i];
+            for(let i = 0; i < fileContent.split(this._config.delimiterStr).length; ++i) {
+                let str = fileContent.split(this._config.delimiterStr)[i];
                 let item = [];
 
-                for(var j = 0; j < str.split(this._config.delimiterChar).length; ++j) {
+                for(let j = 0; j < str.split(this._config.delimiterChar).length; ++j) {
                     item.push(str.split(this._config.delimiterChar)[j]);
                 }
 
@@ -96,39 +129,57 @@ class uploadData {
     /**
      * Render List with standart fields
      */
-
     _renderListFields(){
-        let self = this;
         let theTemplateScript = document.getElementById("title-list-template").innerHTML.trim();
         let theTemplate = Handlebars.compile(theTemplateScript);
-        let theCompiledHtml = theTemplate( {data: self._typeFields, options: self._inputData[0]} );
+        let theCompiledHtml = theTemplate( {data: this._typeFields, options: this._inputData[0]});
 
         this._componentRoot.querySelector("#upload-file-group")
             .insertAdjacentHTML('afterEnd', theCompiledHtml);
+
+        this._componentRoot.querySelector('#chooseFields')
+            .addEventListener('change', this._eventHandlerChoosenFields.bind(this));
     }
-    _eventHandler(event) {
-        if(event.target.id === "renderTable") {
-            this._renderTable(event);
+
+    _eventHandlerChoosenFields(event) {
+        let selects = this._componentRoot.getElementsByTagName('select');
+        let indexArr = [];
+
+        for(let i = 0; i < selects.length; i++) {
+            indexArr.push(selects[i].selectedIndex);
         }
 
+        if( !~indexArr.indexOf(0) ) this._createTable(event);
+    }
+
+    _eventHandler(event) {
         if(event.target.dataset.tableCustom === "submit") {
+            event.preventDefault();
             this._prepareDataBeforeSubmit();
             this._submitData(event);
         }
     }
     /**
-     * Render table with data from csv file
+     * Create table with data from csv file
      */
-    _renderTable(){
-        var self = this;
-        var chooseFields = this._componentRoot.querySelector("#chooseFields");
+    _createTable(){
+        let chooseFields = this._componentRoot.querySelector("#chooseFields");
+
         this._updateData();
 
-        window.customTbl = new TableCustom({}, self._userDataStyle, self._correctData);
+        window.customTbl = new TableCustom({}, this._userDataStyle, this._correctData);
 
         if (chooseFields.parentNode) {
             chooseFields.parentNode.removeChild(chooseFields);
         }
+
+        noty({
+            text: 'Загружено ' + (this._correctData.length - 1) + ' абонентов.',
+            type: 'success',
+            timeout: '3000'
+        });
+
+        this.options.tableRender = true;
     }
 
     _updateData(){
@@ -192,22 +243,24 @@ class uploadData {
     _prepareDataBeforeSubmit() {
         this.options.data = [];
         //rewrite this part code
-        this.options.title = document.body.querySelector("#tableCustomTitle").value;
-        this.options.describe = document.body.querySelector("#tableCustomDescribe").value;
+        this.options.title = this._componentRoot.querySelector("#clientListTitle").value;
+        this.options.describe = this._componentRoot.querySelector("#clientListDescribe").value;
 
         this.options.fields = [];
 
-        for(let i = 0, th = document.body.querySelector('thead').querySelectorAll("th"); i < th.length - 1; i++) {
-            this.options.fields.push(th[i].dataset.tableCustom);
-        }
-
-        for(let i = 0, tr = document.body.querySelector('tbody').querySelectorAll("tr"); i < tr.length; i++) {
-            let item = {};
-            for(let j = 0, td = document.body.querySelector('tbody').querySelectorAll("tr")[i].querySelectorAll("td"); j < td.length - 1; j++) {
-                item[this.options.fields[j]] = td[j].innerText;
+        if(this._componentRoot.querySelector('#customUserTableFromCSV')) {
+            for(let i = 0, th = this._componentRoot.querySelector('thead').querySelectorAll("th"); i < th.length - 1; i++) {
+                this.options.fields.push(th[i].dataset.tableCustom);
             }
 
-            this.options.data.push(item);
+            for(let i = 0, tr = this._componentRoot.querySelector('tbody').querySelectorAll("tr"); i < tr.length; i++) {
+                let item = {};
+                for(let j = 0, td = this._componentRoot.querySelector('tbody').querySelectorAll("tr")[i].querySelectorAll("td"); j < td.length - 1; j++) {
+                    item[this.options.fields[j]] = td[j].innerText;
+                }
+
+                this.options.data.push(item);
+            }
         }
     }
 
@@ -220,22 +273,44 @@ class uploadData {
         var validation = true;
 
         if( !this.options.title ) {
-            let warningTpl = document.getElementById("warning-template").innerHTML.trim();
-            let warningCompile = Handlebars.compile(warningTpl);
-            let warningHtml = warningCompile( {message: "Заполните Название."} );
 
-            document.body.querySelector("[data-component='userUploadCSVFile']")
-                .insertAdjacentHTML('afterBegin', warningHtml);
+            noty({
+                text: "Заполните Название.",
+                type: "error",
+                timeout: 3000
+            });
+
+            this._componentRoot.querySelector("#clientListTitle")
+                .parentNode
+                    .classList
+                        .add("has-error");
+
             validation = false;
         }
 
         if( !this.options.describe ) {
-            let warningTpl = document.getElementById("warning-template").innerHTML.trim();
-            let warningCompile = Handlebars.compile(warningTpl);
-            let warningHtml = warningCompile( {message: "Заполните Описание."} );
 
-            document.body.querySelector("[data-component='userUploadCSVFile']")
-                .insertAdjacentHTML('afterBegin', warningHtml);
+            noty({
+                text: "Заполните Описание.",
+                type: "error",
+                timeout: 3000
+            });
+
+            this._componentRoot.querySelector("#clientListDescribe")
+                .parentNode
+                    .classList
+                        .add("has-error");
+
+            validation = false;
+        }
+
+        if(!this.options.data.length) {
+            noty({
+                text: "Сформируйте данные.",
+                type: "error",
+                timeout: 3000
+            });
+
             validation = false;
         }
 
@@ -264,7 +339,7 @@ class uploadData {
 
         var xhr = $.ajax({
             type: "POST",
-            url: this.options.url,
+            url: this._config.url,
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             data: JSON.stringify(data)

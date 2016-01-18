@@ -1,0 +1,33 @@
+/* ==========================================================================
+   upload Button
+   ========================================================================== */
+
+.custom-btnUpload .btn-upload {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.custom-btnUpload input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 30px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+
+.custom-btnUpload .btn {
+    cursor: pointer;
+}
+
+.custom-btnUpload .notice {
+    float: left;
+    line-height: 20px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-left:10px;
+}
