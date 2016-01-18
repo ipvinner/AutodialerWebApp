@@ -213,7 +213,7 @@ class uploadClientList {
         }
 
         noty({
-            text: createMessage( (this._correctData.length - 1), 'Загружен'),
+            text: createMessage( (this._correctData.length), 'Загружен'),
             type: 'success',
             timeout: '3000'
         });
