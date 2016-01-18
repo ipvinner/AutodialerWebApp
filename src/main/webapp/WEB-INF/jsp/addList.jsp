@@ -35,25 +35,23 @@
 
         </div>
         {{/each}}
-
-        <button id="renderTable" class="btn btn-primary space-m-b-s" type="button" >Отобразить данные</button>
     </div>
 </script>
 
 <!-- Template for custom table -->
 <script id="table-custom-template" type="text/x-handlebars-template">
-    <div data-component="table-custom">
+    <div data-component="table-custom" class="space-m-b-s">
         <div class="table-custom__navigation text-right space-m-b-s">
-            <button class="btn btn-primary" data-table-custom="add-row" data-component="dialog" type="button">Добавить запись</button>
+            <button class="btn btn-primary btn-sm" data-table-custom="add-row" data-component="dialog" type="button">Добавить запись</button>
         </div>
 
-        <table id="customUserTableFromCSV" class="table table-bordered table-hover" data-component="table-custom">
+        <table id="customUserTableFromCSV" class="table table-striped display dataTable no-footer" data-component="table-custom">
             <thead>
             <tr>
                 {{#each title}}
                 <th data-table-custom="{{id}}">{{title}}</th>
                 {{/each}}
-                <th width="140">
+                <th width="70">
                     Edit/Remove
                 </th>
             </tr>
@@ -65,9 +63,9 @@
                 {{#each this}}
                 <td>{{this}}</td>
                 {{/each}}
-                <td>
-                    <button class="btn btn-primary" data-table-custom="edit-row" data-component="dialog" type="button">Edit</button>
-                    <button class="btn btn-primary" data-table-custom="delete-row" type="button">Delete</button>
+                <td class="text-center">
+                    <button class="btn btn-primary btn-xs" data-table-custom="edit-row" data-component="dialog" type="button">Edit</button>
+                    <button class="btn btn-danger btn-xs" data-table-custom="delete-row" type="button">Delete</button>
                 </td>
             </tr>
             {{/each}}
@@ -82,75 +80,86 @@
         {{#each data}}
         <td>{{this}}</td>
         {{/each}}
-        <td>
-            <button class="btn btn-primary" data-table-custom="edit-row" data-component="dialog" type="button">Edit</button>
-            <button class="btn btn-primary" data-table-custom="delete-row" type="button">Delete</button>
+        <td class="text-center">
+            <button class="btn btn-primary btn-xs" data-table-custom="edit-row" data-component="dialog" type="button">Edit</button>
+            <button class="btn btn-danger btn-xs" data-table-custom="delete-row" type="button">Delete</button>
         </td>
     </tr>
 </script>
 
-<!-- Template for dialog-->
-<script id="dialog-edit-row" type="text/x-handlebars-template">
-    <div class="dialog__header">
-        <h4>{{title}}</h4>
+<!-- Template for dialog-modal-tpl-->
+<script id="dialog-modal-tpl" type="text/x-handlebars-template">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">{{title}}</h4>
     </div>
 
-    <div class="dialog__body">
-        <div id="row-content">
+    <div class="modal-body">
+        <div id="row-content" class="form-horizontal">
             {{#each data}}
-            <dl class="edit-group row">
+            <div class="edit-group form-group">
                 {{#each this}}
-                <dt class="col-md-2 text-right">{{@key}}</dt>
-                {{#if ../../newString }}
-                <dd class="empty col-md-4" contenteditable="true"></dd>
+                <label class="col-sm-4 control-label">{{@key}}</label>
+                {{#if ../../addRow }}
+                <div class="col-sm-8">
+                    <input type="email" class="form-control" placeholder="{{@key}}">
+                </div>
                 {{else}}
-                <dd class="col-md-4" contenteditable="true">{{this}}</dd>
+                <div class="col-sm-8">
+                    <input type="text" value="{{@this}}" class="form-control">
+                </div>
                 {{/if}}
                 {{/each}}
-                <br>
-            </dl>
+            </div>
             {{/each}}
         </div>
     </div>
 
-    <div class="dialog__control">
-        <button class="btn btn-default" type="button" data-dialog="close">Закрыть</button>
-        <button data-index="{{index}}" class="btn btn-primary" data-table-custom="update-row" type="button">Update</button>
+    <div class="modal-footer">
+        <button class="btn btn-default" type="button" data-dismiss="modal" aria-label="Close">Закрыть</button>
+        <button data-index="{{index}}" class="btn btn-primary" data-table-custom="update-row" type="button">Сохранить</button>
     </div>
 </script>
-
-<!-- Template for warning message-->
-<script id="warning-template" type="text/x-handlebars-template">
-    <div class="alert alert-warning" role="alert">
-        {{message}}
-    </div>
-</script>
-
 
 <div class="jumbotron">
     <div class="container">
         <div class="shadow">
-            <div data-component="userUploadCSVFile" class="space-m-v-md">
+            <div data-component="uploadClientList" class="space-m-v-md">
                 <form id="addClientList" method="post">
                     <div class="row">
                         <div class="form-group col-xs-4">
-                            <label for="tableCustomTitle">List name</label>
-                            <input placeholder="Название" class="form-control" type="text" name="name" id="tableCustomTitle">
+                            <label for="clientListTitle">Имя списка</label>
+                            <input placeholder="Название" class="form-control" type="text" name="name" id="clientListTitle">
 
                         </div>
 
                         <div class="form-group col-xs-4">
-                            <label for="tableCustomDescribe">Description</label>
-                            <input placeholder="Описание" class="form-control" type="text" name="description" id="tableCustomDescribe">
+                            <label for="clientListDescribe">Описание</label>
+                            <input placeholder="Описание" class="form-control" type="text" name="description" id="clientListDescribe">
                         </div>
                     </div>
 
-                    <div class="form-group" id="upload-file-group">
-                        <label for="uploadFile">Add file</label>
-                        <input type="file" name="uploadFile" id="uploadFile" title="Добавить файл">
+                    <div class="form-group custom-btnUpload" id="upload-file-group" data-component="btn-file-upload">
+                        <label for="uploadFile">Выберите файл:</label>
+
+                        <div class="clearfix">
+                            <div class="btn-upload pull-left">
+                                <button type="button" class="btn btn-default btn-sm" data-button>Загрузить...</button>
+                                <input type="file" name="uploadFile" id="uploadFile" data-file>
+                            </div>
+
+                            <div class="notice text-info">
+                                <span data-file-name>Имя файла появится здесь сразу после загрузки</span>
+                                <span data-file-size>(15mb)</span>
+                            </div>
+                        </div>
+
                     </div>
 
-                <button type="submit" id="submitData" data-table-custom="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" id="submitData" data-table-custom="submit" class="btn btn-primary btn-sm">Отправить</button>
                 </form>
             </div>
 
@@ -159,9 +168,16 @@
     </div>
 </div>
 
-<script src="resources/javascript/uploadData.js"></script>
-<script src="resources/javascript/table-custom.js"></script>
-<script src="resources/javascript/dialog.js"></script>
+<div id="dialog-modal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content"></div>
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script src="resources/javascript/yb/uploadClientList.js"></script>
+<script src="resources/javascript/yb/table-custom.js"></script>
+<script src="resources/javascript/yb/dialog.js"></script>
+<script src="resources/javascript/yb/btnUpload.js"></script>
 
 <jsp:include page="fragments/footer.jsp"/>
 
