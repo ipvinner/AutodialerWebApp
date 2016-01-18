@@ -77,8 +77,13 @@ public class AjaxClientController extends AbstractClientController {
     }
 
     @RequestMapping(value = "/clientList/{id}", method = RequestMethod.GET)
-    public Collection<Client> deleteList(@PathVariable("id") int id) {
+    public Collection<Client> getList(@PathVariable("id") int id) {
         return super.getByList(id);
+    }
+
+    @RequestMapping(value = "/clientList/{id}", method = RequestMethod.DELETE)
+    public void removeList(@PathVariable("id") int id) {
+        super.removeList(id);
     }
 
 }

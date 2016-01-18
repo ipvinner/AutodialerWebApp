@@ -46,6 +46,11 @@ public class AbstractClientController {
         return clientListService.getAll();
     }
 
+    public void removeList(int listId){
+        LOG.info("remove List + id" + listId);
+        clientListService.delete(listId);
+    }
+
     public void createListAndAddClients(ClientList clientList , List<Client> clients){
         LOG.info("create List and add clients");
         clientListService.createWithListOfClients(clientList, clients);

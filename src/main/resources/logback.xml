@@ -25,7 +25,7 @@
     </appender>
 
     <!--<logger name="org.springframework.web" level="DEBUG"/>-->
-    <logger name="org.springframework" level="debug"/>
+    <!--<logger name="org.springframework" level="debug"/>-->
 
 <logger name="org.springframework.security" level="debug"/>
 

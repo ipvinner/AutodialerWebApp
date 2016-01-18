@@ -139,5 +139,21 @@ function getClientsByList(id){
     });
 }
 
+function deleteRowById(id, url, notification) {
+    $.ajax({
+        url: url + id,
+        type: 'DELETE',
+        success: function () {
+            successNoty(notification);
+            $.get(ajaxUrl, function (data) {
+                updateTableByData(data);
+            });
+            $.get(ajaxUrlList, function (data) {
+                datatableApiList.clear().rows.add(data).draw();
+            });
+        }
+    });
+}
+
 
 
