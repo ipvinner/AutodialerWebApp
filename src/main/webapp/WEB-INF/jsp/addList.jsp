@@ -42,7 +42,7 @@
 <script id="table-custom-template" type="text/x-handlebars-template">
     <div data-component="table-custom" class="space-m-b-s">
         <div class="table-custom__navigation text-right space-m-b-s">
-            <button class="btn btn-primary btn-sm" data-table-custom="add-row" data-component="dialog" type="button">Добавить запись</button>
+            <button class="btn btn-primary btn-sm" data-table-custom="add-row" data-component="dialog" type="button"><fmt:message key="clients.add_client"/></button>
         </div>
 
         <table id="customUserTableFromCSV" class="table table-striped display dataTable no-footer" data-component="table-custom">
@@ -131,35 +131,35 @@
                 <form id="addClientList" method="post">
                     <div class="row">
                         <div class="form-group col-xs-4">
-                            <label for="clientListTitle">Имя списка</label>
+                            <label for="clientListTitle"><fmt:message key="clients.list.name"/></label>
                             <input placeholder="Название" class="form-control" type="text" name="name" id="clientListTitle">
 
                         </div>
 
                         <div class="form-group col-xs-4">
-                            <label for="clientListDescribe">Описание</label>
+                            <label for="clientListDescribe"><fmt:message key="clients.list.description"/></label>
                             <input placeholder="Описание" class="form-control" type="text" name="description" id="clientListDescribe">
                         </div>
                     </div>
 
                     <div class="form-group custom-btnUpload" id="upload-file-group" data-component="btn-file-upload">
-                        <label for="uploadFile">Выберите файл:</label>
+                        <label for="uploadFile"><fmt:message key="clients.choose_list_file"/></label>
 
                         <div class="clearfix">
                             <div class="btn-upload pull-left">
-                                <button type="button" class="btn btn-default btn-sm" data-button>Загрузить...</button>
+                                <button type="button" class="btn btn-default btn-sm" data-button><fmt:message key="clients.upload_file"/></button>
                                 <input type="file" name="uploadFile" id="uploadFile" data-file>
                             </div>
 
                             <div class="notice text-info">
-                                <span data-file-name>Имя файла появится здесь сразу после загрузки</span>
+                                <span data-file-name><fmt:message key="clients.upload_filename_message"/></span>
                                 <span data-file-size>(15mb)</span>
                             </div>
                         </div>
 
                     </div>
 
-                <button type="submit" id="submitData" data-table-custom="submit" class="btn btn-primary btn-sm">Отправить</button>
+                <button type="submit" id="submitData" data-table-custom="submit" class="btn btn-primary btn-sm"><fmt:message key="app.send"/></button>
                 </form>
             </div>
 
