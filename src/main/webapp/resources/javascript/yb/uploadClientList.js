@@ -24,7 +24,8 @@ class uploadClientList {
 
         this._inputData = [];
         this._correctData = [];
-
+        this._inCorrectData = [];
+        this._formatData = null;
         /**
          * Event Listeners
          */
@@ -119,6 +120,8 @@ class uploadClientList {
 
                 this._inputData.push(item);
             }
+
+            this._formatData = this._inputData[0].length;
         }.bind(this);
 
         fileObject.onloadend = function() {
@@ -173,13 +176,55 @@ class uploadClientList {
             chooseFields.parentNode.removeChild(chooseFields);
         }
 
+        this._createMessage();
+
+        this.options.tableRender = true;
+    }
+
+    /**
+     * create message after render table
+     *
+     * @private
+     */
+    _createMessage() {
+        let messageArr = ['абонент', 'абонента', 'абонентов'];
+
+        function createMessage(number, startWord) {
+            let endMessage = null;
+            let startMessage = (number === 1) ? startWord : (startWord + "o");
+
+            if(number === 1) {
+                endMessage = messageArr[0];
+            } else if (number == 12
+                || number == 13
+                || number == 14) {
+
+                endMessage = messageArr[2];
+            } else if( number.toString()[number.toString().length - 1] === '2'
+                || number.toString()[number.toString().length - 1] === '3'
+                || number.toString()[number.toString().length - 1] === '4') {
+
+                endMessage = messageArr[1];
+            } else {
+                endMessage = messageArr[2];
+            }
+
+            return  startMessage + " " + number + " " + endMessage;
+        }
+
         noty({
-            text: 'Загружено ' + (this._correctData.length - 1) + ' абонентов.',
+            text: createMessage( (this._correctData.length), 'Загружен'),
             type: 'success',
             timeout: '3000'
         });
 
-        this.options.tableRender = true;
+        if(this._inCorrectData.length) {
+            noty({
+                text: createMessage( (this._inCorrectData.length - 1), 'Не загружен'),
+                type: 'error',
+                timeout: '3000'
+            });
+        }
     }
 
     _updateData(){
@@ -221,6 +266,12 @@ class uploadClientList {
 
         for(let i = 0; i < this._inputData.length; i++) {
             var item = {};
+
+            if(this._inputData[i].length !== this._formatData) {
+                this._inCorrectData.push(this._inputData[i]);
+                continue;
+            }
+
             for(let j = 0; j < this._inputData[i].length; j++) {
                 for(var k = 0; k < this._userDataStyle.length; k++) {
                     if(j === +this._userDataStyle[k].index) {

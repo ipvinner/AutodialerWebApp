@@ -5,7 +5,6 @@ class btnUpload {
         this.options = options | {};
 
         this.root = document.querySelector('[data-component="btn-file-upload"]');
-        debugger;
         this.elements = {
             btn: this.root.querySelector('[data-button]'),
             file: this.root.querySelector('[data-file]'),
@@ -50,7 +49,6 @@ class btnUpload {
 
     _eventKeyBoard(event) {
         if(event.keyCode === 32 || event.keyCode === 13) {
-            debugger;
             this.elements.file.click();
         }
     }
