@@ -33,7 +33,7 @@ class TableCustom {
         }
 
         // prepare data to view
-        for(let i = 0; i < data.length - 1; i++) {
+        for(let i = 0; i < data.length; i++) {
             let item = [];
             for(let j = 0; j < title.length; j++) {
                 if(data[i][title[j].id] === "index") continue;

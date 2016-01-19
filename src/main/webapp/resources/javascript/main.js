@@ -59,7 +59,6 @@ if($('#dialog-modal').length) {
 if( $('[data-component="btn-file-upload"]').length ) {
 
     let inst = new btnUpload({
-        component: 'btn-file-upload',
-
+        component: 'btn-file-upload'
     });
 }
