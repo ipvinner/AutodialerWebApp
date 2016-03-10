@@ -16,11 +16,11 @@
                 <span class="icon-bar"></span>
             </button>
             <%--<a class="navbar-brand" href="#">Bootstrap theme</a>--%>
-            <a href="/autodialer"><img src="resources/images/cartrack.png"/></a>
+            <a href="/autodialer"><img src="resources/images/iptel-logo.png"/></a>
         </div>
 <div id="navbar" class="navbar-collapse collapse navbar-right">
     <ul class="nav navbar-nav">
-    <li class="active"><a href="/autodialer">Home</a></li>
+    <li class="active"><a href="/autodialer"><fmt:message key="app.dashboard"/></a></li>
 
     <li><a href="results"><fmt:message key="app.statistics"/></a></li>
 

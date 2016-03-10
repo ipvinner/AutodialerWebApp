@@ -134,23 +134,23 @@
                 <form id="addClientList" method="post">
                     <div class="row">
                         <div class="form-group col-xs-4">
-                            <label for="tableCustomTitle">List name</label>
+                            <label for="tableCustomTitle"><fmt:message key="clients.add_clients_list"/></label>
                             <input placeholder="Название" class="form-control" type="text" name="name" id="tableCustomTitle">
 
                         </div>
 
                         <div class="form-group col-xs-4">
-                            <label for="tableCustomDescribe">Description</label>
+                            <label for="tableCustomDescribe"><fmt:message key="clients.list.description"/></label>
                             <input placeholder="Описание" class="form-control" type="text" name="description" id="tableCustomDescribe">
                         </div>
                     </div>
 
                     <div class="form-group" id="upload-file-group">
-                        <label for="uploadFile">Add file</label>
+                        <label for="uploadFile"><fmt:message key="clients.add_file"/></label>
                         <input type="file" name="uploadFile" id="uploadFile" title="Добавить файл">
                     </div>
 
-                <button type="submit" id="submitData" data-table-custom="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" id="submitData" data-table-custom="submit" class="btn btn-primary"><fmt:message key="clients.add"/></button>
                 </form>
             </div>
 

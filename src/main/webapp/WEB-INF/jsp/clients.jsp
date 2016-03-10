@@ -17,7 +17,7 @@
       <h3><fmt:message key="clients.title"/></h3>
 
       <div class="view-box">
-        <a class="btn btn-sm btn-info" id="add">Add client</a>
+        <a class="btn btn-sm btn-info" id="add"><fmt:message key="clients.add_client"/></a>
         </br>
         </br>
         <form id="chooseClientsByList" method="post">
@@ -62,39 +62,39 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h2 class="modal-title">edit</h2>
+        <h2 class="modal-title"><fmt:message key="clients.add_client"/></h2>
       </div>
       <div class="modal-body">
         <form class="form-horizontal" method="post" id="detailsForm">
           <input type="text" hidden="hidden" id="id" name="id">
 
           <div class="form-group">
-            <label for="firstName" class="control-label col-xs-3">firstName</label>
+            <label for="firstName" class="control-label col-xs-3"><fmt:message key="clients.firstname"/></label>
 
             <div class="col-xs-9">
-              <input type="text" class="form-control" id="firstName" name="firstName" placeholder="firstName">
+              <input type="text" class="form-control" id="firstName" name="firstName">
             </div>
           </div>
 
           <div class="form-group">
-            <label for="lastName" class="control-label col-xs-3">lastName</label>
+            <label for="lastName" class="control-label col-xs-3"><fmt:message key="clients.lastname"/></label>
 
             <div class="col-xs-9">
-              <input type="text" class="form-control" id="lastName" name="lastName" placeholder="lastName">
+              <input type="text" class="form-control" id="lastName" name="lastName" >
             </div>
           </div>
 
           <div class="form-group">
-            <label for="phoneNumber" class="control-label col-xs-3">phoneNumber</label>
+            <label for="phoneNumber" class="control-label col-xs-3"><fmt:message key="clients.phone_number"/></label>
 
             <div class="col-xs-9">
-              <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" placeholder="phoneNumber">
+              <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" >
             </div>
           </div>
 
 
           <div class="form-group">
-            <label for="email" class="control-label col-xs-3">email</label>
+            <label for="email" class="control-label col-xs-3"><fmt:message key="clients.email"/></label>
 
             <div class="col-xs-9">
               <input type="email" class="form-control" id="email" name="email" placeholder="email">
@@ -102,7 +102,7 @@
           </div>
 
           <div class="form-group">
-            <label for="modal_clients_lis_id" class="control-label col-xs-3">client_list</label>
+            <label for="modal_clients_lis_id" class="control-label col-xs-3"><fmt:message key="clients.list"/></label>
 
             <div class="col-xs-9">
               <select class="form-control" id="modal_clients_lis_id" name="modal_clients_lis_id">

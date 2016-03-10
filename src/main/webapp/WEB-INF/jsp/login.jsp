@@ -17,21 +17,21 @@
     <link rel="stylesheet" href="resources/css/style.css">
     <link rel="stylesheet" href="resources/css/singin.css">
     <link rel="stylesheet" href="webjars/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link rel="shortcut icon" href="resources/images/cartrack-logo.png">
+    <link rel="shortcut icon" href="resources/images/favicon.png">
 </head>
 <body>
 
 <div class="container">
 
     <form class="form-signin" role="form" action="spring_security_check" method="post">
-        <div class="text-center"><img src="resources/images/cartrack-logo-big.png"></div>
+        <div class="text-center"><img src="resources/images/iptel-logo-big.png"></div>
 
-        <h2 class="form-signin-heading text-center">Please sign in</h2>
+        <h2 class="form-signin-heading text-center"><fmt:message key="app.title"/> </h2>
             <label for="inputEmail" class="sr-only">Login</label>
                 <input type="text" name="username" id="inputEmail" class="form-control" placeholder="Login" required autofocus>
             <label for="inputPassword" class="sr-only">Password</label>
                 <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit"><fmt:message key="app.singin"/></button>
     </form>
 
     <c:if test="${error}">
@@ -47,6 +47,6 @@
 
 </div> <!-- /container -->
 
-<jsp:include page="fragments/footer.jsp"/>
+
 </body>
 </html>

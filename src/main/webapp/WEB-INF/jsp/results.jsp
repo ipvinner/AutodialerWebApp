@@ -15,32 +15,32 @@
 <div class="jumbotron">
   <div class="container">
     <div class="shadow">
-      <h3>Call results</h3>
+      <h3><fmt:message key="result.list"/></h3>
 
       <div class="view-box">
 
         <form:form method="post" class="form-horizontal" role="form" id="filter">
           <div class="form-group">
-            <label class="control-label col-sm-2" for="startDate">From Date:</label>
+            <label class="control-label col-sm-2" for="startDate"><fmt:message key="result.datetime"/></label>
 
             <div class="col-sm-2">
               <input name="startDate" id="startDate" class="date-picker">
             </div>
 
-            <label class="control-label col-sm-2" for="endDate">To Date:</label>
+            <label class="control-label col-sm-2" for="endDate"><fmt:message key="result.datetime"/></label>
 
             <div class="col-sm-2">
               <input name="endDate" id="endDate" class="date-picker">
             </div>
           </div>
           <div class="form-group">
-            <label class="control-label col-sm-2" for="startTime">From Time:</label>
+            <label class="control-label col-sm-2" for="startTime"><fmt:message key="result.datetime"/></label>
 
             <div class="col-sm-2">
               <input name="startTime" id="startTime" class="time-picker">
             </div>
 
-            <label class="control-label col-sm-2" for="endTime">To Time:</label>
+            <label class="control-label col-sm-2" for="endTime"><fmt:message key="result.datetime"/></label>
 
             <div class="col-sm-2">
               <input name="endTime" id="endTime" class="time-picker">
