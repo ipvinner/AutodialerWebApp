@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<jnlp spec="1.0+" codebase="https://192.168.200.155/Java">
+     <information>
+        <title>JViewer</title>
+        <vendor>American Megatrends, Inc.</vendor>
+        <description kind="one-line">JViewer Console Redirection Application</description>
+        <description kind="tooltip">JViewer Console Redirection Application</description>
+        <description kind="short">
+            JViewer enables a user to view the video display of managed server via KVM.  
+            It also enables the user to redirect his local keyboard, mouse for managing the server remotely.
+        </description>
+    </information>
+	<security>
+		<all-permissions/>
+	</security>
+    <resources>
+        <j2se version="1.5+"/>
+        <jar href="release/JViewer.jar"/>
+    </resources>
+    <resources os="Windows" arch="x86">
+    	<j2se version="1.5+"/>
+    	<nativelib href="release/Win32.jar"/>
+    </resources>    
+    <resources os="Windows" arch="amd64">
+           <j2se version="1.5+"/>
+           <nativelib href="release/Win64.jar"/>
+    </resources>
+    <resources os="Linux"  arch="x86">
+	 	<j2se version="1.5+"/>
+    	<nativelib href="release/Linux_x86_32.jar"/>
+	</resources>
+	<resources os="Linux"  arch="i386">
+	 	<j2se version="1.5+"/>
+    	<nativelib href="release/Linux_x86_32.jar"/>
+	</resources>
+	<resources os="Linux" arch="x86_64">
+	 	<j2se version="1.5+"/>
+    	<nativelib href="release/Linux_x86_64.jar"/>
+	</resources>	
+	<resources os="Linux" arch="amd64">
+	 	<j2se version="1.5+"/>
+    	<nativelib href="release/Linux_x86_64.jar"/>
+	</resources>
+    <application-desc>
+        <argument>192.168.200.155</argument>
+<argument>5901</argument>
+<argument>pRsGvITJh2LdDq64</argument>
+<argument>0</argument>
+<argument>0</argument>
+<argument>5120</argument>
+<argument>5123</argument>
+<argument>511</argument>
+<argument>5900</argument>
+<argument>1</argument>
+<argument>EN</argument>
+<argument>bCynzH0VDhLNCFXRfXQ8EucJCkTgec0Q003</argument>
+
+    </application-desc>
+</jnlp>

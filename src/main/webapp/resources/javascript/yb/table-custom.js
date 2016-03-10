@@ -16,8 +16,6 @@ class TableCustom {
         this._renderTable(title, data);
         this._defineElements();
         this._setEvents();
-
-        window.tableCustom = this;
     }
 
     /**
@@ -35,7 +33,7 @@ class TableCustom {
         }
 
         // prepare data to view
-        for(let i = 0; i < data.length - 1; i++) {
+        for(let i = 0; i < data.length; i++) {
             let item = [];
             for(let j = 0; j < title.length; j++) {
                 if(data[i][title[j].id] === "index") continue;
@@ -66,7 +64,7 @@ class TableCustom {
     _setEvents() {
         this.elements.root.addEventListener("blur", this._disableEditableCell.bind(this), true);
 
-        this.elements.root.addEventListener("click", this.clickHandler.bind(this));
+        document.body.addEventListener("click", this.clickHandler.bind(this));
     }
 
     /**
@@ -85,15 +83,15 @@ class TableCustom {
         }
 
         if(event.target.dataset.tableCustom === "update-row") {
-            var dd = this.elements.root.querySelectorAll("#row-content dd");
+            var inputs = document.body.querySelectorAll("#row-content input");
             var rowData = [];
             var rowIndex = event.target.dataset.index;
             var td;
 
-            if(event.target.dataset.index === "newString") {
+            if(event.target.dataset.index === "add-row") {
                 var data = [];
-                for(var i = 0; i < dd.length; i++) {
-                    data.push(dd[i].innerText);
+                for(var i = 0; i < inputs.length; i++) {
+                    data.push(inputs[i].value);
                 }
 
                 this.addRow(data);
@@ -101,13 +99,13 @@ class TableCustom {
             } else {
                 td = this.elements.tbody.querySelectorAll("[data-index='" + rowIndex + "'] td");
 
-                for(var i = 0; i < dd.length; i++) {
-                    rowData.push(dd[i].innerText);
+                for(var i = 0; i < inputs.length; i++) {
+                    rowData.push(inputs[i].value);
                     td[i].innerHTML = rowData[i];
                 }
             }
 
-            dialog.destruct();
+            $('#dialog-modal').modal('hide');
         }
 
         if(event.target.tagName.toUpperCase() === "TD")  {
@@ -120,6 +118,7 @@ class TableCustom {
      * @private
      */
     _toggleEditableCell(event) {
+        if(!event.target.nextElementSibling) return;
         if(event.target.nextElementSibling.nodeName.toLowerCase() !== "td") return;
 
         if(event.target.hasAttribute("contenteditable")) {

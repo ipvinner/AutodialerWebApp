@@ -44,7 +44,10 @@ public class CallResultServiceTest {
 
     @Test
     public void testGetAll() throws Exception {
+        Long time1 = System.currentTimeMillis();
         List<CallResult> callResults = service.getAll();
+        Long time2 = System.currentTimeMillis();
+        System.out.println("TIMEEEEE" + (time2 - time1));
         MATCHER.assertCollectionEquals(Arrays.asList(ClientTestData.CALL_RESULT1, ClientTestData.CALL_RESULT2, ClientTestData.CALL_RESULT3, ClientTestData.CALL_RESULT4,
                 ClientTestData.CALL_RESULT5, ClientTestData.CALL_RESULT6 ), callResults);
     }
