@@ -39,52 +39,71 @@
 </script>
 
 <!-- Template for custom table -->
-<script id="table-custom-template" type="text/x-handlebars-template">
-    <div data-component="table-custom" class="space-m-b-s">
+<script id="table-custom-component-template" type="text/x-handlebars-template">
+    <div data-component="table-custom" class="space-m-b-s"
+         data-table-custom-limit-value="{{limit}}"
+         data-table-custom-offset-value="{{offset}}">
+
+        <div class="clearfix" data-table-custom="navigation"></div>
+
         <div class="table-custom__navigation text-right space-m-b-s">
             <button class="btn btn-primary btn-sm" data-table-custom="add-row" data-component="dialog" type="button"><fmt:message key="clients.add_client"/></button>
         </div>
 
-        <table id="customUserTableFromCSV" class="table table-striped display dataTable no-footer" data-component="table-custom">
-            <thead>
-            <tr>
-                {{#each title}}
-                <th data-table-custom="{{id}}">{{title}}</th>
-                {{/each}}
-                <th width="70">
-                    Edit/Remove
-                </th>
-            </tr>
-            </thead>
-
-            <tbody>
-            {{#each data}}
-            <tr data-index="{{@index}}">
-                {{#each this}}
-                <td>{{this}}</td>
-                {{/each}}
-                <td class="text-center">
-                    <button class="btn btn-primary btn-xs" data-table-custom="edit-row" data-component="dialog" type="button">Edit</button>
-                    <button class="btn btn-danger btn-xs" data-table-custom="delete-row" type="button">Delete</button>
-                </td>
-            </tr>
-            {{/each}}
-            </tbody>
-        </table>
+        <div data-table-custom="table"></div>
     </div>
 </script>
 
-<!-- Template for table row-->
-<script id="table-row-template" type="text/x-handlebars-template">
-    <tr data-index="{{@index}}">
-        {{#each data}}
-        <td>{{this}}</td>
+<script id="table-custom-navigation-template" type="text/x-handlebars-template">
+    <div class="table-custom__limit pull-left">
+        <label for="table-custom-limit">Показывать по: </label>
+        <select name="table-custom-limit" data-table-custom="data-limit">
+            {{#each limits}}
+            <option value="{{value}}" {{#if selected}}selected{{/if}}>{{value}}</option>
+            {{/each}}
+        </select>
+    </div>
+
+    <ul class="pagination pull-right space-p-t-n" data-table-custom="data-offset" data-table-custom="0">
+        <%--<li><a href="<<"><<</a></li>--%>
+        <li><a href="<"><</a></li>
+        {{#each pages}}
+        <li {{#if active}}class="active"{{/if}} {{#if disabled}} class="disabled"{{/if}}>
+            <a href="{{link}}">{{content}}</a>
+        </li>
         {{/each}}
-        <td class="text-center">
-            <button class="btn btn-primary btn-xs" data-table-custom="edit-row" data-component="dialog" type="button">Edit</button>
-            <button class="btn btn-danger btn-xs" data-table-custom="delete-row" type="button">Delete</button>
-        </td>
-    </tr>
+        <li><a href=">">></a></li>
+        <%--<li><a href=">>">>></a></li>--%>
+    </ul>
+</script>
+
+<script id="customUserTableFromCSV-template" type="text/x-handlebars-template">
+    <table id="customUserTableFromCSV" class="table table-striped display dataTable no-footer">
+        <thead>
+        <tr>
+            {{#each title}}
+            <th data-table-custom="{{id}}">{{title}}</th>
+            {{/each}}
+            <th width="70">
+                Edit/Remove
+            </th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {{#each data}}
+        <tr data-index="{{math ../offset '+' @index}}">
+            {{#each this}}
+            <td>{{this}}</td>
+            {{/each}}
+            <td class="text-center">
+                <button class="btn btn-primary btn-xs" data-table-custom="edit-row" data-component="dialog" type="button">Edit</button>
+                <button class="btn btn-danger btn-xs" data-table-custom="delete-row" type="button">Delete</button>
+            </td>
+        </tr>
+        {{/each}}
+        </tbody>
+    </table>
 </script>
 
 <!-- Template for dialog-modal-tpl-->
@@ -183,4 +202,3 @@
 
 </body>
 </html>
-

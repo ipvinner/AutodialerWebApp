@@ -296,23 +296,23 @@ class uploadClientList {
         //rewrite this part code
         this.options.title = this._componentRoot.querySelector("#clientListTitle").value;
         this.options.describe = this._componentRoot.querySelector("#clientListDescribe").value;
+        this.options.data = window.customTbl.getData();
 
-        this.options.fields = [];
+        //this.options.fields = [];
+        //if(this._componentRoot.querySelector('#customUserTableFromCSV')) {
+        //    for(let i = 0, th = this._componentRoot.querySelector('thead').querySelectorAll("th"); i < th.length - 1; i++) {
+        //        this.options.fields.push(th[i].dataset.tableCustom);
+        //    }
 
-        if(this._componentRoot.querySelector('#customUserTableFromCSV')) {
-            for(let i = 0, th = this._componentRoot.querySelector('thead').querySelectorAll("th"); i < th.length - 1; i++) {
-                this.options.fields.push(th[i].dataset.tableCustom);
-            }
-
-            for(let i = 0, tr = this._componentRoot.querySelector('tbody').querySelectorAll("tr"); i < tr.length; i++) {
-                let item = {};
-                for(let j = 0, td = this._componentRoot.querySelector('tbody').querySelectorAll("tr")[i].querySelectorAll("td"); j < td.length - 1; j++) {
-                    item[this.options.fields[j]] = td[j].innerText;
-                }
-
-                this.options.data.push(item);
-            }
-        }
+            //for(let i = 0, tr = this._componentRoot.querySelector('tbody').querySelectorAll("tr"); i < tr.length; i++) {
+            //    let item = {};
+            //    for(let j = 0, td = this._componentRoot.querySelector('tbody').querySelectorAll("tr")[i].querySelectorAll("td"); j < td.length - 1; j++) {
+            //        item[this.options.fields[j]] = td[j].innerText;
+            //    }
+            //
+            //    this.options.data.push(item);
+            //}
+        //}
     }
 
     /**
