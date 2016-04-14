@@ -21,6 +21,10 @@ body {
     margin-bottom: 10px;
 }
 
+.space-p-t-n {
+    margin-top: 0 !important;
+}
+
 .space-p-t-xxl {
     padding-top: 50px !important;
 }
@@ -44,4 +48,18 @@ body {
 
 .edit-group dd.empty {
     min-width: 100px;
+}
+
+.pagination .disabled a {
+    cursor: not-allowed;
+}
+
+.pagination .active a,
+.pagination .disabled,
+.pagination .disabled a{
+    pointer-events: none;
+}
+
+.table-custom__limit {
+    margin-top: 10px;
 }
